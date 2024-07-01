@@ -1,15 +1,28 @@
 import * as Playground from "@/components/playground"
 import { Container, HStack, SimpleGrid, Text } from "@chakra-ui/react"
+import { AccordionBasic } from "compositions/examples/accordion-basic"
 import { AlertWithStatus } from "compositions/examples/alert-with-status"
+import { AlertWithSpinner } from "compositions/examples/alert-wtih-spinner"
+import { AvatarGrouped } from "compositions/examples/avatar-grouped"
+import { AvatarWithBadge } from "compositions/examples/avatar-with-badge"
 import { AvatarWithColors } from "compositions/examples/avatar-with-colors"
 import { BadgeWithColors } from "compositions/examples/badge-with-colors"
+import { BadgeWithGroup } from "compositions/examples/badge-with-group"
+import { BadgeWithIcon } from "compositions/examples/badge-with-icon"
 import { BlockquoteWithColors } from "compositions/examples/blockquote-with-colors"
-import { BreadcrumbWithSeparator } from "compositions/examples/breabcrumb-with-separator"
 import { BreadcrumbBasic } from "compositions/examples/breadcrumb-basic"
+import { BreadcrumbWithSeparator } from "compositions/examples/breadcrumb-with-separator"
+import { ButtonIcons } from "compositions/examples/button-icons"
 import { ButtonWithColors } from "compositions/examples/button-with-colors"
+import { ButtonWithIcons } from "compositions/examples/button-with-icons"
+import { ButtonWithLoading } from "compositions/examples/button-with-loading"
 import { CardWithVariants } from "compositions/examples/card-with-variants"
 import { CheckboxCardBasic } from "compositions/examples/checkbox-card-basic"
 import { CheckboxWithColors } from "compositions/examples/checkbox-with-colors"
+import { CheckboxWithCustomIcon } from "compositions/examples/checkbox-with-custom-icon"
+import { CheckboxWithIndeterminate } from "compositions/examples/checkbox-with-indeterminate"
+import { CheckboxWithStates } from "compositions/examples/checkbox-with-states"
+import { CheckmarkStates } from "compositions/examples/checkmark-states"
 import { CircularProgressWithColors } from "compositions/examples/circular-progress-with-colors"
 import { CodeWithColors } from "compositions/examples/code-with-colors"
 import { CollapsibleBasic } from "compositions/examples/collapsible-basic"
@@ -219,6 +232,15 @@ export default function Page() {
       </Playground.Section>
 
       <Playground.Section>
+        <Playground.SectionTitle id="Checkmark">
+          Checkmark
+        </Playground.SectionTitle>
+        <Playground.SectionContent>
+          <CheckmarkStates />
+        </Playground.SectionContent>
+      </Playground.Section>
+
+      <Playground.Section>
         <Playground.SectionTitle id="RadioCard">
           RadioCard
         </Playground.SectionTitle>
@@ -312,9 +334,20 @@ export default function Page() {
       </Playground.Section>
 
       <Playground.Section>
+        <Playground.SectionTitle id="Accordion">
+          Accordion
+        </Playground.SectionTitle>
+        <Playground.SectionContent>
+          <AccordionBasic />
+        </Playground.SectionContent>
+      </Playground.Section>
+
+      <Playground.Section>
         <Playground.SectionTitle id="avatar">Avatar</Playground.SectionTitle>
         <Playground.SectionContent>
+          <AvatarWithBadge />
           <AvatarWithColors />
+          <AvatarGrouped />
         </Playground.SectionContent>
       </Playground.Section>
 
@@ -322,6 +355,7 @@ export default function Page() {
         <Playground.SectionTitle id="alert">Alert</Playground.SectionTitle>
         <Playground.SectionContent>
           <AlertWithStatus />
+          <AlertWithSpinner />
         </Playground.SectionContent>
       </Playground.Section>
 
@@ -329,6 +363,8 @@ export default function Page() {
         <Playground.SectionTitle id="badge">Badge</Playground.SectionTitle>
         <Playground.SectionContent>
           <BadgeWithColors />
+          <BadgeWithIcon />
+          <BadgeWithGroup />
         </Playground.SectionContent>
       </Playground.Section>
 
@@ -360,6 +396,9 @@ export default function Page() {
           Checkbox
         </Playground.SectionTitle>
         <Playground.SectionContent>
+          <CheckboxWithStates />
+          <CheckboxWithIndeterminate />
+          <CheckboxWithCustomIcon />
           <CheckboxWithColors />
         </Playground.SectionContent>
       </Playground.Section>
@@ -367,6 +406,9 @@ export default function Page() {
       <Playground.Section>
         <Playground.SectionTitle id="button">Button</Playground.SectionTitle>
         <Playground.SectionContent>
+          <ButtonWithIcons />
+          <ButtonWithLoading />
+          <ButtonIcons />
           <ButtonWithColors />
         </Playground.SectionContent>
       </Playground.Section>
