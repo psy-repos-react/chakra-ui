@@ -216,6 +216,7 @@ export type Token =
   | "radii.xl"
   | "radii.2xl"
   | "radii.3xl"
+  | "radii.4xl"
   | "radii.full"
   | "spacing.1"
   | "spacing.2"
@@ -305,6 +306,11 @@ export type Token =
   | "sizes.container.md"
   | "sizes.container.lg"
   | "sizes.container.xl"
+  | "sizes.breakpoint-sm"
+  | "sizes.breakpoint-md"
+  | "sizes.breakpoint-lg"
+  | "sizes.breakpoint-xl"
+  | "sizes.breakpoint-2xl"
   | "zIndex.hide"
   | "zIndex.base"
   | "zIndex.docked"
@@ -318,6 +324,11 @@ export type Token =
   | "zIndex.toast"
   | "zIndex.tooltip"
   | "zIndex.max"
+  | "breakpoints.sm"
+  | "breakpoints.md"
+  | "breakpoints.lg"
+  | "breakpoints.xl"
+  | "breakpoints.2xl"
   | "colors.bg"
   | "colors.bg.subtle"
   | "colors.bg.muted"
@@ -346,6 +357,7 @@ export type Token =
   | "colors.border.warning"
   | "colors.border.success"
   | "colors.border.info"
+  | "colors.focusRing"
   | "shadows.xs"
   | "shadows.sm"
   | "shadows.md"
@@ -429,6 +441,7 @@ export type ColorPalette =
   | "bg"
   | "fg"
   | "border"
+  | "focusRing"
 
 export type AnimationsToken = "spin" | "ping" | "pulse" | "bounce"
 
@@ -601,6 +614,7 @@ export type ColorsToken =
   | "border.warning"
   | "border.success"
   | "border.info"
+  | "focusRing"
   | "colorPalette"
   | "colorPalette.50"
   | "colorPalette.100"
@@ -638,7 +652,7 @@ export type LetterSpacingsToken = "tighter" | "tight" | "normal" | "wide" | "wid
 
 export type LineHeightsToken = "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "shorter" | "short" | "base" | "tall" | "taller"
 
-export type RadiiToken = "2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full"
+export type RadiiToken = "2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full"
 
 export type SpacingToken =
   | "1"
@@ -764,6 +778,11 @@ export type SizesToken =
   | "container.md"
   | "container.lg"
   | "container.xl"
+  | "breakpoint-sm"
+  | "breakpoint-md"
+  | "breakpoint-lg"
+  | "breakpoint-xl"
+  | "breakpoint-2xl"
 
 export type ZIndexToken =
   | "hide"
@@ -779,6 +798,8 @@ export type ZIndexToken =
   | "toast"
   | "tooltip"
   | "max"
+
+export type BreakpointsToken = "sm" | "md" | "lg" | "xl" | "2xl"
 
 export type ShadowsToken = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "inset"
 
@@ -798,5 +819,6 @@ export type Tokens = {
   spacing: SpacingToken
   sizes: SizesToken
   zIndex: ZIndexToken
+  breakpoints: BreakpointsToken
   shadows: ShadowsToken
 } & { [token: string]: never }

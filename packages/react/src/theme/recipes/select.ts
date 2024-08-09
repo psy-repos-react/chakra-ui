@@ -10,6 +10,8 @@ export const selectSlotRecipe = defineSlotRecipe({
       flexDirection: "column",
       gap: "1.5",
       width: "full",
+      "--focus-color": "colors.border.emphasized",
+      "--error-color": "colors.border.error",
     },
     trigger: {
       display: "flex",
@@ -26,10 +28,10 @@ export const selectSlotRecipe = defineSlotRecipe({
       _invalid: {
         borderColor: "var(--error-color)",
       },
-      focusRing: "extend",
+      focusRing: "outside",
     },
     indicator: {
-      "& svg": {
+      _icon: {
         width: "4",
         height: "4",
       },
@@ -38,6 +40,7 @@ export const selectSlotRecipe = defineSlotRecipe({
       background: "bg.panel",
       display: "flex",
       flexDirection: "column",
+      gap: "1",
       zIndex: "dropdown",
       outline: 0,
       maxH: "96",
@@ -67,7 +70,7 @@ export const selectSlotRecipe = defineSlotRecipe({
         pointerEvents: "none",
         opacity: "0.5",
       },
-      "& :where(svg)": {
+      _icon: {
         width: "4",
         height: "4",
       },
@@ -112,6 +115,32 @@ export const selectSlotRecipe = defineSlotRecipe({
     },
 
     size: {
+      xs: {
+        trigger: {
+          px: "2",
+          h: "6",
+          minW: "6",
+          fontSize: "xs",
+          rounded: "sm",
+          gap: "1",
+        },
+        item: {
+          py: "1",
+          px: "2",
+          rounded: "sm",
+        },
+        itemGroupLabel: {
+          py: "1",
+          px: "2",
+        },
+        content: {
+          p: "1",
+          rounded: "sm",
+          boxShadow: "md",
+          minW: "8rem",
+          fontSize: "xs",
+        },
+      },
       sm: {
         content: {
           p: "1",

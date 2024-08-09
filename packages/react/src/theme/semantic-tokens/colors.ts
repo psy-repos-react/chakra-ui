@@ -67,13 +67,13 @@ export const semanticColors = defineSemanticTokens.colors({
       value: { base: "{colors.gray.200}", _dark: "{colors.gray.700}" },
     },
     muted: {
-      value: { base: "{colors.gray.300}", _dark: "{colors.gray.500}" },
+      value: { base: "{colors.gray.100}", _dark: "{colors.gray.800}" },
     },
     subtle: {
-      value: { base: "{colors.gray.200}", _dark: "{colors.gray.600}" },
+      value: { base: "{colors.gray.50}", _dark: "{colors.gray.800/50}" },
     },
     emphasized: {
-      value: { base: "{colors.gray.400}", _dark: "{colors.gray.500}" },
+      value: { base: "{colors.gray.300}", _dark: "{colors.gray.600}" },
     },
     disabled: {
       value: { base: "{colors.gray.200}", _dark: "{colors.gray.600}" },
@@ -90,5 +90,8 @@ export const semanticColors = defineSemanticTokens.colors({
     info: {
       value: { base: "{colors.blue.500}", _dark: "{colors.blue.400}" },
     },
+  },
+  focusRing: {
+    value: { base: "{colors.blue.600}", _dark: "{colors.blue.500}" },
   },
 })

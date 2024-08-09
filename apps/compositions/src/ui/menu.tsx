@@ -7,35 +7,29 @@ import { LuCheck, LuChevronRight } from "react-icons/lu"
 interface MenuContentProps extends ChakraMenu.ContentProps {
   portalled?: boolean
   containerRef?: React.RefObject<HTMLElement>
-  showArrow?: boolean
 }
 
 export const MenuContent = forwardRef<HTMLDivElement, MenuContentProps>(
   function MenuContent(props, ref) {
-    const {
-      children,
-      portalled = true,
-      containerRef,
-      showArrow,
-      ...rest
-    } = props
+    const { portalled = true, containerRef, ...rest } = props
 
     return (
       <Portal disabled={!portalled} container={containerRef}>
         <ChakraMenu.Positioner>
-          <ChakraMenu.Content ref={ref} {...rest} asChild={false}>
-            {showArrow && (
-              <ChakraMenu.Arrow>
-                <ChakraMenu.ArrowTip />
-              </ChakraMenu.Arrow>
-            )}
-            {children}
-          </ChakraMenu.Content>
+          <ChakraMenu.Content ref={ref} {...rest} />
         </ChakraMenu.Positioner>
       </Portal>
     )
   },
 )
+
+export const MenuArrow = (props: ChakraMenu.ArrowProps) => {
+  return (
+    <ChakraMenu.Arrow {...props}>
+      <ChakraMenu.ArrowTip />
+    </ChakraMenu.Arrow>
+  )
+}
 
 export const MenuCheckboxItem = (props: ChakraMenu.CheckboxItemProps) => {
   return (
@@ -66,28 +60,22 @@ export const MenuTrigger = (props: ChakraMenu.TriggerProps) => {
   return <ChakraMenu.Trigger {...props} asChild />
 }
 
-export const MenuRoot = ChakraMenu.Root
-export const MenuSeparator = ChakraMenu.Separator
-
-export interface MenuItemProps extends ChakraMenu.ItemProps {
-  startIcon?: React.ReactNode
-  endIcon?: React.ReactNode
-  command?: string
+export const MenuItemGroup = (props: ChakraMenu.ItemGroupProps) => {
+  const { title, children, ...rest } = props
+  return (
+    <ChakraMenu.ItemGroup {...rest}>
+      <ChakraMenu.ItemGroupLabel userSelect="none">
+        {title}
+      </ChakraMenu.ItemGroupLabel>
+      {children}
+    </ChakraMenu.ItemGroup>
+  )
 }
 
-export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>(
-  function MenuItem(props, ref) {
-    const { startIcon, endIcon, command, children, ...rest } = props
-    return (
-      <ChakraMenu.Item ref={ref} {...rest}>
-        {startIcon}
-        {children}
-        {endIcon}
-        {command && <ChakraMenu.ItemCommand>{command}</ChakraMenu.ItemCommand>}
-      </ChakraMenu.Item>
-    )
-  },
-)
+export const MenuRoot = ChakraMenu.Root
+export const MenuSeparator = ChakraMenu.Separator
+export const MenuItem = ChakraMenu.Item
+export const MenuItemCommand = ChakraMenu.ItemCommand
 
 export interface MenuTriggerItemProps extends ChakraMenu.ItemProps {
   startIcon?: React.ReactNode

@@ -2,7 +2,6 @@ import type { CssProperties } from "../css.types"
 import type { Tokens } from "./token.gen"
 
 type WithColorOpacityModifier<T> = T extends string ? `${T}/${string}` : T
-
 type ImportantMark = "!" | "!important"
 type WhitespaceImportant = ` ${ImportantMark}`
 type Important = ImportantMark | WhitespaceImportant
@@ -10,7 +9,6 @@ type Important = ImportantMark | WhitespaceImportant
 type WithImportant<T> = T extends string ? `${T}${Important}` & { __important?: true } : T
 
 export type WithEscapeHatch<T> = T | `[${string}]` | WithColorOpacityModifier<T> | WithImportant<T>
-
 // eslint-disable-next-line
 export type OnlyKnown<Value> = Value extends boolean ? Value : Value extends `${infer _}` ? Value : never
 
@@ -35,6 +33,7 @@ export interface UtilityValues {
     | "bg"
     | "fg"
     | "border"
+    | "focusRing"
   background: Tokens["colors"]
   backgroundColor: Tokens["colors"]
   backgroundGradient: Tokens["gradients"] | "to-t" | "to-tr" | "to-r" | "to-br" | "to-b" | "to-bl" | "to-l" | "to-tl"
@@ -115,8 +114,9 @@ export interface UtilityValues {
   gridColumnGap: Tokens["spacing"]
   gridRowGap: Tokens["spacing"]
   outlineColor: Tokens["colors"]
-  focusRing: "extend" | "contain"
+  focusRing: "outside" | "inside" | "mixed" | "none"
   focusRingColor: Tokens["colors"]
+  focusRingWidth: Tokens["borderWidths"] | CssProperties["outlineWidth"]
   aspectRatio: Tokens["aspectRatios"]
   width: Tokens["sizes"]
   inlineSize: Tokens["sizes"]
@@ -197,6 +197,7 @@ export interface UtilityValues {
   animation: Tokens["animations"]
   animationDuration: Tokens["durations"]
   animationDelay: Tokens["durations"]
+  animationTimingFunction: Tokens["easings"]
   fontFamily: Tokens["fonts"]
   fontSize: Tokens["fontSizes"]
   fontWeight: Tokens["fontWeights"]

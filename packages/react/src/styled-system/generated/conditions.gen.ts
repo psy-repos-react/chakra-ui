@@ -155,9 +155,9 @@ export interface Conditions {
   _landscape: string
   /** `@media (orientation: portrait)` */
   _portrait: string
-  /** ` &.dark, .dark &` */
+  /** `&.dark, .dark &` */
   _dark: string
-  /** ` &.light, .light &` */
+  /** `&.light, .light &` */
   _light: string
   /** `@media (prefers-color-scheme: dark)` */
   _mediaDark: string
@@ -183,6 +183,8 @@ export interface Conditions {
   _horizontal: string
   /** `&[data-orientation=vertical]` */
   _vertical: string
+  /** `& :where(svg)` */
+  _icon: string
   /** `@media screen and (min-width: 30rem)` */
   sm: string
   /** `@media screen and (min-width: 30rem) and (max-width: 47.9975rem)` */

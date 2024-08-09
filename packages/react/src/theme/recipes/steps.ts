@@ -13,6 +13,7 @@ export const stepsSlotRecipe = defineSlotRecipe({
       display: "flex",
       justifyContent: "space-between",
       "--steps-gutter": "spacing.3",
+      "--steps-thickness": "2px",
     },
     title: {
       fontWeight: "medium",
@@ -55,11 +56,11 @@ export const stepsSlotRecipe = defineSlotRecipe({
       alignItems: "center",
       gap: "3",
       textAlign: "start",
-      focusRing: "extend",
+      focusRing: "outside",
       borderRadius: "md",
     },
     content: {
-      focusRing: "extend",
+      focusRing: "outside",
     },
   },
 
@@ -68,6 +69,7 @@ export const stepsSlotRecipe = defineSlotRecipe({
       vertical: {
         root: {
           flexDirection: "row",
+          height: "100%",
         },
         list: {
           flexDirection: "column",
@@ -75,7 +77,7 @@ export const stepsSlotRecipe = defineSlotRecipe({
         },
         separator: {
           position: "absolute",
-          width: "2px",
+          width: "var(--steps-thickness)",
           height: "100%",
           maxHeight: "calc(100% - var(--steps-size) - var(--steps-gutter) * 2)",
           top: "calc(var(--steps-size) + var(--steps-gutter))",
@@ -88,6 +90,7 @@ export const stepsSlotRecipe = defineSlotRecipe({
       horizontal: {
         root: {
           flexDirection: "column",
+          width: "100%",
         },
         list: {
           flexDirection: "row",
@@ -95,7 +98,7 @@ export const stepsSlotRecipe = defineSlotRecipe({
         },
         separator: {
           width: "100%",
-          height: "2px",
+          height: "var(--steps-thickness)",
           marginX: "var(--steps-gutter)",
         },
         item: {
@@ -108,11 +111,11 @@ export const stepsSlotRecipe = defineSlotRecipe({
       solid: {
         indicator: {
           _incomplete: {
-            borderWidth: "2px",
+            borderWidth: "var(--steps-thickness)",
           },
           _current: {
             bg: "bg.muted",
-            borderWidth: "2px",
+            borderWidth: "var(--steps-thickness)",
             borderColor: "colorPalette.600",
             color: { base: "colorPalette.700", _dark: "colorPalette.200" },
           },

@@ -1,5 +1,46 @@
 # @chakra-ui/cli
 
+## 3.0.0-next.13
+
+## 3.0.0-next.12
+
+### Patch Changes
+
+- [`0f0ed76`](https://github.com/chakra-ui/chakra-ui/commit/0f0ed76e3f06b9f3efeb7421d2283aee8aead9f7)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Fix regression
+  where files were always converted to `.jsx`
+
+## 3.0.0-next.11
+
+### Minor Changes
+
+- [`085cacd`](https://github.com/chakra-ui/chakra-ui/commit/085cacdef4dbc853609d2930ca01382599df705c)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Add support for
+  installing required NPM dependencies for compositions
+
+## 3.0.0-next.10
+
+### Minor Changes
+
+- [`758f226`](https://github.com/chakra-ui/chakra-ui/commit/758f226e941e4ac9b644a5ab5a4900c2db728c28)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Add support for
+  `composition` command in CLI to import ready-made compositions for faster
+  development experience.
+
+  ```sh
+  Usage: chakra-ui composition [options] [command]
+
+  Add compositions to your project for better DX
+
+  Options:
+    -h, --help                     display help for command
+
+  Commands:
+    add [options] [components...]  Add a new composition for better DX
+    list                           List all compositions
+    help [command]                 display help for command
+  ```
+
 ## 3.0.0-next.9
 
 ### Minor Changes

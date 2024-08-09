@@ -6,7 +6,7 @@ export interface BadgeVariantProps {
 }
 
 export interface ButtonVariantProps {
-  size?: "lg" | "md" | "sm" | "xs"
+  size?: "xs" | "sm" | "md" | "lg"
   variant?: "solid" | "subtle" | "outline" | "ghost" | "plain"
 }
 
@@ -15,7 +15,10 @@ export interface CodeVariantProps {
   size?: "xs" | "sm" | "md" | "lg"
 }
 
-export interface ContainerVariantProps {}
+export interface ContainerVariantProps {
+  centerContent?: boolean
+  fluid?: boolean
+}
 
 export interface HeadingVariantProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl"
@@ -40,15 +43,18 @@ export interface LinkVariantProps {
   variant?: "underline" | "plain"
 }
 
-export interface MarkVariantProps {}
+export interface MarkVariantProps {
+  variant?: "subtle" | "solid" | "text" | "plain"
+}
 
 export interface SeparatorVariantProps {
-  variant?: "solid" | "dashed"
+  variant?: "solid" | "dashed" | "dotted"
   orientation?: "vertical" | "horizontal"
+  size?: "xs" | "sm" | "md" | "lg"
 }
 
 export interface SkeletonVariantProps {
-  loaded?: boolean
+  loading?: boolean
   variant?: "pulse" | "shine" | "none"
 }
 
@@ -119,7 +125,7 @@ export interface AccordionVariantProps {
 
 // ActionBar
 
-export type ActionBarSlot = "positioner" | "content" | "separator" | "selectionTrigger"
+export type ActionBarSlot = "positioner" | "content" | "separator" | "selectionTrigger" | "closeTrigger"
 
 export interface ActionBarVariantProps {}
 
@@ -128,7 +134,7 @@ export interface ActionBarVariantProps {}
 export type AlertSlot = "title" | "description" | "root" | "indicator" | "spinner"
 
 export interface AlertVariantProps {
-  status?: "info" | "warning" | "success" | "error"
+  status?: "info" | "warning" | "success" | "error" | "neutral"
   variant?: "subtle" | "outline" | "solid"
   size?: "sm" | "md" | "lg"
 }
@@ -186,16 +192,6 @@ export type CheckboxCardSlot = "root" | "control" | "label" | "addon" | "indicat
 export interface CheckboxCardVariantProps {
   size?: "sm" | "md" | "lg"
   variant?: "plain" | "subtle"
-}
-
-// CircularProgress
-
-export type CircularProgressSlot = "root" | "label" | "track" | "range" | "valueText" | "view" | "circle" | "circleTrack" | "circleRange"
-
-export interface CircularProgressVariantProps {
-  indeterminate?: boolean
-  valuePlacement?: "center"
-  size?: "xs" | "sm" | "md" | "lg"
 }
 
 // Collapsible
@@ -337,7 +333,7 @@ export interface NativeSelectVariantProps {
 
 // NumberInput
 
-export type NumberInputSlot = "root" | "label" | "input" | "control" | "incrementTrigger" | "decrementTrigger" | "scrubber"
+export type NumberInputSlot = "root" | "label" | "input" | "control" | "valueText" | "incrementTrigger" | "decrementTrigger" | "scrubber"
 
 export interface NumberInputVariantProps {
   size?: "xs" | "sm" | "md" | "lg"
@@ -380,10 +376,17 @@ export type ProgressSlot = "root" | "label" | "track" | "range" | "valueText" | 
 
 export interface ProgressVariantProps {
   variant?: "outline" | "subtle"
-  indeterminate?: boolean
   shape?: "square" | "rounded" | "pill"
   striped?: boolean
   animated?: boolean
+  size?: "xs" | "sm" | "md" | "lg"
+}
+
+// ProgressCircle
+
+export type ProgressCircleSlot = "root" | "label" | "track" | "range" | "valueText" | "view" | "circle" | "circleTrack" | "circleRange"
+
+export interface ProgressCircleVariantProps {
   size?: "xs" | "sm" | "md" | "lg"
 }
 
@@ -410,7 +413,7 @@ export interface RadioGroupVariantProps {
 export type RatingGroupSlot = "root" | "label" | "item" | "control" | "itemIndicator"
 
 export interface RatingGroupVariantProps {
-  size?: "sm" | "md" | "lg"
+  size?: "xs" | "sm" | "md" | "lg"
 }
 
 // SegmentGroup
@@ -442,7 +445,7 @@ export type SelectSlot =
 
 export interface SelectVariantProps {
   variant?: "outline" | "filled"
-  size?: "sm" | "md" | "lg"
+  size?: "xs" | "sm" | "md" | "lg"
 }
 
 // Slider
@@ -457,10 +460,10 @@ export interface SliderVariantProps {
 
 // Stat
 
-export type StatSlot = "root" | "label" | "helpText" | "valueText" | "indicator"
+export type StatSlot = "root" | "label" | "helpText" | "valueText" | "valueUnit" | "indicator"
 
 export interface StatVariantProps {
-  size?: "md"
+  size?: "sm" | "md" | "lg"
 }
 
 // Steps
@@ -487,11 +490,11 @@ export interface StepsVariantProps {
 
 // Switch
 
-export type SwitchSlot = "root" | "label" | "control" | "thumb"
+export type SwitchSlot = "root" | "label" | "control" | "thumb" | "indicator"
 
 export interface SwitchVariantProps {
   variant?: "solid" | "outline" | "raised"
-  size?: "sm" | "md" | "lg" | "xl"
+  size?: "xs" | "sm" | "md" | "lg"
 }
 
 // Table
@@ -550,6 +553,15 @@ export interface StatusVariantProps {
   size?: "sm" | "md" | "lg"
 }
 
+// Timeline
+
+export type TimelineSlot = "root" | "item" | "content" | "separator" | "indicator" | "connector"
+
+export interface TimelineVariantProps {
+  variant?: "subtle" | "solid" | "outline" | "plain"
+  size?: "sm" | "md"
+}
+
 export interface ConfigSlotRecipes {
   accordion: SystemSlotRecipeFn<AccordionSlot, AccordionVariantProps>
   actionBar: SystemSlotRecipeFn<ActionBarSlot, ActionBarVariantProps>
@@ -560,7 +572,6 @@ export interface ConfigSlotRecipes {
   card: SystemSlotRecipeFn<CardSlot, CardVariantProps>
   checkbox: SystemSlotRecipeFn<CheckboxSlot, CheckboxVariantProps>
   checkboxCard: SystemSlotRecipeFn<CheckboxCardSlot, CheckboxCardVariantProps>
-  circularProgress: SystemSlotRecipeFn<CircularProgressSlot, CircularProgressVariantProps>
   collapsible: SystemSlotRecipeFn<CollapsibleSlot, CollapsibleVariantProps>
   dataList: SystemSlotRecipeFn<DataListSlot, DataListVariantProps>
   dialog: SystemSlotRecipeFn<DialogSlot, DialogVariantProps>
@@ -576,6 +587,7 @@ export interface ConfigSlotRecipes {
   pinInput: SystemSlotRecipeFn<PinInputSlot, PinInputVariantProps>
   popover: SystemSlotRecipeFn<PopoverSlot, PopoverVariantProps>
   progress: SystemSlotRecipeFn<ProgressSlot, ProgressVariantProps>
+  progressCircle: SystemSlotRecipeFn<ProgressCircleSlot, ProgressCircleVariantProps>
   radioCard: SystemSlotRecipeFn<RadioCardSlot, RadioCardVariantProps>
   radioGroup: SystemSlotRecipeFn<RadioGroupSlot, RadioGroupVariantProps>
   ratingGroup: SystemSlotRecipeFn<RatingGroupSlot, RatingGroupVariantProps>
@@ -591,8 +603,8 @@ export interface ConfigSlotRecipes {
   toast: SystemSlotRecipeFn<ToastSlot, ToastVariantProps>
   tooltip: SystemSlotRecipeFn<TooltipSlot, TooltipVariantProps>
   status: SystemSlotRecipeFn<StatusSlot, StatusVariantProps>
+  timeline: SystemSlotRecipeFn<TimelineSlot, TimelineVariantProps>
 }
-
 export interface ConfigRecipeSlots {
   accordion: AccordionSlot
   actionBar: ActionBarSlot
@@ -603,7 +615,6 @@ export interface ConfigRecipeSlots {
   card: CardSlot
   checkbox: CheckboxSlot
   checkboxCard: CheckboxCardSlot
-  circularProgress: CircularProgressSlot
   collapsible: CollapsibleSlot
   dataList: DataListSlot
   dialog: DialogSlot
@@ -619,6 +630,7 @@ export interface ConfigRecipeSlots {
   pinInput: PinInputSlot
   popover: PopoverSlot
   progress: ProgressSlot
+  progressCircle: ProgressCircleSlot
   radioCard: RadioCardSlot
   radioGroup: RadioGroupSlot
   ratingGroup: RatingGroupSlot
@@ -634,12 +646,11 @@ export interface ConfigRecipeSlots {
   toast: ToastSlot
   tooltip: TooltipSlot
   status: StatusSlot
+  timeline: TimelineSlot
 }
 
 export type SlotRecipeRecord<T, K> = T extends keyof ConfigRecipeSlots ? Record<ConfigRecipeSlots[T], K> : Record<string, K>
-
 export type SlotRecipeProps<T> = T extends keyof ConfigSlotRecipes
   ? ConfigSlotRecipes[T]["__type"] & { recipe?: SlotRecipeDefinition }
   : { recipe?: SlotRecipeDefinition }
-
 export type RecipeProps<T> = T extends keyof ConfigRecipes ? ConfigRecipes[T]["__type"] & { recipe?: RecipeDefinition } : { recipe?: RecipeDefinition }

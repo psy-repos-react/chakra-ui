@@ -1,0 +1,58 @@
+---
+title: Accordion
+description: Used to show and hide sections of related content on a page
+links:
+  [
+    { title: "Source", url: "#" },
+    { title: "Storybook", url: "#" },
+    { title: "Recipe", url: "#" },
+  ]
+---
+
+<ExampleTabs name="accordion-basic" />
+
+## Setup
+
+If you don't already have the snippet, run the following command to add the
+`accordion` snippet
+
+```sh
+chakra snippet add accordion
+```
+
+The snippet includes a closed component composition for the `Accordion`
+component.
+
+## Usage
+
+```jsx
+import {
+  AccordionItem,
+  AccordionItemContent,
+  AccordionItemTrigger,
+  AccordionRoot,
+} from "@/components/ui/accordion"
+```
+
+```jsx
+<AccordionRoot>
+  <AccordionItem>
+    <AccordionItemTrigger />
+    <AccordionItemContent />
+  </AccordionItem>
+</AccordionRoot>
+```
+
+## Examples
+
+### Controlled
+
+Set the accordion that shows up by default.
+
+<ExampleTabs name="accordion-controlled" />
+
+### With Icon
+
+Use the `AccordionItemIcon` to add an icon to each accordion item.
+
+<ExampleTabs name="accordion-with-icon" />

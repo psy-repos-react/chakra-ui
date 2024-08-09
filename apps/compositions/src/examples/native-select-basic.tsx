@@ -7,19 +7,11 @@ export const NativeSelectBasic = () => {
   return (
     <NativeSelectRoot size="sm" width="240px">
       <NativeSelectField placeholder="Select option">
-        {items.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.label}
-          </option>
-        ))}
+        <option value="react">React</option>
+        <option value="vue">Vue</option>
+        <option value="angular">Angular</option>
+        <option value="svelte">Svelte</option>
       </NativeSelectField>
     </NativeSelectRoot>
   )
 }
-
-const items = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue" },
-  { value: "angular", label: "Angular" },
-  { value: "svelte", label: "Svelte" },
-]

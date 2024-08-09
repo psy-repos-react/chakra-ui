@@ -2,7 +2,7 @@ import { anatomy } from "@ark-ui/anatomy/switch"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const switchSlotRecipe = defineSlotRecipe({
-  slots: anatomy.keys(),
+  slots: [...anatomy.keys(), "indicator"],
   base: {
     root: {
       display: "inline-flex",
@@ -22,6 +22,27 @@ export const switchSlotRecipe = defineSlotRecipe({
       lineHeight: "1",
       userSelect: "none",
       fontSize: "sm",
+      fontWeight: "medium",
+      _disabled: {
+        opacity: "0.5",
+      },
+    },
+
+    indicator: {
+      position: "absolute",
+      height: "var(--switch-height)",
+      width: "var(--switch-height)",
+      fontSize: "var(--switch-indicator-font-size)",
+      fontWeight: "medium",
+      flexShrink: 0,
+      userSelect: "none",
+      display: "grid",
+      placeContent: "center",
+      transition: "inset-inline-start 0.12s ease",
+      insetInlineStart: "calc(var(--switch-x) - 2px)",
+      _checked: {
+        insetInlineStart: "2px",
+      },
     },
 
     control: {
@@ -40,10 +61,19 @@ export const switchSlotRecipe = defineSlotRecipe({
         opacity: "0.5",
         cursor: "not-allowed",
       },
+      _invalid: {
+        outline: "2px solid",
+        outlineColor: "border.error",
+        outlineOffset: "2px",
+      },
     },
 
     thumb: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       bg: "white",
+      flexShrink: 0,
       transitionProperty: "translate",
       transitionDuration: "fast",
       borderRadius: "inherit",
@@ -142,28 +172,32 @@ export const switchSlotRecipe = defineSlotRecipe({
     },
 
     size: {
+      xs: {
+        root: {
+          "--switch-width": "sizes.6",
+          "--switch-height": "sizes.3",
+          "--switch-indicator-font-size": "fontSizes.xs",
+        },
+      },
       sm: {
         root: {
-          "--switch-width": "sizes.5",
-          "--switch-height": "sizes.3",
+          "--switch-width": "sizes.8",
+          "--switch-height": "sizes.4",
+          "--switch-indicator-font-size": "fontSizes.xs",
         },
       },
       md: {
         root: {
-          "--switch-width": "sizes.9",
+          "--switch-width": "sizes.10",
           "--switch-height": "sizes.5",
+          "--switch-indicator-font-size": "fontSizes.sm",
         },
       },
       lg: {
         root: {
-          "--switch-width": "sizes.10",
+          "--switch-width": "sizes.12",
           "--switch-height": "sizes.6",
-        },
-      },
-      xl: {
-        root: {
-          "--switch-width": "sizes.14",
-          "--switch-height": "sizes.8",
+          "--switch-indicator-font-size": "fontSizes.md",
         },
       },
     },

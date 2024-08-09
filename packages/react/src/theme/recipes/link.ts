@@ -2,10 +2,14 @@ import { defineRecipe } from "../../styled-system"
 
 export const linkRecipe = defineRecipe({
   base: {
+    colorPalette: "gray",
+    display: "inline-flex",
+    alignItems: "center",
     outline: "none",
+    gap: "1.5",
     cursor: "pointer",
     borderRadius: "xs",
-    focusRing: "extend",
+    focusRing: "outside",
   },
   variants: {
     variant: {

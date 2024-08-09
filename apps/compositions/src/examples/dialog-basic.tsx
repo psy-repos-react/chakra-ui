@@ -1,6 +1,5 @@
 import { Button } from "compositions/ui/button"
 import {
-  DialogBackdrop,
   DialogBody,
   DialogCloseTrigger,
   DialogContent,
@@ -14,9 +13,10 @@ import {
 export const DialogBasic = () => {
   return (
     <DialogRoot>
-      <DialogBackdrop />
       <DialogTrigger>
-        <Button variant="outline">Open Dialog</Button>
+        <Button variant="outline" size="sm">
+          Open Dialog
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

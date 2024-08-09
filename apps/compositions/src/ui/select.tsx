@@ -1,7 +1,7 @@
 "use client"
 
 import { Select as ChakraSelect, Portal } from "@chakra-ui/react"
-import { CloseButton } from "./close-button"
+import { CloseButton } from "compositions/ui/close-button"
 
 interface SelectTriggerProps extends ChakraSelect.ControlProps {
   clearable?: boolean
@@ -66,7 +66,7 @@ export const SelectValueText = (props: SelectValueTextProps) => {
           if (items.length === 0) return props.placeholder
           if (children) return children(items)
           if (items.length === 1)
-            return select.collection.itemToString(items[0])
+            return select.collection.stringifyItem(items[0])
           return `${items.length} selected`
         }}
       </ChakraSelect.Context>
@@ -74,7 +74,16 @@ export const SelectValueText = (props: SelectValueTextProps) => {
   )
 }
 
+export const SelectRoot = (props: ChakraSelect.RootProps) => {
+  return (
+    <ChakraSelect.Root
+      {...props}
+      positioning={{ sameWidth: true, ...props.positioning }}
+    />
+  )
+}
+
 export const SelectLabel = ChakraSelect.Label
 export const SelectItemGroup = ChakraSelect.ItemGroup
 export const SelectItemText = ChakraSelect.ItemText
-export const SelectRoot = ChakraSelect.Root
+export const SelectItemGroupLabel = ChakraSelect.ItemGroupLabel

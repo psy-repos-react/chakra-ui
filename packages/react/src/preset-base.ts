@@ -114,8 +114,8 @@ export const defaultConditions = defineConditions({
   landscape: "@media (orientation: landscape)",
   portrait: "@media (orientation: portrait)",
 
-  dark: " &.dark, .dark &",
-  light: " &.light, .light &",
+  dark: "&.dark, .dark &",
+  light: "&.light, .light &",
   mediaDark: "@media (prefers-color-scheme: dark)",
   mediaLight: "@media (prefers-color-scheme: light)",
 
@@ -132,6 +132,8 @@ export const defaultConditions = defineConditions({
 
   horizontal: "&[data-orientation=horizontal]",
   vertical: "&[data-orientation=vertical]",
+
+  icon: "& :where(svg)",
 })
 
 export const defaultBaseConfig = defineConfig({
@@ -532,36 +534,57 @@ export const defaultBaseConfig = defineConfig({
       transform: createColorMixTransform("outlineColor"),
     },
     focusRing: {
-      values: ["extend", "contain"],
+      values: ["outside", "inside", "mixed", "none"],
       transform(value: any, { token }: any) {
         const focusRingColor = token("colors.border.emphasized")
         const styles: Record<string, any> = {
-          contain: {
+          inside: {
             "--focus-ring-color": focusRingColor,
             "&:where(:focus-visible, [data-focus])": {
-              outlineWidth: "1px",
+              outlineWidth: "var(--focus-ring-width, 2px)",
               outlineColor: "var(--focus-ring-color)",
               outlineStyle: "solid",
               borderColor: "var(--focus-ring-color)",
             },
           },
-          extend: {
+          outside: {
             "--focus-ring-color": focusRingColor,
-            "&:where(:focus-visible, [data-focus])": {
-              outlineWidth: "2px",
+            "&:is(:focus-visible, [data-focus])": {
+              outlineWidth: "var(--focus-ring-width, 2px)",
               outlineOffset: "2px",
-              outlineColor: "var(--focus-ring-color)",
               outlineStyle: "solid",
+              outlineColor: "var(--focus-ring-color)",
+            },
+          },
+          mixed: {
+            "--focus-ring-color": focusRingColor,
+            "&:is(:focus-visible, [data-focus])": {
+              outlineWidth: "2px",
+              outlineStyle: "solid",
+              outlineColor:
+                "color-mix(in srgb, var(--focus-ring-color), transparent 60%)",
+              borderColor: "var(--focus-ring-color)",
+            },
+          },
+          none: {
+            "--focus-ring-color": focusRingColor,
+            "&:is(:focus-visible, [data-focus])": {
+              outline: "none",
             },
           },
         }
 
-        return styles[value]
+        return styles[value] ?? {}
       },
     },
     focusRingColor: {
       values: "colors",
       transform: createColorMixTransform("--focus-ring-color"),
+    },
+    focusRingWidth: {
+      values: "borderWidths",
+      property: "outlineWidth",
+      transform: (v) => ({ "--focus-ring-width": v }),
     },
     // layout
     aspectRatio: { values: "aspectRatios" },
@@ -585,12 +608,30 @@ export const defaultBaseConfig = defineConfig({
     hideFrom: {
       values: "breakpoints",
       //@ts-ignore
-      transform: (v) => ({ [`@breakpoint ${v}`]: { display: "none" } }),
+      transform: (value, { raw, token }) => {
+        const bp = token.raw(`breakpoints.${raw}`)
+        const media = bp
+          ? `@breakpoint ${raw}`
+          : `@media screen and (min-width: ${value})`
+        return {
+          [media]: { display: "none" },
+        }
+      },
     },
     hideBelow: {
       values: "breakpoints",
       //@ts-ignore
-      transform: (v) => ({ [`@breakpoint ${v}Down`]: { display: "none" } }),
+      transform(value, { raw, token }) {
+        const bp = token.raw(`breakpoints.${raw}`)
+        const media = bp
+          ? `@breakpoint ${raw}Down`
+          : `@media screen and (max-width: ${value})`
+        return {
+          [media]: {
+            display: "none",
+          },
+        }
+      },
     },
     // scroll
     overscrollBehavior: { shorthand: ["overscroll"] },
@@ -805,14 +846,12 @@ export const defaultBaseConfig = defineConfig({
         background: "background-color, background-image, background-position",
       },
     },
-    transitionTimingFunction: {
-      values: "easings",
-      shorthand: ["transitionTiming"],
-    },
+    transitionTimingFunction: { values: "easings" },
     // animation
     animation: { values: "animations" },
     animationDuration: { values: "durations" },
     animationDelay: { values: "durations" },
+    animationTimingFunction: { values: "easings" },
     // typography
     fontFamily: { values: "fonts" },
     fontSize: { values: "fontSizes" },

@@ -1,6 +1,6 @@
 {
   "name": "@chakra-ui/react",
-  "version": "3.0.0-next.9",
+  "version": "3.0.0-next.13",
   "description": "Responsive and accessible React UI components built with React and Emotion",
   "type": "module",
   "main": "dist/cjs/index.cjs",
@@ -38,8 +38,8 @@
     "url": "https://storybook.chakra-ui.com"
   },
   "dependencies": {
-    "@ark-ui/anatomy": "3.3.1",
-    "@ark-ui/react": "3.4.0-0",
+    "@ark-ui/anatomy": "3.5.0",
+    "@ark-ui/react": "3.6.2",
     "@chakra-ui/hooks": "workspace:*",
     "@chakra-ui/utils": "workspace:*",
     "@emotion/is-prop-valid": "1.2.2",
@@ -57,15 +57,15 @@
   },
   "devDependencies": {
     "@emotion/react": "11.11.4",
-    "@tanstack/react-table": "8.17.3",
+    "@tanstack/react-table": "8.19.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-frame-component": "5.2.7",
-    "react-hook-form": "7.52.0",
+    "react-hook-form": "7.52.1",
     "react-icons": "5.2.1",
-    "react-lorem-component": "0.13.0",
+    "react-lorem-ipsum": "1.4.10",
     "react-markdown": "^9.0.1",
-    "react-spinners": "0.13.8"
+    "react-spinners": "0.14.1"
   },
   "scripts": {
     "build:fast": "tsx ../../scripts/build/main.ts",

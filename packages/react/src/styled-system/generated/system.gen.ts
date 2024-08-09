@@ -1,14 +1,11 @@
 import type { ConditionalValue, CssProperties } from "../css.types"
 import type { UtilityValues } from "./prop-types.gen"
 import type { Token } from "./token.gen"
-
 type AnyString = string & {}
 type AnyNumber = number & {}
-
 type CssVars = `var(--${string})`
 type CssVarValue = ConditionalValue<Token | CssVars | AnyString | AnyNumber>
 type CssVarKey = `--${string}`
-
 export type CssVarProperties = {
   [key in CssVarKey]?: CssVarValue
 }
@@ -60,7 +57,7 @@ export interface SystemProperties {
   animationRange?: ConditionalValue<CssProperties["animationRange"] | AnyString>
   animationRangeEnd?: ConditionalValue<CssProperties["animationRangeEnd"] | AnyString>
   animationRangeStart?: ConditionalValue<CssProperties["animationRangeStart"] | AnyString>
-  animationTimingFunction?: ConditionalValue<CssProperties["animationTimingFunction"] | AnyString>
+  animationTimingFunction?: ConditionalValue<UtilityValues["animationTimingFunction"] | CssVars | CssProperties["animationTimingFunction"] | AnyString>
   animationTimeline?: ConditionalValue<CssProperties["animationTimeline"] | AnyString>
   appearance?: ConditionalValue<CssProperties["appearance"] | AnyString>
   aspectRatio?: ConditionalValue<UtilityValues["aspectRatio"] | CssVars | CssProperties["aspectRatio"] | AnyString>
@@ -611,7 +608,6 @@ export interface SystemProperties {
   py?: ConditionalValue<UtilityValues["paddingBlock"] | CssVars | CssProperties["paddingBlock"] | AnyString>
   paddingY?: ConditionalValue<UtilityValues["paddingBlock"] | CssVars | CssProperties["paddingBlock"] | AnyString>
   textDecor?: ConditionalValue<CssProperties["textDecoration"] | AnyString>
-  transitionTiming?: ConditionalValue<UtilityValues["transitionTimingFunction"] | CssVars | CssProperties["transitionTimingFunction"] | AnyString>
   backgroundGradient?: ConditionalValue<UtilityValues["backgroundGradient"] | CssVars | AnyString>
   gradientFrom?: ConditionalValue<UtilityValues["gradientFrom"] | CssVars | AnyString>
   gradientTo?: ConditionalValue<UtilityValues["gradientTo"] | CssVars | AnyString>
@@ -647,6 +643,7 @@ export interface SystemProperties {
   backdropSepia?: ConditionalValue<string | number | AnyString>
   focusRing?: ConditionalValue<UtilityValues["focusRing"] | CssVars | AnyString>
   focusRingColor?: ConditionalValue<UtilityValues["focusRingColor"] | CssVars | AnyString>
+  focusRingWidth?: ConditionalValue<UtilityValues["focusRingWidth"] | CssVars | AnyString>
   boxSize?: ConditionalValue<UtilityValues["boxSize"] | CssVars | AnyString>
   hideFrom?: ConditionalValue<UtilityValues["hideFrom"] | CssVars | AnyString>
   hideBelow?: ConditionalValue<UtilityValues["hideBelow"] | CssVars | AnyString>

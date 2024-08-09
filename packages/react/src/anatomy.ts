@@ -53,6 +53,7 @@ export const statAnatomy = createAnatomy("stat").parts(
   "label",
   "helpText",
   "valueText",
+  "valueUnit",
   "indicator",
 )
 
@@ -103,3 +104,12 @@ export const stepsAnatomy = createAnatomy("steps", [
   "prevTrigger",
   "progress",
 ])
+
+export const timelineAnatomy = createAnatomy("timeline").parts(
+  "root",
+  "item",
+  "content",
+  "separator",
+  "indicator",
+  "connector",
+)

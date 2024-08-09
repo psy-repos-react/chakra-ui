@@ -1,3 +1,4 @@
+import type { Meta } from "@storybook/react"
 import { useEffect, useState } from "react"
 import { Box, Circle, For, HStack, Span, Stack, useRecipe } from "../src"
 import { Skeleton } from "../src/components/skeleton"
@@ -6,8 +7,14 @@ import { PlaygroundTable } from "./shared/playground-table"
 
 export default {
   title: "Components / Skeleton",
-  decorators: [(Story: any) => <Box padding="40px">{<Story />}</Box>],
-}
+  decorators: [
+    (Story) => (
+      <Box p="10">
+        <Story />
+      </Box>
+    ),
+  ],
+} satisfies Meta
 
 export const Variants = () => {
   const recipe = useRecipe("skeleton")
@@ -55,14 +62,14 @@ export const Variants = () => {
 }
 
 export const WithFade = () => {
-  const [loaded, setLoaded] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setLoaded(true), 1000)
+    setTimeout(() => setLoading(true), 1000)
   }, [])
 
   return (
-    <Skeleton loaded={loaded} width="fit-content">
+    <Skeleton loading={loading} width="fit-content">
       <span>Chakra ui is cool</span>
     </Skeleton>
   )

@@ -31,11 +31,11 @@ export const InputWithLeftAndRightElement = () => {
         <InputElement placement="end" pe="1">
           <MenuRoot>
             <MenuTrigger>
-              <Button variant="plain" size="xs" endIcon={<LuChevronsUpDown />}>
-                .com
+              <Button variant="plain" size="xs">
+                .com <LuChevronsUpDown />
               </Button>
             </MenuTrigger>
-            <MenuContent portalled={false}>
+            <MenuContent>
               <MenuItem value=".com">.com</MenuItem>
               <MenuItem value=".org">.org</MenuItem>
               <MenuItem value=".net">.net</MenuItem>

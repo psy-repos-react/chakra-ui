@@ -1,39 +1,22 @@
-import { Group, Stat } from "../src"
+import type { Meta } from "@storybook/react"
+import { Box } from "../src"
 
 export default {
   title: "Components / Stat",
-}
+  decorators: [
+    (Story) => (
+      <Box p="10">
+        <Story />
+      </Box>
+    ),
+  ],
+} satisfies Meta
 
-export const Basic = () => {
-  return (
-    <Stat.Root>
-      <Stat.Label>Collected Fees</Stat.Label>
-      <Stat.ValueText>£0.00</Stat.ValueText>
-      <Stat.HelpText>Feb 12 - Feb 28</Stat.HelpText>
-    </Stat.Root>
-  )
-}
-
-export const WithIndicator = () => {
-  return (
-    <Group gap="10">
-      <Stat.Root>
-        <Stat.Label>Sent</Stat.Label>
-        <Stat.ValueText>345,670</Stat.ValueText>
-        <Stat.HelpText>
-          <Stat.UpIndicator />
-          23.36%
-        </Stat.HelpText>
-      </Stat.Root>
-
-      <Stat.Root>
-        <Stat.Label>Clicked</Stat.Label>
-        <Stat.ValueText>45</Stat.ValueText>
-        <Stat.HelpText>
-          <Stat.DownIndicator />
-          9.05%
-        </Stat.HelpText>
-      </Stat.Root>
-    </Group>
-  )
-}
+export { StatBasic as Basic } from "compositions/examples/stat-basic"
+export { StatWithFormatOptions as WithFormatOptions } from "compositions/examples/stat-with-format-options"
+export { StatWithIcon as WithIcon } from "compositions/examples/stat-with-icon"
+export { StatWithIndicator as WithIndicator } from "compositions/examples/stat-with-indicator"
+export { StatWithInfoTip as WithInfoTip } from "compositions/examples/stat-with-info-tip"
+export { StatWithProgressBar as WithProgressBar } from "compositions/examples/stat-with-progress-bar"
+export { StatWithTrend as WithTrend } from "compositions/examples/stat-with-trend"
+export { StatWithValueUnit as WithValueUnit } from "compositions/examples/stat-with-value-unit"

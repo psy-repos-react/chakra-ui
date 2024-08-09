@@ -36,6 +36,7 @@ export function createSystem(config: SystemConfig): SystemContext {
   } = config
 
   const tokens = createTokenDictionary({
+    breakpoints: theme.breakpoints,
     tokens: theme.tokens,
     semanticTokens: theme.semanticTokens,
     prefix: cssVarsPrefix,
@@ -158,6 +159,18 @@ export function createSystem(config: SystemConfig): SystemContext {
     return theme.slotRecipes?.[key] ?? fallback
   }
 
+  function isRecipe(key: string) {
+    return Object.hasOwnProperty.call(theme.recipes ?? {}, key)
+  }
+
+  function isSlotRecipe(key: string) {
+    return Object.hasOwnProperty.call(theme.slotRecipes ?? {}, key)
+  }
+
+  function hasRecipe(key: string) {
+    return isRecipe(key) || isSlotRecipe(key)
+  }
+
   return {
     $$chakra: true,
     _config: config,
@@ -177,6 +190,9 @@ export function createSystem(config: SystemConfig): SystemContext {
     sva,
     getRecipe,
     getSlotRecipe,
+    hasRecipe,
+    isRecipe,
+    isSlotRecipe,
   }
 }
 
