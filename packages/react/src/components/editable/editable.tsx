@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import {
   Editable as ArkEditable,
   useEditableContext,
@@ -20,22 +21,47 @@ const {
   withProvider,
   withContext,
   useStyles: useEditableStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "editable" })
 
 export { useEditableStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface EditableRootProps
-  extends HTMLChakraProps<"div", ArkEditable.RootBaseProps>,
-    SlotRecipeProps<"editable">,
+export interface EditableRootProviderBaseProps
+  extends Assign<
+      ArkEditable.RootProviderBaseProps,
+      SlotRecipeProps<"editable">
+    >,
     UnstyledProp {}
+
+export interface EditableRootProviderProps
+  extends HTMLChakraProps<"div", EditableRootProviderBaseProps> {}
+
+export const EditableRootProvider = withProvider<
+  HTMLDivElement,
+  EditableRootProviderProps
+>(ArkEditable.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface EditableRootBaseProps
+  extends Assign<ArkEditable.RootBaseProps, SlotRecipeProps<"editable">>,
+    UnstyledProp {}
+
+export interface EditableRootProps
+  extends HTMLChakraProps<"div", EditableRootBaseProps> {}
 
 export const EditableRoot = withProvider<HTMLDivElement, EditableRootProps>(
   ArkEditable.Root,
   "root",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const EditablePropsProvider =
+  PropsProvider as React.Provider<EditableRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -127,3 +153,10 @@ export const EditableCancelTrigger = withContext<
   HTMLButtonElement,
   EditableCancelTriggerProps
 >(ArkEditable.CancelTrigger, "cancelTrigger", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const EditableContext = ArkEditable.Context
+
+export interface EditableValueChangeDetails
+  extends ArkEditable.ValueChangeDetails {}

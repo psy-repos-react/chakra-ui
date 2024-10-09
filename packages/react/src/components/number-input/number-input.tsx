@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { NumberInput as ArkNumberInput } from "@ark-ui/react/number-input"
 import {
   type HTMLChakraProps,
@@ -15,21 +16,46 @@ const {
   withProvider,
   withContext,
   useStyles: useNumberInputStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "numberInput" })
 
 export { useNumberInputStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface NumberInputRootProps
-  extends HTMLChakraProps<"div", ArkNumberInput.RootBaseProps>,
-    SlotRecipeProps<"numberInput">,
+export interface NumberInputRootProviderBaseProps
+  extends Assign<
+      ArkNumberInput.RootProviderBaseProps,
+      SlotRecipeProps<"numberInput">
+    >,
     UnstyledProp {}
+
+export interface NumberInputRootProviderProps
+  extends HTMLChakraProps<"div", NumberInputRootProviderBaseProps> {}
+
+export const NumberInputRootProvider = withProvider<
+  HTMLDivElement,
+  NumberInputRootProviderProps
+>(ArkNumberInput.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface NumberInputRootBaseProps
+  extends Assign<ArkNumberInput.RootBaseProps, SlotRecipeProps<"numberInput">>,
+    UnstyledProp {}
+
+export interface NumberInputRootProps
+  extends HTMLChakraProps<"div", NumberInputRootBaseProps> {}
 
 export const NumberInputRoot = withProvider<
   HTMLDivElement,
   NumberInputRootProps
 >(ArkNumberInput.Root, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const NumberInputPropsProvider =
+  PropsProvider as React.Provider<NumberInputRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,3 +122,20 @@ export const NumberInputScrubber = withContext<
   HTMLDivElement,
   NumberInputScrubberProps
 >(ArkNumberInput.Scrubber, "scrubber", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const NumberInputValueText = withContext<
+  HTMLSpanElement,
+  NumberInputValueTextProps
+>(ArkNumberInput.ValueText, "valueText", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const NumberInputContext = ArkNumberInput.Context
+
+export interface NumberInputValueChangeDetails
+  extends ArkNumberInput.ValueChangeDetails {}
+
+export interface NumberInputValueTextProps
+  extends HTMLChakraProps<"span", ArkNumberInput.ValueTextBaseProps> {}

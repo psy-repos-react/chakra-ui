@@ -1,10 +1,12 @@
 export {
   FieldRoot,
+  FieldPropsProvider,
   FieldLabel,
   FieldHelperText,
   FieldErrorText,
   FieldErrorIcon,
   FieldRequiredIndicator,
+  useFieldStyles,
 } from "./field"
 
 export type {
@@ -15,8 +17,6 @@ export type {
   FieldErrorIconProps,
   FieldRequiredIndicatorProps,
 } from "./field"
-
-export { useFieldStyles } from "./field"
 
 export { useFieldContext } from "@ark-ui/react/field"
 

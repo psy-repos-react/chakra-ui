@@ -6,7 +6,7 @@ export const Pre = (props: BoxProps) => {
       as="pre"
       {...props}
       css={{
-        backgroundColor: "bg.muted",
+        backgroundColor: "bg.subtle",
         shadow: "inset",
         marginTop: "1.6em",
         marginBottom: "1.6em",
@@ -34,11 +34,11 @@ export const Code = (props: BoxProps) => {
       as="code"
       {...props}
       css={{
-        fontSize: "0.925em",
+        fontSize: "0.8em",
         letterSpacing: "-0.01em",
         borderRadius: "md",
         borderWidth: "0.5px",
-        bg: "bg.muted",
+        bg: "bg.subtle",
         color: "fg",
         whiteSpace: "pre",
         padding: "0.1em 0.4em",

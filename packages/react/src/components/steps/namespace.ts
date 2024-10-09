@@ -1,5 +1,7 @@
 export {
   StepsRoot as Root,
+  StepsRootProvider as RootProvider,
+  StepsPropsProvider as PropsProvider,
   StepsSeparator as Separator,
   StepsTrigger as Trigger,
   StepsTitle as Title,
@@ -12,11 +14,14 @@ export {
   StepsNumber as Number,
   StepsIndicator as Indicator,
   StepsDescription as Description,
-  StepsCompleteContent as CompleteContent,
+  StepsCompletedContent as CompletedContent,
+  StepsItemContext as ItemContext,
+  StepsContext as Context,
 } from "./steps"
 
 export type {
   StepsRootProps as RootProps,
+  StepsRootProviderProps as RootProviderProps,
   StepsListProps as ListProps,
   StepsItemProps as ItemProps,
   StepsTriggerProps as TriggerProps,
@@ -29,10 +34,6 @@ export type {
   StepsPrevTriggerProps as PrevTriggerProps,
   StepsNextTriggerProps as NextTriggerProps,
   StepsDescriptionProps as DescriptionProps,
-  StepsCompleteContentProps as CompleteContentProps,
+  StepsCompletedContentProps as CompletedContentProps,
+  StepsChangeDetails as ChangeDetails,
 } from "./steps"
-
-export {
-  StepsContext as Context,
-  StepsItemContext as ItemContext,
-} from "./steps.ark"

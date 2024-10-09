@@ -1,9 +1,9 @@
-import { anatomy } from "@ark-ui/anatomy/segment-group"
+import { segmentGroupAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const segmentGroupSlotRecipe = defineSlotRecipe({
   className: "chakra-segment-group",
-  slots: anatomy.keys(),
+  slots: segmentGroupAnatomy.keys(),
   base: {
     root: {
       display: "inline-flex",
@@ -12,7 +12,7 @@ export const segmentGroupSlotRecipe = defineSlotRecipe({
       textAlign: "center",
       position: "relative",
       isolation: "isolate",
-      bg: "bg.muted",
+      bg: "bg.subtle",
     },
 
     item: {
@@ -22,8 +22,12 @@ export const segmentGroupSlotRecipe = defineSlotRecipe({
       fontSize: "sm",
       position: "relative",
       color: "fg",
+      borderRadius: "var(--segment-radius)",
       _disabled: {
         opacity: "0.5",
+      },
+      "&:has(input:focus-visible)": {
+        focusRing: "outside",
       },
       _before: {
         content: '""',
@@ -50,7 +54,7 @@ export const segmentGroupSlotRecipe = defineSlotRecipe({
     indicator: {
       shadow: "sm",
       pos: "absolute",
-      bg: "bg",
+      bg: { _light: "bg", _dark: "border.emphasized" },
       width: "var(--width)",
       height: "var(--height)",
       top: "var(--top)",

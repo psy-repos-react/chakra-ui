@@ -1,8 +1,13 @@
 export {
+  PinInputContext,
   PinInputControl,
+  PinInputHiddenInput,
   PinInputInput,
   PinInputLabel,
+  PinInputPropsProvider,
   PinInputRoot,
+  PinInputRootProvider,
+  usePinInputStyles,
 } from "./pin-input"
 
 export type {
@@ -10,11 +15,10 @@ export type {
   PinInputInputProps,
   PinInputLabelProps,
   PinInputRootProps,
+  PinInputRootProviderProps,
+  PinInputValueChangeDetails,
 } from "./pin-input"
 
-export { usePinInputStyles } from "./pin-input"
-
-export { PinInputContext, PinInputHiddenInput } from "@ark-ui/react/pin-input"
-export type { PinInputHiddenInputProps } from "@ark-ui/react/pin-input"
-
 export * as PinInput from "./namespace"
+
+export { usePinInput, usePinInputContext } from "@ark-ui/react/pin-input"

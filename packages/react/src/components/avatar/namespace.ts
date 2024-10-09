@@ -1,9 +1,10 @@
 export {
   AvatarRoot as Root,
+  AvatarPropsProvider as PropsProvider,
   AvatarImage as Image,
   AvatarFallback as Fallback,
-  AvatarInitial as Initial,
   AvatarIcon as Icon,
+  AvatarContext as Context,
 } from "./avatar"
 
 export type {
@@ -11,9 +12,5 @@ export type {
   AvatarImageProps as ImageProps,
   AvatarFallbackProps as FallbackProps,
   AvatarIconProps as IconProps,
+  AvatarStatusChangeDetails as StatusChangeDetails,
 } from "./avatar"
-
-export {
-  AvatarContext as Context,
-  type AvatarStatusChangeDetails as StatusChangeDetails,
-} from "@ark-ui/react/avatar"

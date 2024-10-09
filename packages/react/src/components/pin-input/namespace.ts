@@ -3,6 +3,10 @@ export {
   PinInputInput as Input,
   PinInputLabel as Label,
   PinInputRoot as Root,
+  PinInputRootProvider as RootProvider,
+  PinInputPropsProvider as PropsProvider,
+  PinInputContext as Context,
+  PinInputHiddenInput as HiddenInput,
 } from "./pin-input"
 
 export type {
@@ -10,10 +14,6 @@ export type {
   PinInputInputProps as InputProps,
   PinInputLabelProps as LabelProps,
   PinInputRootProps as RootProps,
+  PinInputRootProviderProps as RootProviderProps,
+  PinInputValueChangeDetails as ValueChangeDetails,
 } from "./pin-input"
-
-export {
-  PinInputHiddenInput as HiddenInput,
-  PinInputContext as Context,
-} from "@ark-ui/react/pin-input"
-export type { PinInputHiddenInputProps as HiddenInputProps } from "@ark-ui/react/pin-input"

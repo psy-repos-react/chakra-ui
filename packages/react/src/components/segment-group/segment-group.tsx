@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { SegmentGroup as ArkSegmentGroup } from "@ark-ui/react/segment-group"
 import {
   type HTMLChakraProps,
@@ -14,21 +15,49 @@ const {
   withProvider,
   withContext,
   useStyles: useSegmentGroupStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "segmentGroup" })
 
 export { useSegmentGroupStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface SegmentGroupRootProps
-  extends HTMLChakraProps<"div", ArkSegmentGroup.RootBaseProps>,
-    SlotRecipeProps<"segmentGroup">,
+export interface SegmentGroupRootProviderBaseProps
+  extends Assign<
+      ArkSegmentGroup.RootProviderBaseProps,
+      SlotRecipeProps<"segmentGroup">
+    >,
     UnstyledProp {}
+
+export interface SegmentGroupRootProviderProps
+  extends HTMLChakraProps<"div", SegmentGroupRootProviderBaseProps> {}
+
+export const SegmentGroupRootProvider = withProvider<
+  HTMLDivElement,
+  SegmentGroupRootProviderProps
+>(ArkSegmentGroup.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface SegmentGroupRootBaseProps
+  extends Assign<
+      ArkSegmentGroup.RootBaseProps,
+      SlotRecipeProps<"segmentGroup">
+    >,
+    UnstyledProp {}
+
+export interface SegmentGroupRootProps
+  extends HTMLChakraProps<"div", SegmentGroupRootBaseProps> {}
 
 export const SegmentGroupRoot = withProvider<
   HTMLDivElement,
   SegmentGroupRootProps
 >(ArkSegmentGroup.Root, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const SegmentGroupPropsProvider =
+  PropsProvider as React.Provider<SegmentGroupRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -59,3 +88,13 @@ export const SegmentGroupIndicator = withContext<
   HTMLSpanElement,
   SegmentGroupIndicatorProps
 >(ArkSegmentGroup.Indicator, "indicator", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const SegmentGroupItemHiddenInput = ArkSegmentGroup.ItemHiddenInput
+
+export const SegmentGroupContext = ArkSegmentGroup.Context
+export const SegmentGroupItemContext = ArkSegmentGroup.ItemContext
+
+export interface SegmentGroupValueChangeDetails
+  extends ArkSegmentGroup.ValueChangeDetails {}

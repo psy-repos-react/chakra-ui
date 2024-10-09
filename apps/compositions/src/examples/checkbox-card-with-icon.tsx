@@ -1,37 +1,34 @@
-import { Box, Float, HStack, Text, VStack } from "@chakra-ui/react"
+import { CheckboxGroup, Float, HStack } from "@chakra-ui/react"
 import {
-  CheckboxCardControl,
-  CheckboxCardGroup,
+  CheckboxCard,
   CheckboxCardIndicator,
-  CheckboxCardLabel,
-  CheckboxCardRoot,
 } from "compositions/ui/checkbox-card"
 import { HiGlobeAlt, HiLockClosed, HiShieldCheck, HiUser } from "react-icons/hi"
 
 export const CheckboxCardWithIcon = () => {
   return (
-    <CheckboxCardGroup width="full" defaultValue={["Guest"]}>
+    <CheckboxGroup width="full" defaultValue={["Guest"]}>
       <HStack>
         {items.map((item) => (
-          <CheckboxCardRoot variant="subtle" flex="1" key={item.label}>
-            <CheckboxCardControl showIndicator={false}>
-              <VStack gap="1" flex="1" textAlign="center">
-                <Box mb="2" css={{ "& svg": { fontSize: "2xl" } }}>
-                  {item.icon}
-                </Box>
-                <CheckboxCardLabel color="inherit!">
-                  {item.label}
-                </CheckboxCardLabel>
-                <Text fontSize="xs">{item.description}</Text>
-              </VStack>
+          <CheckboxCard
+            flex="1"
+            align="center"
+            key={item.label}
+            variant="subtle"
+            colorPalette="teal"
+            icon={item.icon}
+            iconColor="inherit"
+            label={item.label}
+            description={item.description}
+            indicator={
               <Float placement="top-end" offset="4">
                 <CheckboxCardIndicator />
               </Float>
-            </CheckboxCardControl>
-          </CheckboxCardRoot>
+            }
+          />
         ))}
       </HStack>
-    </CheckboxCardGroup>
+    </CheckboxGroup>
   )
 }
 

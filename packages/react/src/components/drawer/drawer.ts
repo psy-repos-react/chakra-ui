@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Dialog as ArkDialog } from "@ark-ui/react/dialog"
 import {
   type HTMLChakraProps,
@@ -14,22 +15,46 @@ const {
   withRootProvider,
   withContext,
   useStyles: useDrawerStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "drawer" })
 
 export { useDrawerStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface DrawerRootProps
-  extends ArkDialog.RootBaseProps,
-    SlotRecipeProps<"drawer">,
-    UnstyledProp {
+export interface DrawerRootProviderBaseProps
+  extends Assign<ArkDialog.RootProviderBaseProps, SlotRecipeProps<"drawer">>,
+    UnstyledProp {}
+
+export interface DrawerRootProviderProps extends DrawerRootProviderBaseProps {
+  children: React.ReactNode
+}
+
+export const DrawerRootProvider = withRootProvider<DrawerRootProviderProps>(
+  ArkDialog.RootProvider,
+  {
+    defaultProps: { unmountOnExit: true, lazyMount: true },
+  },
+)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface DrawerRootBaseProps
+  extends Assign<ArkDialog.RootBaseProps, SlotRecipeProps<"drawer">>,
+    UnstyledProp {}
+
+export interface DrawerRootProps extends DrawerRootBaseProps {
   children: React.ReactNode
 }
 
 export const DrawerRoot = withRootProvider<DrawerRootProps>(ArkDialog.Root, {
   defaultProps: { unmountOnExit: true, lazyMount: true },
 })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const DrawerRootPropsProvider =
+  PropsProvider as React.Provider<DrawerRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -131,3 +156,9 @@ export const DrawerHeader = withContext<HTMLDivElement, DrawerHeaderProps>(
   "div",
   "header",
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const DrawerContext = ArkDialog.Context
+
+export interface DrawerOpenChangeDetails extends ArkDialog.OpenChangeDetails {}

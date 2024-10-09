@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Tooltip as ArkTooltip } from "@ark-ui/react/tooltip"
 import {
   type HTMLChakraProps,
@@ -14,18 +15,41 @@ const {
   withRootProvider,
   withContext,
   useStyles: useTooltipStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "tooltip" })
 
 export { useTooltipStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface TooltipRootProps
-  extends ArkTooltip.RootProps,
-    SlotRecipeProps<"tooltip">,
+export interface TooltipRootProviderBaseProps
+  extends Assign<ArkTooltip.RootProviderBaseProps, SlotRecipeProps<"tooltip">>,
     UnstyledProp {}
 
+export interface TooltipRootProviderProps extends TooltipRootProviderBaseProps {
+  children?: React.ReactNode
+}
+
+export const TooltipRootProvider = withRootProvider<TooltipRootProviderProps>(
+  ArkTooltip.RootProvider,
+)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface TooltipRootBaseProps
+  extends Assign<ArkTooltip.RootBaseProps, SlotRecipeProps<"tooltip">>,
+    UnstyledProp {}
+
+export interface TooltipRootProps extends TooltipRootBaseProps {
+  children?: React.ReactNode
+}
+
 export const TooltipRoot = withRootProvider<TooltipRootProps>(ArkTooltip.Root)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const TooltipPropsProvider =
+  PropsProvider as React.Provider<TooltipRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -78,3 +102,10 @@ export const TooltipArrowTip = withContext<
   HTMLDivElement,
   TooltipArrowTipProps
 >(ArkTooltip.ArrowTip, "arrowTip", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const TooltipContext = ArkTooltip.Context
+
+export interface TooltipOpenChangeDetails
+  extends ArkTooltip.OpenChangeDetails {}

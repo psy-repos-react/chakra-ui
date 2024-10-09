@@ -2,11 +2,10 @@
 title: Tabs
 description: Used to display content in a tabbed interface
 links:
-  [
-    { title: "Source", url: "#" },
-    { title: "Storybook", url: "#" },
-    { title: "Recipe", url: "#" },
-  ]
+  source: components/tabs
+  storybook: components-tabs--basic
+  recipe: tabs
+  ark: https://ark-ui.com/react/docs/components/tabs
 ---
 
 <ExampleTabs name="tabs-basic" />
@@ -60,7 +59,7 @@ When a tab is clicked, the link will be navigated to.
 
 Use the `fitted` prop to make the tabs fit the width of the container.
 
-<ExampleTabs name="tabs-stretched" />
+<ExampleTabs name="tabs-with-fitted" />
 
 ### Controlled
 
@@ -89,3 +88,17 @@ pressed.
 Here's an example of how to dynamically add and remove tabs.
 
 <ExampleTabs name="tabs-with-dynamic-add" />
+
+## Props
+
+### Root
+
+<PropTable component="Tabs" part="Root" />
+
+### Trigger
+
+<PropTable component="Tabs" part="TabTrigger" />
+
+### Content
+
+<PropTable component="Tabs" part="TabContent" />

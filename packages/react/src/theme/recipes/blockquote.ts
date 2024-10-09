@@ -10,17 +10,17 @@ export const blockquoteSlotRecipe = defineSlotRecipe({
       display: "flex",
       flexDirection: "column",
       gap: "2",
-      colorPalette: "gray",
     },
     caption: {
-      fontSize: "sm",
-      opacity: 0.6,
+      textStyle: "sm",
+      color: "fg.subtle",
     },
     icon: {
-      fontSize: "xl",
-      color: "colorPalette.400",
+      textStyle: "xl",
+      color: "colorPalette.fg",
     },
   },
+
   variants: {
     justify: {
       start: {
@@ -48,13 +48,10 @@ export const blockquoteSlotRecipe = defineSlotRecipe({
         root: {
           paddingX: "5",
           borderStartWidth: "4px",
-          borderStartColor: {
-            base: "colorPalette.200",
-            _dark: "colorPalette.200/40",
-          },
+          borderStartColor: "colorPalette.subtle",
         },
         icon: {
-          color: "colorPalette.400",
+          color: "colorPalette.fg",
         },
       },
 
@@ -62,19 +59,10 @@ export const blockquoteSlotRecipe = defineSlotRecipe({
         root: {
           paddingX: "5",
           borderStartWidth: "4px",
-          borderStartColor: "colorPalette.600",
+          borderStartColor: "colorPalette.solid",
         },
         icon: {
-          color: "colorPalette.600",
-        },
-      },
-
-      plain: {
-        root: {
-          paddingX: "6",
-        },
-        icon: {
-          color: "colorPalette.600",
+          color: "colorPalette.solid",
         },
       },
     },
@@ -83,6 +71,5 @@ export const blockquoteSlotRecipe = defineSlotRecipe({
   defaultVariants: {
     variant: "subtle",
     justify: "start",
-    colorPalette: "gray",
   },
 })

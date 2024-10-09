@@ -6,8 +6,7 @@
  *
  * This also serves a bridge to React 19's style tag hoisting features.
  */
-import { cx } from "@chakra-ui/utils"
-import isPropValid from "@emotion/is-prop-valid"
+import emotionIsPropValid from "@emotion/is-prop-valid"
 import { ThemeContext, withEmotionCache } from "@emotion/react"
 import { serializeStyles } from "@emotion/serialize"
 //@ts-ignore
@@ -20,9 +19,12 @@ import {
 import * as React from "react"
 import { mergeProps } from "../merge-props"
 import { mergeRefs } from "../merge-refs"
+import { compact, cx, interopDefault } from "../utils"
 import type { JsxFactory, StyledFactoryFn } from "./factory.types"
 import { useChakraContext } from "./provider"
 import { useResolvedProps } from "./use-resolved-props"
+
+const isPropValid = interopDefault(emotionIsPropValid)
 
 const testOmitPropsOnStringTag = isPropValid
 const testOmitPropsOnComponent = (key: string) => key !== "theme"
@@ -128,7 +130,7 @@ const createStyled = (tag: any, configOrCva: any = {}, options: any = {}) => {
     const defaultShouldForwardProp = shouldForwardProp || initShouldForwardProp
 
     const propsWithDefault = React.useMemo(
-      () => Object.assign({}, options.defaultProps, inProps),
+      () => Object.assign({}, options.defaultProps, compact(inProps)),
       [inProps],
     )
 

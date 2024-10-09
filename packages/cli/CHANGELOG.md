@@ -1,5 +1,60 @@
 # @chakra-ui/cli
 
+## 3.0.0-next.29
+
+### Patch Changes
+
+- [`0eda15c`](https://github.com/chakra-ui/chakra-ui/commit/0eda15c6dc09fc777a0091be15416063dc4ad862)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Set process
+  setMaxListeners to improve watch mode
+
+## 3.0.0-next.28
+
+## 3.0.0-next.27
+
+## 3.0.0-next.26
+
+## 3.0.0-next.25
+
+## 3.0.0-next.24
+
+## 3.0.0-next.23
+
+## 3.0.0-next.22
+
+## 3.0.0-next.21
+
+### Minor Changes
+
+- [`14b6a45`](https://github.com/chakra-ui/chakra-ui/commit/14b6a45f5df2405e7e40494d4691efceed87f962)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Show the number of
+  skipped snippets that already exists in outdir
+
+## 3.0.0-next.20
+
+### Patch Changes
+
+- [`c074b58`](https://github.com/chakra-ui/chakra-ui/commit/c074b58770908d9ab27367578020134975ea5378)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Fix issue where
+  vite project throws due to config search
+
+## 3.0.0-next.19
+
+## 3.0.0-next.18
+
+### Minor Changes
+
+- [`bfb68dc`](https://github.com/chakra-ui/chakra-ui/commit/bfb68dc319786ee7495a78527408e8d193c53e06)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - Add `eject` command
+  to import default theme into project
+
+- [`8fc7b49`](https://github.com/chakra-ui/chakra-ui/commit/8fc7b4979739acb347ca9c662d8d242833438b51)
+  Thanks [@segunadebayo](https://github.com/segunadebayo)! - - Add support for
+  conditional value in variant props.
+  - Add `@default` JSDoc comment for `defaultVariants` in generated types.
+
+## 3.0.0-next.17
+
 ## 3.0.0-next.16
 
 ### Patch Changes

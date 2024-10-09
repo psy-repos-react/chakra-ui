@@ -7,14 +7,14 @@ import type { RecipeDefinition, SystemRecipeFn } from "./recipe.types"
 
 export type RecipeKey = keyof ConfigRecipes | (string & {})
 
-interface UseRecipeOptions<K extends RecipeKey> {
+export interface UseRecipeOptions<K extends RecipeKey> {
   key?: K
   recipe?: RecipeDefinition
 }
 
 export function useRecipe<K extends RecipeKey>(
   options: UseRecipeOptions<K>,
-): K extends keyof ConfigRecipes ? ConfigRecipes[K] : SystemRecipeFn<{}> {
+): K extends keyof ConfigRecipes ? ConfigRecipes[K] : SystemRecipeFn<{}, {}> {
   const { key, recipe: recipeProp } = options
   const sys = useChakraContext()
   return useMemo((): any => {

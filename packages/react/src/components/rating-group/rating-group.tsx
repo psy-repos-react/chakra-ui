@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import {
   RatingGroup as ArkRatingGroup,
   useRatingGroupItemContext,
@@ -20,21 +21,46 @@ const {
   withProvider,
   withContext,
   useStyles: useRatingGroupStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "ratingGroup" })
 
 export { useRatingGroupStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface RatingGroupRootProps
-  extends HTMLChakraProps<"div", ArkRatingGroup.RootBaseProps>,
-    SlotRecipeProps<"ratingGroup">,
+export interface RatingGroupRootProviderBaseProps
+  extends Assign<
+      ArkRatingGroup.RootProviderBaseProps,
+      SlotRecipeProps<"ratingGroup">
+    >,
     UnstyledProp {}
+
+export interface RatingGroupRootProviderProps
+  extends HTMLChakraProps<"div", RatingGroupRootProviderBaseProps> {}
+
+export const RatingGroupRootProvider = withProvider<
+  HTMLDivElement,
+  RatingGroupRootProviderProps
+>(ArkRatingGroup.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface RatingGroupRootBaseProps
+  extends Assign<ArkRatingGroup.RootBaseProps, SlotRecipeProps<"ratingGroup">>,
+    UnstyledProp {}
+
+export interface RatingGroupRootProps
+  extends HTMLChakraProps<"div", RatingGroupRootBaseProps> {}
 
 export const RatingGroupRoot = withProvider<
   HTMLDivElement,
   RatingGroupRootProps
 >(ArkRatingGroup.Root, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const RatingGroupPropsProvider =
+  PropsProvider as React.Provider<RatingGroupRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -100,3 +126,12 @@ export const RatingGroupItemIndicator = forwardRef<
     </chakra.span>
   )
 })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const RatingGroupContext = ArkRatingGroup.Context
+export const RatingGroupItemContext = ArkRatingGroup.ItemContext
+export const RatingGroupHiddenInput = ArkRatingGroup.HiddenInput
+
+export interface RatingGroupValueChangeDetails
+  extends ArkRatingGroup.ValueChangeDetails {}

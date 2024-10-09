@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react"
 import { useState } from "react"
-import { Box, Button, Stack, Text } from "../src"
+import { Badge, Box, Button, Center, For, Link, Stack, Text } from "../src"
 
 export default {
   title: "Foundations / Sandbox",
@@ -44,10 +44,52 @@ export const ReRenders = () => {
   )
 }
 
+export const ColorPalette = () => {
+  return (
+    <Stack>
+      <For each={["blue", "green", "red"]}>
+        {(color) => (
+          <Box colorPalette={color}>
+            <Box bg="colorPalette.subtle" color="colorPalette.fg" p="4">
+              Welcome to the{" "}
+              <Link variant="underline" href="https://www.google.com">
+                jungle <Badge variant="solid"> New</Badge>
+              </Link>
+              <br />
+              <Button>Click me</Button>
+            </Box>
+          </Box>
+        )}
+      </For>
+    </Stack>
+  )
+}
+
 export const SelfClosing = () => {
   return (
     <Box rounded="full" overflow="hidden" asChild>
       <img src="https://via.placeholder.com/150" alt="placeholder" />
     </Box>
+  )
+}
+
+export const Layers = () => {
+  return <Button bg="red">Click me</Button>
+}
+
+export const SortOrder = () => {
+  return (
+    <Center
+      flex={[undefined, undefined, 1, 5]}
+      display={["none", "none", "flex"]}
+      layerStyle="fill.subtle"
+      h="90vh"
+      minH="200px"
+      position="sticky"
+      top="0"
+      borderLeft={[undefined, "5px solid red"]}
+    >
+      <Text>Hello</Text>
+    </Center>
   )
 }

@@ -2,11 +2,10 @@
 title: Rating
 description: Used to show reviews and ratings in a visual format.
 links:
-  [
-    { title: "Source", url: "#" },
-    { title: "Storybook", url: "#" },
-    { title: "Recipe", url: "#" },
-  ]
+  source: components/rating
+  storybook: components-rating--basic
+  recipe: rating
+  ark: https://ark-ui.com/react/docs/components/rating-group
 ---
 
 <ExampleTabs name="rating-basic" />
@@ -53,6 +52,12 @@ Use the `readOnly` prop to make the rating component read-only.
 
 <ExampleTabs name="rating-with-readonly" />
 
+### Hook Form
+
+Here's an example of how to use rating with `react-hook-form`.
+
+<ExampleTabs name="rating-with-hook-form" />
+
 ### Custom Icon
 
 Use the `icon` prop to pass a custom icon to the rating component. This will
@@ -77,3 +82,13 @@ Compose the rating component with emojis.
 Use the rating component to show testimonials.
 
 <ExampleTabs name="rating-in-testimonial" />
+
+## Props
+
+### Root
+
+<PropTable component="RatingGroup" part="Root" />
+
+### Item
+
+<PropTable component="RatingGroup" part="Item" />

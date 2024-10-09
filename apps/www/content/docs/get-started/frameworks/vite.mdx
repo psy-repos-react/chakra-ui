@@ -12,52 +12,47 @@ Use the vite template below to get started quickly.
 <ResourceCard
   type="github"
   title="Vite template"
-  url="https://github.com/chakra-ui/chakra-vite-template"
+  url="https://github.com/chakra-ui/chakra-ui/tree/main/sandbox/vite-ts"
 />
 
 :::
 
 ## Installation
 
+> The minimum node version required is Node.20.x
+
 :::steps
 
 ### Install dependencies
 
 ```bash
-npm i @chakra-ui/react @emotion/react next-themes
+npm i @chakra-ui/react@next @emotion/react
+```
+
+### Add snippets
+
+Snippets are pre-built components that you can use to build your UI faster.
+Using the `@chakra-ui/cli` you can add snippets to your project.
+
+```bash
+npx @chakra-ui/cli@next snippet add
 ```
 
 ### Setup provider
 
-Create a `Provider` component at the root of your application. This provider
-composes the following:
+Wrap your application with the `Provider` component at the root of your
+application.
+
+This provider composes the following:
 
 - `ChakraProvider` from `@chakra-ui/react` for the styling system
 - `ThemeProvider` from `next-themes` for color mode
 
-```tsx title="src/components/provider.tsx"
-import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
-import { ThemeProvider } from "next-themes"
-
-export function Provider(props: { children: React.ReactNode }) {
-  return (
-    <ChakraProvider value={defaultSystem}>
-      <ThemeProvider attribute="class" disableTransitionOnChange>
-        {props.children}
-      </ThemeProvider>
-    </ChakraProvider>
-  )
-}
-```
-
-Next, wrap your application with the `Provider` component at the root of your
-application.
-
-```tsx title="src/main.tsx"
+```tsx title="src/main.tsx" {1,8,10}
+import { Provider } from "@/components/ui/provider"
 import React from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App"
-import { Provider } from "./components/provider"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -70,31 +65,47 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
 ### Update tsconfig
 
-If you're using TypeScript, you need to update the `compilerOptions` in the
-tsconfig file to include the following options:
+If you're using TypeScript, in the `tsconfig.app.json` file, make sure the
+`compilerOptions` includes the following:
 
 ```json title="tsconfig.json"
 {
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }
 ```
 
-### Add snippets
+### Setup Vite Config Paths
 
-Snippets are pre-built components that you can use to build your UI faster.
-Using the `@chakra-ui/cli` you can add snippets to your project.
+In your project, set up a vite config path to automatically sync `tsconfig` with
+vite using the command:
 
 ```bash
-npx @chakra-ui/cli@next snippet add
+npm i -D vite-tsconfig-paths
+```
+
+Update the `vite.config.ts` file:
+
+```ts {3} /tsconfigPaths()/
+import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
+import tsconfigPaths from "vite-tsconfig-paths"
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react(), tsconfigPaths()],
+})
 ```
 
 ### Enjoy!
 
-When the power of the snippets and the primitive components from Chakra UI, you
+With the power of the snippets and the primitive components from Chakra UI, you
 can build your UI faster.
 
 ```tsx

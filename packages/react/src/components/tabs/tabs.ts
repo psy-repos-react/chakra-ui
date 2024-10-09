@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Tabs as ArkTabs } from "@ark-ui/react/tabs"
 import {
   type HTMLChakraProps,
@@ -14,22 +15,44 @@ const {
   withProvider,
   withContext,
   useStyles: useTabsStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "tabs" })
 
 export { useTabsStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface TabsRootProps
-  extends HTMLChakraProps<"div", ArkTabs.RootBaseProps>,
-    SlotRecipeProps<"tabs">,
+export interface TabsRootProviderBaseProps
+  extends Assign<ArkTabs.RootProviderBaseProps, SlotRecipeProps<"tabs">>,
     UnstyledProp {}
+
+export interface TabsRootProviderProps
+  extends HTMLChakraProps<"div", TabsRootProviderBaseProps> {}
+
+export const TabsRootProvider = withProvider<
+  HTMLDivElement,
+  TabsRootProviderProps
+>(ArkTabs.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface TabsRootBaseProps
+  extends Assign<ArkTabs.RootBaseProps, SlotRecipeProps<"tabs">>,
+    UnstyledProp {}
+
+export interface TabsRootProps
+  extends HTMLChakraProps<"div", TabsRootBaseProps> {}
 
 export const TabsRoot = withProvider<HTMLDivElement, TabsRootProps>(
   ArkTabs.Root,
   "root",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const TabsPropsProvider =
+  PropsProvider as React.Provider<TabsRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -83,3 +106,9 @@ export const TabsIndicator = withContext<HTMLDivElement, TabsIndicatorProps>(
   "indicator",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const TabsContext = ArkTabs.Context
+
+export interface TabsValueChangeDetails extends ArkTabs.ValueChangeDetails {}

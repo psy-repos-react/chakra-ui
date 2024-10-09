@@ -17,7 +17,7 @@ interface Props {
 const TocLink = chakra(Link, {
   base: {
     fontSize: "sm",
-    color: "fg.muted",
+    color: "fg.subtle",
     _currentPage: { color: "fg", fontWeight: "medium" },
     _hover: { color: "fg" },
     ms: "calc(1rem * var(--toc-depth))",
@@ -39,7 +39,6 @@ export const Toc = (props: Props) => {
         {items.map((item, index) => (
           <TocLink
             data-toc
-            fontSize="0.9em"
             id={item.url}
             key={index}
             href={item.url}

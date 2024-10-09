@@ -1,4 +1,4 @@
-import { progressAnatomy } from "@ark-ui/anatomy"
+import { progressAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const progressCircleSlotRecipe = defineSlotRecipe({
@@ -7,8 +7,7 @@ export const progressCircleSlotRecipe = defineSlotRecipe({
   base: {
     root: {
       display: "inline-flex",
-      colorPalette: "gray",
-      fontSize: "sm",
+      textStyle: "sm",
       position: "relative",
     },
     circle: {
@@ -17,12 +16,12 @@ export const progressCircleSlotRecipe = defineSlotRecipe({
       },
     },
     circleTrack: {
-      "--track-color": "colors.bg.emphasized",
+      "--track-color": "colors.colorPalette.subtle",
       stroke: "var(--track-color)",
     },
     circleRange: {
-      stroke: "colorPalette.600",
-      transitionProperty: "stroke-dasharray, stroke",
+      stroke: "colorPalette.solid",
+      transitionProperty: "stroke-dasharray",
       transitionDuration: "0.6s",
       _indeterminate: {
         animation: "circular-progress 1.5s linear infinite",
@@ -38,6 +37,7 @@ export const progressCircleSlotRecipe = defineSlotRecipe({
       fontVariantNumeric: "tabular-nums",
     },
   },
+
   variants: {
     size: {
       xs: {
@@ -46,7 +46,7 @@ export const progressCircleSlotRecipe = defineSlotRecipe({
           "--thickness": "4px",
         },
         valueText: {
-          fontSize: "2xs",
+          textStyle: "2xs",
         },
       },
       sm: {
@@ -55,7 +55,7 @@ export const progressCircleSlotRecipe = defineSlotRecipe({
           "--thickness": "5px",
         },
         valueText: {
-          fontSize: "2xs",
+          textStyle: "2xs",
         },
       },
       md: {
@@ -64,7 +64,7 @@ export const progressCircleSlotRecipe = defineSlotRecipe({
           "--thickness": "6px",
         },
         valueText: {
-          fontSize: "xs",
+          textStyle: "xs",
         },
       },
       lg: {
@@ -73,25 +73,13 @@ export const progressCircleSlotRecipe = defineSlotRecipe({
           "--thickness": "8px",
         },
         valueText: {
-          fontSize: "sm",
+          textStyle: "sm",
         },
       },
     },
   },
 
-  compoundVariants: [
-    {
-      colorPalette: "gray",
-      css: {
-        circleRange: {
-          stroke: { base: "gray.800", _dark: "gray.200" },
-        },
-      },
-    },
-  ],
-
   defaultVariants: {
     size: "md",
-    colorPalette: "gray",
   },
 })

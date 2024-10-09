@@ -1,4 +1,4 @@
-import { hoverCardAnatomy } from "@ark-ui/anatomy"
+import { hoverCardAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const hoverCardSlotRecipe = defineSlotRecipe({
@@ -9,7 +9,7 @@ export const hoverCardSlotRecipe = defineSlotRecipe({
       position: "relative",
       display: "flex",
       flexDirection: "column",
-      fontSize: "sm",
+      textStyle: "sm",
       paddingInline: "var(--hovercard-padding)",
       paddingBlock: "var(--hovercard-padding)",
       "--hovercard-bg": "colors.bg.panel",

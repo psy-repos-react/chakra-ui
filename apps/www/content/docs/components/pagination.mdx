@@ -2,11 +2,9 @@
 title: Pagination
 description: Used to navigate through a series of pages.
 links:
-  [
-    { title: "Source", url: "#" },
-    { title: "Storybook", url: "#" },
-    { title: "Recipe", url: "#" },
-  ]
+  source: components/pagination
+  storybook: components-pagination--basic
+  ark: https://ark-ui.com/react/docs/components/pagination
 ---
 
 <ExampleTabs name="pagination-basic" />
@@ -87,6 +85,20 @@ for mobile views.
 
 <ExampleTabs name="pagination-compact" />
 
+### As Link
+
+Use the `getHref` prop to create a pagination that navigates via links. This
+will use the `LinkButton` component to create the links.
+
+:::info
+
+Edit the `LinkButton` component to point to the correct framework link component
+if needed.
+
+:::
+
+<ExampleTabs name="pagination-as-link" />
+
 ### Attached
 
 Here's an example of composing the pagination with the `Group` component to
@@ -106,3 +118,9 @@ Here's an example of controlling the pagination state and using the state to
 chunk the data.
 
 <ExampleTabs name="pagination-with-content" />
+
+## Props
+
+### Root
+
+<PropTable component="Pagination" part="Root" />

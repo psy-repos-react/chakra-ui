@@ -1,4 +1,4 @@
-import { selectAnatomy } from "@ark-ui/anatomy"
+import { selectAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const selectSlotRecipe = defineSlotRecipe({
@@ -6,7 +6,6 @@ export const selectSlotRecipe = defineSlotRecipe({
   slots: selectAnatomy.keys(),
   base: {
     root: {
-      colorPalette: "gray",
       display: "flex",
       flexDirection: "column",
       gap: "1.5",
@@ -17,9 +16,12 @@ export const selectSlotRecipe = defineSlotRecipe({
       alignItems: "center",
       justifyContent: "space-between",
       width: "full",
+      minH: "var(--select-trigger-height)",
+      px: "var(--select-trigger-padding-x)",
       userSelect: "none",
+      textAlign: "start",
       _placeholderShown: {
-        color: "fg.muted",
+        color: "fg.subtle",
       },
       _disabled: {
         layerStyle: "disabled",
@@ -29,7 +31,20 @@ export const selectSlotRecipe = defineSlotRecipe({
       },
       focusVisibleRing: "outside",
     },
+    indicatorGroup: {
+      display: "flex",
+      alignItems: "center",
+      gap: "1",
+      pos: "absolute",
+      right: "0",
+      top: "0",
+      bottom: "0",
+      px: "var(--select-trigger-padding-x)",
+      pointerEvents: "none",
+    },
     indicator: {
+      display: "flex",
+      color: { base: "fg.muted", _invalid: "fg.error" },
       _icon: {
         width: "4",
         height: "4",
@@ -39,18 +54,18 @@ export const selectSlotRecipe = defineSlotRecipe({
       background: "bg.panel",
       display: "flex",
       flexDirection: "column",
-      gap: "1",
       zIndex: "dropdown",
       outline: 0,
       maxH: "96",
       overflowY: "auto",
+      boxShadow: "md",
       _open: {
         animationStyle: "slide-fade-in",
-        animationDuration: "faster",
+        animationDuration: "fast",
       },
       _closed: {
-        animationName: "fade-out",
-        animationDuration: "0.01s",
+        animationStyle: "slide-fade-out",
+        animationDuration: "fastest",
       },
     },
     item: {
@@ -59,11 +74,12 @@ export const selectSlotRecipe = defineSlotRecipe({
       display: "flex",
       alignItems: "center",
       gap: "2",
+      cursor: "option",
       justifyContent: "space-between",
       flex: "1",
       textAlign: "start",
       _highlighted: {
-        bg: "bg.muted",
+        bg: { _light: "bg.subtle", _dark: "bg.emphasized" },
       },
       _disabled: {
         pointerEvents: "none",
@@ -74,18 +90,27 @@ export const selectSlotRecipe = defineSlotRecipe({
         height: "4",
       },
     },
+    control: {
+      pos: "relative",
+    },
     itemText: {
       flex: "1",
     },
     itemGroupLabel: {
+      py: "1",
       fontWeight: "medium",
     },
     label: {
       fontWeight: "medium",
       userSelect: "none",
+      textStyle: "sm",
+      _disabled: {
+        layerStyle: "disabled",
+      },
     },
     valueText: {
       lineClamp: "1",
+      maxW: "80%",
     },
   },
 
@@ -96,11 +121,8 @@ export const selectSlotRecipe = defineSlotRecipe({
           borderWidth: "1px",
           borderColor: "inherit",
           bg: "bg",
-          _hover: {
-            bg: { base: "colorPalette.50", _dark: "colorPalette.400/10" },
-          },
           _expanded: {
-            bg: { base: "colorPalette.50", _dark: "colorPalette.400/10" },
+            bg: "colorPalette.muted",
           },
         },
       },
@@ -108,18 +130,19 @@ export const selectSlotRecipe = defineSlotRecipe({
         trigger: {
           borderWidth: "1px",
           borderColor: "transparent",
-          bg: { base: "gray.100", _dark: "gray.800" },
+          bg: "bg.subtle",
         },
       },
     },
 
     size: {
       xs: {
+        root: {
+          "--select-trigger-height": "sizes.6",
+          "--select-trigger-padding-x": "spacing.2",
+        },
         trigger: {
-          px: "2",
-          h: "6",
-          minW: "6",
-          fontSize: "xs",
+          textStyle: "xs",
           rounded: "sm",
           gap: "1",
         },
@@ -135,24 +158,24 @@ export const selectSlotRecipe = defineSlotRecipe({
         content: {
           p: "1",
           rounded: "sm",
-          boxShadow: "md",
           minW: "8rem",
-          fontSize: "xs",
+          textStyle: "xs",
         },
       },
+
       sm: {
+        root: {
+          "--select-trigger-height": "sizes.8",
+          "--select-trigger-padding-x": "spacing.3",
+        },
         content: {
           p: "1",
           rounded: "sm",
-          boxShadow: "md",
           minW: "12rem",
-          fontSize: "sm",
+          textStyle: "sm",
         },
         trigger: {
-          px: "3",
-          h: "8",
-          minW: "8",
-          fontSize: "sm",
+          textStyle: "sm",
           rounded: "sm",
           gap: "1",
         },
@@ -168,12 +191,15 @@ export const selectSlotRecipe = defineSlotRecipe({
       },
 
       md: {
+        root: {
+          "--select-trigger-height": "sizes.10",
+          "--select-trigger-padding-x": "spacing.3",
+        },
         content: {
           p: "1",
           rounded: "md",
-          boxShadow: "sm",
           minW: "12rem",
-          fontSize: "sm",
+          textStyle: "sm",
         },
         item: {
           py: "1.5",
@@ -190,20 +216,21 @@ export const selectSlotRecipe = defineSlotRecipe({
           px: "2",
         },
         trigger: {
-          px: "3",
-          h: "10",
-          minW: "10",
-          fontSize: "sm",
+          textStyle: "sm",
           rounded: "md",
           gap: "2",
         },
       },
 
       lg: {
+        root: {
+          "--select-trigger-height": "sizes.12",
+          "--select-trigger-padding-x": "spacing.4",
+        },
         content: {
           p: "2",
           rounded: "lg",
-          fontSize: "md",
+          textStyle: "md",
         },
         item: {
           py: "2",
@@ -215,8 +242,7 @@ export const selectSlotRecipe = defineSlotRecipe({
           px: "3",
         },
         trigger: {
-          fontSize: "md",
-          px: "4",
+          textStyle: "md",
           py: "3",
           rounded: "md",
         },

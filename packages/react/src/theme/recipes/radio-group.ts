@@ -1,22 +1,18 @@
-import { anatomy } from "@ark-ui/anatomy/radio-group"
+import { radioGroupAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 import { radiomarkRecipe } from "./radiomark"
 
 export const radioGroupSlotRecipe = defineSlotRecipe({
   className: "chakra-radio-group",
-  slots: anatomy.keys(),
+  slots: radioGroupAnatomy.keys(),
   base: {
-    root: {
-      colorPalette: "gray",
-    },
-
     item: {
       display: "inline-flex",
       alignItems: "center",
       verticalAlign: "top",
       position: "relative",
       _disabled: {
-        cursor: "not-allowed",
+        cursor: "disabled",
       },
     },
 
@@ -47,64 +43,47 @@ export const radioGroupSlotRecipe = defineSlotRecipe({
     size: {
       sm: {
         item: {
-          fontSize: "xs",
+          textStyle: "xs",
           gap: "0.35rem",
         },
         itemControl: {
           boxSize: "3",
         },
         label: {
-          fontSize: "xs",
+          textStyle: "xs",
         },
       },
 
       md: {
         item: {
-          fontSize: "sm",
+          textStyle: "sm",
           gap: "0.5rem",
         },
         itemControl: {
           boxSize: "4",
         },
         label: {
-          fontSize: "sm",
+          textStyle: "sm",
         },
       },
 
       lg: {
         item: {
-          fontSize: "md",
+          textStyle: "md",
           gap: "0.5rem",
         },
         itemControl: {
           boxSize: "5",
         },
         label: {
-          fontSize: "md",
+          textStyle: "md",
         },
       },
     },
   },
 
-  compoundVariants: [
-    {
-      variant: "outline",
-      colorPalette: "gray",
-      css: {
-        itemControl: {
-          color: "fg.inverted",
-          _checked: {
-            bg: { base: "gray.800", _dark: "gray.200" },
-            borderColor: { base: "gray.800", _dark: "gray.200" },
-          },
-        },
-      },
-    },
-  ],
-
   defaultVariants: {
     size: "md",
     variant: "outline",
-    colorPalette: "gray",
   },
 })

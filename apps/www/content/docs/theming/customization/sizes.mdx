@@ -12,15 +12,10 @@ how to properly customize the styling engine, and get type safety.
 
 ## Example
 
-Here's an example of how to customize spacing in Chakra UI.
+Here's an example of how to customize sizes in Chakra UI.
 
 ```tsx title="theme.ts"
-import {
-  createSystem,
-  defaultConfig,
-  defineConfig,
-  mergeConfigs,
-} from "@chakra-ui/react"
+import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react"
 
 const customConfig = defineConfig({
   theme: {
@@ -34,9 +29,7 @@ const customConfig = defineConfig({
   },
 })
 
-const config = mergeConfigs(defaultConfig, customConfig)
-
-export const system = createSystem(config)
+export const system = createSystem(defaultConfig, customConfig)
 ```
 
 ## Usage

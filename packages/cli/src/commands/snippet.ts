@@ -9,8 +9,8 @@ import { getProjectContext } from "../utils/context"
 import { convertTsxToJsx } from "../utils/convert-tsx-to-jsx"
 import { fetchComposition, fetchCompositions } from "../utils/fetch"
 import { getFileDependencies } from "../utils/get-file-dependencies"
-import * as io from "../utils/io"
-import { runCommand } from "../utils/run-command"
+import { ensureDir } from "../utils/io"
+import { installCommand } from "../utils/run-command"
 import { type CompositionFile, addCommandFlagsSchema } from "../utils/schema"
 import { uniq } from "../utils/shared"
 import { tasks } from "../utils/tasks"
@@ -39,14 +39,17 @@ export const SnippetCommand = new Command("snippet")
       .argument("[snippets...]", "snippets to add")
       .option("-d, --dry-run", "Dry run")
       .option("--outdir <dir>", "Output directory to write the snippets")
+      .option("-f, --force", "Overwrite existing files")
       .action(async (components: string[], flags: unknown) => {
         const parsedFlags = addCommandFlagsSchema.parse(flags)
-        const { dryRun } = parsedFlags
+        const { dryRun, force } = parsedFlags
 
         const ctx = await getProjectContext({ cwd: process.cwd() })
         debug("context", ctx)
 
         const jsx = !ctx.isTypeScript
+
+        ensureDir(ctx.scope.componentsDir)
         const outdir = parsedFlags.outdir || ctx.scope.componentsDir
 
         const items = await fetchCompositions()
@@ -62,28 +65,28 @@ export const SnippetCommand = new Command("snippet")
 
         p.log.info(`Adding ${components.length} snippet(s)...`)
 
-        io.ensureDir(outdir)
-
-        const fileDependencies = uniq(
+        const deps = uniq(
           components.flatMap((id) => getFileDependencies(items, id)),
         )
 
+        const fileDependencies = uniq(
+          deps.map((dep) => dep.fileDependencies).flat(),
+        )
         const npmDependencies = uniq(
-          fileDependencies.flatMap((dep) => {
-            const comp = items.find((item) => item.id === dep)
-            return comp?.npmDependencies || []
-          }),
+          deps.map((dep) => dep.npmDependencies).flat(),
         )
 
         debug("fileDependencies", fileDependencies)
         debug("npmDependencies", npmDependencies)
 
+        let skippedFiles: string[] = []
+
         await tasks([
           {
-            title: `Installing required dependencies`,
+            title: `Installing required dependencies...`,
             enabled: !!npmDependencies.length && !dryRun,
             task: () =>
-              runCommand(["ni", ...npmDependencies, "--silent"], outdir),
+              installCommand([...npmDependencies, "--silent"], outdir),
           },
           {
             title: "Writing file dependencies",
@@ -91,7 +94,10 @@ export const SnippetCommand = new Command("snippet")
             task: async () => {
               await Promise.all(
                 fileDependencies.map(async (dep) => {
-                  if (existsSync(join(outdir, dep))) return
+                  if (existsSync(join(outdir, dep)) && !force) {
+                    skippedFiles.push(dep)
+                    return
+                  }
                   const item = await fetchComposition(dep)
 
                   if (jsx) {
@@ -101,7 +107,11 @@ export const SnippetCommand = new Command("snippet")
 
                   const outPath = join(outdir, item.file.name)
 
-                  await writeFile(outPath, item.file.content, "utf-8")
+                  await writeFile(
+                    outPath,
+                    item.file.content.replace("compositions/ui", "."),
+                    "utf-8",
+                  )
                 }),
               )
             },
@@ -111,7 +121,10 @@ export const SnippetCommand = new Command("snippet")
             task: async () => {
               await Promise.all(
                 components.map(async (id) => {
-                  if (existsSync(join(outdir, id))) return
+                  if (existsSync(join(outdir, id)) && !force) {
+                    skippedFiles.push(id)
+                    return
+                  }
 
                   const item = await fetchComposition(id)
 
@@ -125,13 +138,23 @@ export const SnippetCommand = new Command("snippet")
                   if (dryRun) {
                     printFileSync(item)
                   } else {
-                    await writeFile(outPath, item.file.content, "utf-8")
+                    await writeFile(
+                      outPath,
+                      item.file.content.replace("compositions/ui", "."),
+                      "utf-8",
+                    )
                   }
                 }),
               )
             },
           },
         ])
+
+        if (skippedFiles.length) {
+          p.log.warn(
+            `Skipping ${skippedFiles.length} file(s) that already exist. Use the --force flag to overwrite.`,
+          )
+        }
 
         p.outro("🎉 Done!")
       }),

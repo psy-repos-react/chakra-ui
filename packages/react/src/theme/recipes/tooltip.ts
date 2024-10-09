@@ -1,4 +1,4 @@
-import { tooltipAnatomy } from "@ark-ui/anatomy"
+import { tooltipAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const tooltipSlotRecipe = defineSlotRecipe({
@@ -13,7 +13,7 @@ export const tooltipSlotRecipe = defineSlotRecipe({
       py: "1",
       borderRadius: "md",
       fontWeight: "medium",
-      fontSize: "xs",
+      textStyle: "xs",
       boxShadow: "md",
       maxW: "xs",
       zIndex: "tooltip",

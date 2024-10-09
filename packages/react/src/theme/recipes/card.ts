@@ -14,7 +14,7 @@ export const cardSlotRecipe = defineSlotRecipe({
       bg: "var(--card-bg)",
       boxShadow: "var(--card-shadow)",
       borderRadius: "var(--card-radius)",
-      color: "text",
+      color: "fg",
       borderWidth: "var(--card-border-width, 0)",
       borderColor: "var(--card-border)",
     },
@@ -24,11 +24,14 @@ export const cardSlotRecipe = defineSlotRecipe({
       letterSpacing: "tight",
     },
     description: {
-      color: "fg.muted",
+      color: "fg.subtle",
     },
     body: {
       padding: "var(--card-padding)",
       flex: "1 1 0%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
     },
     header: {
       paddingInline: "var(--card-padding)",
@@ -68,7 +71,7 @@ export const cardSlotRecipe = defineSlotRecipe({
     variant: {
       elevated: {
         root: {
-          "--card-bg": { base: "white", _dark: "colors.gray.800" },
+          "--card-bg": { _light: "white", _dark: "colors.gray.800" },
           "--card-shadow": "shadows.xs",
         },
       },
@@ -81,7 +84,7 @@ export const cardSlotRecipe = defineSlotRecipe({
       },
       subtle: {
         root: {
-          "--card-bg": "colors.bg.muted",
+          "--card-bg": "colors.bg.subtle",
         },
       },
     },

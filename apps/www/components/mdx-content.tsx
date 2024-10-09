@@ -1,11 +1,12 @@
-import { Box, Kbd } from "@chakra-ui/react"
-import { AspectRatioTokenDoc } from "compositions/lib/aspect-ratio-token-toc"
+import { Kbd } from "@chakra-ui/react"
+import { AspectRatioTokenDoc } from "compositions/lib/aspect-ratio-token-doc"
 import { BorderRadiusTokenDoc } from "compositions/lib/border-radius-token-doc"
 import { BreakpointDoc } from "compositions/lib/breakpoint-doc"
 import {
   ColorSemanticTokenDoc,
   ColorTokenDoc,
 } from "compositions/lib/color-token-doc"
+import { CursorTokenDoc } from "compositions/lib/cursor-token-doc"
 import { DurationTokenDoc, KeyframeDoc } from "compositions/lib/keyframe-doc"
 import { ShadowTokenDoc } from "compositions/lib/shadow-token-doc"
 import { SizesTokenDoc } from "compositions/lib/sizes-token-doc"
@@ -13,16 +14,17 @@ import { SpacingTokenDoc } from "compositions/lib/spacing-token-doc"
 import * as TypographyDocs from "compositions/lib/typography-token-doc"
 import { ZIndexTokenDoc } from "compositions/lib/z-index-token-doc"
 import * as runtime from "react/jsx-runtime"
-import { Card, CardGroup } from "./card"
 import { Example, ExamplePreview, ExampleTabs } from "./example"
 import { Anchor } from "./mdx/anchor"
 import { Blockquote } from "./mdx/blockquote"
 import { Callout } from "./mdx/callout"
+import { Card, CardGroup } from "./mdx/card"
 import { Code, Pre } from "./mdx/code"
 import { CodeBlock } from "./mdx/code-block"
 import { CodeGroup } from "./mdx/code-group"
 import { ComponentGrid } from "./mdx/component-grid"
 import { H1, H2, H3, H4 } from "./mdx/heading"
+import { Hr } from "./mdx/hr"
 import { Img } from "./mdx/image"
 import { Li, Ol, Ul } from "./mdx/list"
 import { PropTable } from "./mdx/prop-table"
@@ -57,6 +59,7 @@ const sharedComponents = {
   card: Card,
   "card-group": CardGroup,
   Card,
+  hr: Hr,
   PropTable,
   ComponentGrid,
   ResourceCard: ResourceCard,
@@ -73,6 +76,7 @@ const sharedComponents = {
   AspectRatioTokenDoc,
   SizesTokenDoc,
   ZIndexTokenDoc,
+  CursorTokenDoc,
 }
 
 const useMDXComponent = (code: string) => {
@@ -88,9 +92,5 @@ interface MDXProps {
 export const MDXContent = (props: MDXProps) => {
   const { code, components = {} } = props
   const Component = useMDXComponent(code)
-  return (
-    <Box fontSize="sm">
-      <Component components={{ ...sharedComponents, ...components }} />
-    </Box>
-  )
+  return <Component components={{ ...sharedComponents, ...components }} />
 }

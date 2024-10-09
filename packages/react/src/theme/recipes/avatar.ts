@@ -1,8 +1,8 @@
-import { anatomy } from "@ark-ui/anatomy/avatar"
+import { avatarAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const avatarSlotRecipe = defineSlotRecipe({
-  slots: anatomy.keys(),
+  slots: avatarAnatomy.keys(),
   className: "chakra-avatar",
   base: {
     root: {
@@ -19,7 +19,6 @@ export const avatarSlotRecipe = defineSlotRecipe({
       "--avatar-font-size": "calc(var(--avatar-size) / 2.5)",
       fontSize: "var(--avatar-font-size)",
       borderRadius: "var(--avatar-radius)",
-      colorPalette: "gray",
       "&[data-group-item]": {
         borderWidth: "2px",
         borderColor: "bg",
@@ -62,43 +61,46 @@ export const avatarSlotRecipe = defineSlotRecipe({
       },
       lg: {
         root: {
-          "--avatar-size": "sizes.12",
+          "--avatar-size": "sizes.10",
           "--avatar-margin": "-0.8rem",
         },
       },
       xl: {
         root: {
-          "--avatar-size": "sizes.16",
+          "--avatar-size": "sizes.14",
           "--avatar-margin": "-0.85rem",
         },
       },
       "2xl": {
         root: {
-          "--avatar-size": "sizes.24",
+          "--avatar-size": "sizes.20",
           "--avatar-margin": "-1rem",
         },
       },
     },
+
     variant: {
       solid: {
         root: {
-          bg: "colorPalette.600",
-          color: "white",
+          bg: "colorPalette.solid",
+          color: "colorPalette.contrast",
         },
       },
       subtle: {
         root: {
-          bg: { base: "colorPalette.100", _dark: "colorPalette.400/20" },
-          color: { base: "colorPalette.800", _dark: "colorPalette.300" },
+          bg: "colorPalette.subtle",
+          color: "colorPalette.fg",
         },
       },
       outline: {
         root: {
           bg: "bg",
+          color: "fg",
           borderWidth: "1px",
         },
       },
     },
+
     shape: {
       square: {},
       rounded: {
@@ -108,11 +110,21 @@ export const avatarSlotRecipe = defineSlotRecipe({
         root: { "--avatar-radius": "radii.full" },
       },
     },
+
+    borderless: {
+      true: {
+        root: {
+          "&[data-group-item]": {
+            borderWidth: "0px",
+          },
+        },
+      },
+    },
   },
+
   defaultVariants: {
     size: "md",
     shape: "full",
     variant: "subtle",
-    colorPalette: "gray",
   },
 })

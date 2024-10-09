@@ -1,9 +1,7 @@
 "use client"
 
-import {
-  Select as ArkSelect,
-  type SelectCollectionItem,
-} from "@ark-ui/react/select"
+import type { Assign, CollectionItem } from "@ark-ui/react"
+import { Select as ArkSelect } from "@ark-ui/react/select"
 import {
   type HTMLChakraProps,
   type SlotRecipeProps,
@@ -18,19 +16,44 @@ const {
   withProvider,
   withContext,
   useStyles: useSelectStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "select" })
 
 export { useSelectStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface SelectRootProps<T extends SelectCollectionItem = any>
-  extends HTMLChakraProps<"div", ArkSelect.RootBaseProps<T>>,
-    SlotRecipeProps<"select">,
+export interface SelectRootProviderBaseProps<T extends CollectionItem = any>
+  extends Assign<ArkSelect.RootProviderBaseProps<T>, SlotRecipeProps<"select">>,
     UnstyledProp {}
 
+export interface SelectRootProviderProps<T extends CollectionItem = any>
+  extends HTMLChakraProps<"div", SelectRootProviderBaseProps<T>> {}
+
+interface SelectRootProviderComponent {
+  <T extends CollectionItem>(props: SelectRootProviderProps<T>): JSX.Element
+}
+
+export const SelectRootProvider = withProvider<
+  HTMLDivElement,
+  SelectRootProviderProps
+>(ArkSelect.RootProvider, "root", {
+  forwardAsChild: true,
+}) as SelectRootProviderComponent
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface SelectRootBaseProps<T extends CollectionItem = any>
+  extends Assign<ArkSelect.RootBaseProps<T>, SlotRecipeProps<"select">>,
+    UnstyledProp {}
+
+export interface SelectRootProps<T extends CollectionItem = any>
+  extends HTMLChakraProps<"div", SelectRootBaseProps<T>> {}
+
 interface SelectRootComponent {
-  <T extends SelectCollectionItem>(props: SelectRootProps<T>): JSX.Element
+  <T extends CollectionItem>(
+    props: SelectRootProps<T> & React.RefAttributes<HTMLDivElement>,
+  ): JSX.Element
 }
 
 export const SelectRoot = withProvider<HTMLDivElement, SelectRootProps>(
@@ -38,6 +61,11 @@ export const SelectRoot = withProvider<HTMLDivElement, SelectRootProps>(
   "root",
   { forwardAsChild: true },
 ) as SelectRootComponent
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const SelectPropsProvider =
+  PropsProvider as React.Provider<SelectRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -84,10 +112,10 @@ export const SelectValueText = withContext<
 ////////////////////////////////////////////////////////////////////////////////////
 
 export interface SelectClearTriggerProps
-  extends HTMLChakraProps<"div", ArkSelect.IndicatorBaseProps> {}
+  extends HTMLChakraProps<"button", ArkSelect.ClearTriggerBaseProps> {}
 
 export const SelectClearTrigger = withContext<
-  HTMLDivElement,
+  HTMLButtonElement,
   SelectClearTriggerProps
 >(ArkSelect.ClearTrigger, "clearTrigger", { forwardAsChild: true })
 
@@ -150,6 +178,15 @@ export const SelectItemIndicator = withContext<
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+export interface SelectIndicatorGroupProps extends HTMLChakraProps<"div"> {}
+
+export const SelectIndicatorGroup = withContext<
+  HTMLDivElement,
+  SelectIndicatorGroupProps
+>("div", "indicatorGroup")
+
+////////////////////////////////////////////////////////////////////////////////////
+
 export interface SelectIndicatorProps
   extends HTMLChakraProps<"div", ArkSelect.ItemIndicatorBaseProps> {}
 
@@ -184,3 +221,17 @@ export const SelectLabel = withContext<HTMLLabelElement, SelectLabelProps>(
   "label",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const SelectContext = ArkSelect.Context
+export const SelectHiddenSelect = ArkSelect.HiddenSelect
+export const SelectItemContext = ArkSelect.ItemContext
+
+export interface SelectHighlightChangeDetails<T extends CollectionItem = any>
+  extends ArkSelect.HighlightChangeDetails<T> {}
+
+export interface SelectValueChangeDetails<T extends CollectionItem = any>
+  extends ArkSelect.ValueChangeDetails<T> {}
+
+export interface SelectOpenChangeDetails extends ArkSelect.OpenChangeDetails {}

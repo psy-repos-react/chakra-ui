@@ -9,47 +9,51 @@ export const inputRecipe = defineRecipe({
     position: "relative",
     appearance: "none",
     colorPalette: "gray",
+    textAlign: "start",
     _disabled: {
       layerStyle: "disabled",
     },
+    height: "var(--input-height)",
     "--focus-color": "colors.focusRing",
     "--error-color": "colors.border.error",
   },
+
   variants: {
     size: {
       lg: {
-        fontSize: "md",
+        textStyle: "md",
         px: "4",
         py: "3",
         borderRadius: "md",
-        height: "12",
+        "--input-height": "sizes.12",
         scrollPaddingBottom: "3",
       },
       md: {
-        fontSize: "sm",
+        textStyle: "sm",
         px: "3",
         py: "2",
         borderRadius: "md",
-        height: "10",
+        "--input-height": "sizes.10",
         scrollPaddingBottom: "2",
       },
       sm: {
-        fontSize: "sm",
+        textStyle: "sm",
         px: "3",
         py: "3",
         borderRadius: "sm",
-        height: "8",
+        "--input-height": "sizes.8",
         scrollPaddingBottom: "3",
       },
       xs: {
-        fontSize: "xs",
+        textStyle: "xs",
         px: "2",
         py: "2",
         borderRadius: "sm",
-        height: "6",
+        "--input-height": "sizes.6",
         scrollPaddingBottom: "2",
       },
     },
+
     variant: {
       outline: {
         borderWidth: "1px",
@@ -57,20 +61,21 @@ export const inputRecipe = defineRecipe({
         bg: "bg",
         focusVisibleRing: "inside",
         _invalid: {
+          focusRingColor: "var(--error-color)",
           borderColor: "var(--error-color)",
         },
       },
       filled: {
         borderWidth: "1px",
         borderColor: "transparent",
-        bg: "bg.muted",
-        _invalid: {
-          borderColor: "var(--error-color)",
-        },
+        bg: "bg.subtle",
+        focusVisibleRing: "inside",
         _focusVisible: {
           bg: "bg",
-          outline: "1px solid var(--focus-color)",
-          borderColor: "var(--focus-color)",
+        },
+        _invalid: {
+          focusRingColor: "var(--error-color)",
+          borderColor: "var(--error-color)",
         },
       },
       flushed: {
@@ -79,16 +84,18 @@ export const inputRecipe = defineRecipe({
         borderRadius: "0",
         px: "0",
         bg: "bg",
-        _invalid: {
-          borderColor: "var(--error-color)",
-        },
         _focusVisible: {
           borderColor: "var(--focus-color)",
           boxShadow: "0px 1px 0px 0px var(--focus-color)",
         },
+        _invalid: {
+          focusRingColor: "var(--error-color)",
+          borderColor: "var(--error-color)",
+        },
       },
     },
   },
+
   defaultVariants: {
     size: "md",
     variant: "outline",

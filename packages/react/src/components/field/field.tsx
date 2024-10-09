@@ -1,7 +1,7 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Field as ArkField, useFieldContext } from "@ark-ui/react/field"
-import { cx } from "@chakra-ui/utils"
 import { forwardRef } from "react"
 import {
   type HTMLChakraProps,
@@ -10,6 +10,7 @@ import {
   chakra,
   createSlotRecipeContext,
 } from "../../styled-system"
+import { cx } from "../../utils"
 import { createIcon } from "../icon"
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -19,21 +20,30 @@ const {
   withContext,
   useStyles: useFieldStyles,
   useClassNames,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "field" })
 
 export { useFieldStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
-export interface FieldRootProps
-  extends HTMLChakraProps<"div", ArkField.RootBaseProps>,
-    SlotRecipeProps<"field">,
+
+export interface FieldRootBaseProps
+  extends Assign<ArkField.RootBaseProps, SlotRecipeProps<"field">>,
     UnstyledProp {}
+
+export interface FieldRootProps
+  extends HTMLChakraProps<"div", FieldRootBaseProps> {}
 
 export const FieldRoot = withProvider<HTMLDivElement, FieldRootProps>(
   ArkField.Root,
   "root",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const FieldPropsProvider =
+  PropsProvider as React.Provider<FieldRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -89,6 +99,7 @@ export const FieldRequiredIndicator = forwardRef<
 
   const field = useFieldContext()
   const classNames = useClassNames()
+  const styles = useFieldStyles()
 
   if (!field?.required) {
     return fallback
@@ -100,6 +111,7 @@ export const FieldRequiredIndicator = forwardRef<
       aria-hidden="true"
       {...restProps}
       className={cx(classNames.requiredIndicator, props.className)}
+      css={[styles.requiredIndicator, props.css]}
     >
       {children}
     </chakra.span>

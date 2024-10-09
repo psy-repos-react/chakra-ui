@@ -1,8 +1,9 @@
-import { anatomy } from "@ark-ui/anatomy/checkbox"
+import { checkboxAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
+import { checkmarkRecipe } from "./checkmark"
 
 export const checkboxSlotRecipe = defineSlotRecipe({
-  slots: anatomy.keys(),
+  slots: checkboxAnatomy.keys(),
   className: "chakra-checkbox",
   base: {
     root: {
@@ -11,7 +12,6 @@ export const checkboxSlotRecipe = defineSlotRecipe({
       alignItems: "center",
       verticalAlign: "top",
       position: "relative",
-      colorPalette: "gray",
       _disabled: {
         cursor: "not-allowed",
       },
@@ -24,25 +24,23 @@ export const checkboxSlotRecipe = defineSlotRecipe({
       flexShrink: 0,
       verticalAlign: "top",
       color: "white",
+      cursor: "checkbox",
       borderWidth: "1px",
       borderColor: "transparent",
-      _focus: {
-        outline: "2px solid",
-        outlineColor: "focusRing",
-        outlineOffset: "2px",
-      },
+      focusVisibleRing: "outside",
       _invalid: {
         colorPalette: "red",
-        borderColor: "red.500",
+        borderColor: "border.error",
       },
       _disabled: {
         opacity: "0.5",
       },
     },
 
+    indicator: checkmarkRecipe.base,
+
     label: {
       userSelect: "none",
-      fontWeight: "medium",
       _disabled: {
         opacity: "0.5",
       },
@@ -56,24 +54,24 @@ export const checkboxSlotRecipe = defineSlotRecipe({
           boxSize: "3",
           borderRadius: "xs",
         },
-        label: { fontSize: "xs" },
-        indicator: { fontSize: "3xs" },
+        label: { textStyle: "xs" },
+        indicator: checkmarkRecipe.variants?.size?.sm,
       },
       md: {
         control: {
           boxSize: "4",
           borderRadius: "xs",
         },
-        label: { fontSize: "sm" },
-        indicator: { fontSize: "2xs" },
+        label: { textStyle: "sm" },
+        indicator: checkmarkRecipe.variants?.size?.md,
       },
       lg: {
         control: {
           boxSize: "5",
           borderRadius: "sm",
         },
-        label: { fontSize: "md" },
-        indicator: { fontSize: "xs" },
+        label: { textStyle: "md" },
+        indicator: checkmarkRecipe.variants?.size?.lg,
       },
     },
 
@@ -81,62 +79,38 @@ export const checkboxSlotRecipe = defineSlotRecipe({
       outline: {
         control: {
           borderWidth: "1px",
-          borderColor: "inherit",
+          borderColor: "border",
           _checked: {
-            bg: "colorPalette.600",
-            borderColor: "colorPalette.600",
+            bg: "colorPalette.solid",
+            borderColor: "colorPalette.solid",
+            color: "colorPalette.contrast",
           },
           _indeterminate: {
-            bg: "colorPalette.600",
-            borderColor: "colorPalette.600",
+            bg: "colorPalette.solid",
+            borderColor: "colorPalette.solid",
           },
         },
+        indicator: checkmarkRecipe.variants?.variant?.outline,
       },
       subtle: {
         control: {
           borderWidth: "1px",
-          bg: {
-            base: "colorPalette.100",
-            _dark: "colorPalette.200/20",
-          },
-          borderColor: {
-            base: "colorPalette.200",
-            _dark: "colorPalette.200/10",
-          },
+          bg: "colorPalette.subtle",
+          borderColor: "colorPalette.subtle",
           _checked: {
-            color: { base: "colorPalette.700", _dark: "colorPalette.200" },
+            color: "colorPalette.fg",
           },
           _indeterminate: {
-            color: { base: "colorPalette.700", _dark: "colorPalette.200" },
+            color: "colorPalette.fg",
           },
         },
+        indicator: checkmarkRecipe.variants?.variant?.subtle,
       },
     },
   },
 
-  compoundVariants: [
-    {
-      variant: "outline",
-      colorPalette: "gray",
-      css: {
-        control: {
-          color: "fg.inverted",
-          _checked: {
-            bg: { base: "gray.800", _dark: "gray.200" },
-            borderColor: { base: "gray.800", _dark: "gray.200" },
-          },
-          _indeterminate: {
-            bg: { base: "gray.800", _dark: "gray.200" },
-            borderColor: { base: "gray.800", _dark: "gray.200" },
-          },
-        },
-      },
-    },
-  ],
-
   defaultVariants: {
     variant: "outline",
     size: "md",
-    colorPalette: "gray",
   },
 })

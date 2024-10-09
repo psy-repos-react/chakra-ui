@@ -1,6 +1,5 @@
 "use client"
 
-import { cx } from "@chakra-ui/utils"
 import { forwardRef, useMemo } from "react"
 import {
   type HTMLChakraProps,
@@ -10,6 +9,7 @@ import {
   chakra,
   createSlotRecipeContext,
 } from "../../styled-system"
+import { cx } from "../../utils"
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -19,16 +19,19 @@ const {
   useRecipeResult,
   withContext,
   useStyles: useTableStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "table" })
 
 export { useTableStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+export interface TableRootBaseProps
+  extends SlotRecipeProps<"table">,
+    UnstyledProp {}
+
 export interface TableRootProps
-  extends HTMLChakraProps<"table">,
-    UnstyledProp,
-    SlotRecipeProps<"table"> {
+  extends HTMLChakraProps<"table", TableRootBaseProps> {
   /**
    * If `true`, the table will style its descendants with nested selectors
    */
@@ -67,6 +70,9 @@ export const TableRoot = forwardRef<HTMLTableElement, TableRootProps>(
     )
   },
 )
+
+export const TableRootPropsProvider =
+  PropsProvider as React.Provider<TableRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 

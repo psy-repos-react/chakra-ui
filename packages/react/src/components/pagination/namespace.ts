@@ -4,6 +4,9 @@ export {
   PaginationNextTrigger as NextTrigger,
   PaginationPrevTrigger as PrevTrigger,
   PaginationRoot as Root,
+  PaginationRootProvider as RootProvider,
+  PaginationPropsProvider as PropsProvider,
+  PaginationContext as Context,
 } from "./pagination"
 
 export type {
@@ -12,6 +15,7 @@ export type {
   PaginationNextTriggerProps as NextTriggerProps,
   PaginationPrevTriggerProps as PrevTriggerProps,
   PaginationRootProps as RootProps,
+  PaginationRootProviderProps as RootProviderProps,
+  PaginationPageChangeDetails as PageChangeDetails,
+  PaginationPageSizeChangeDetails as PageSizeChangeDetails,
 } from "./pagination"
-
-export { PaginationContext as Context } from "@ark-ui/react/pagination"

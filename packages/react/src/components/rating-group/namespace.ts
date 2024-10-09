@@ -4,6 +4,12 @@ export {
   RatingGroupItemIndicator as ItemIndicator,
   RatingGroupLabel as Label,
   RatingGroupRoot as Root,
+  RatingGroupRootProvider as RootProvider,
+  RatingGroupPropsProvider as PropsProvider,
+  RatingGroupHiddenInput as HiddenInput,
+  RatingGroupContext as Context,
+  RatingGroupItemContext as ItemContext,
+  useRatingGroupStyles,
 } from "./rating-group"
 
 export type {
@@ -12,9 +18,6 @@ export type {
   RatingGroupItemIndicatorProps as ItemIndicatorProps,
   RatingGroupLabelProps as LabelProps,
   RatingGroupRootProps as RootProps,
+  RatingGroupRootProviderProps as RootProviderProps,
+  RatingGroupValueChangeDetails as ValueChangeDetails,
 } from "./rating-group"
-
-export {
-  RatingGroupHiddenInput as HiddenInput,
-  RatingGroupContext as Context,
-} from "@ark-ui/react/rating-group"

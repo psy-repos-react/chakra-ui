@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import {
   Checkbox as ArkCheckbox,
   useCheckboxContext,
@@ -19,21 +20,46 @@ const {
   withProvider,
   withContext,
   useStyles: useCheckboxCardStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "checkboxCard" })
 
 export { useCheckboxCardStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface CheckboxCardRootProps
-  extends HTMLChakraProps<"label", ArkCheckbox.RootBaseProps>,
-    SlotRecipeProps<"checkboxCard">,
+export interface CheckboxCardRootProviderBaseProps
+  extends Assign<
+      ArkCheckbox.RootProviderBaseProps,
+      SlotRecipeProps<"checkboxCard">
+    >,
     UnstyledProp {}
+
+export interface CheckboxCardRootProviderProps
+  extends HTMLChakraProps<"label", CheckboxCardRootProviderBaseProps> {}
+
+export const CheckboxCardRootProvider = withProvider<
+  HTMLLabelElement,
+  CheckboxCardRootProviderProps
+>(ArkCheckbox.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface CheckboxCardRootBaseProps
+  extends Assign<ArkCheckbox.RootBaseProps, SlotRecipeProps<"checkboxCard">>,
+    UnstyledProp {}
+
+export interface CheckboxCardRootProps
+  extends HTMLChakraProps<"label", CheckboxCardRootBaseProps> {}
 
 export const CheckboxCardRoot = withProvider<
   HTMLLabelElement,
   CheckboxCardRootProps
 >(ArkCheckbox.Root, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const CheckboxCardRootPropsProvider =
+  PropsProvider as React.Provider<CheckboxCardRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -86,3 +112,11 @@ export const CheckboxCardAddon = withContext<
   HTMLElement,
   CheckboxCardAddonProps
 >("div", "addon")
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const CheckboxCardContext = ArkCheckbox.Context
+export const CheckboxCardHiddenInput = ArkCheckbox.HiddenInput
+
+export interface CheckboxCardCheckedChangeDetails
+  extends ArkCheckbox.CheckedChangeDetails {}

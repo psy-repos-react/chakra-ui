@@ -14,26 +14,30 @@ const {
   withProvider,
   withContext,
   useStyles: useBreadcrumbStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "breadcrumb" })
 
 export { useBreadcrumbStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface BreadcrumbRootProps
-  extends HTMLChakraProps<"nav">,
-    SlotRecipeProps<"breadcrumb">,
+export interface BreadcrumbRootBaseProps
+  extends SlotRecipeProps<"breadcrumb">,
     UnstyledProp {}
+
+export interface BreadcrumbRootProps
+  extends HTMLChakraProps<"nav", BreadcrumbRootBaseProps> {}
 
 export const BreadcrumbRoot = withProvider<HTMLElement, BreadcrumbRootProps>(
   "nav",
   "root",
   {
-    defaultProps: {
-      "aria-label": "breadcrumb",
-    },
+    defaultProps: { "aria-label": "breadcrumb" },
   },
 )
+
+export const BreadcrumbPropsProvider =
+  PropsProvider as React.Provider<BreadcrumbRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 

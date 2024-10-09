@@ -14,10 +14,12 @@ describe("css", () => {
       }),
     ).toMatchInlineSnapshot(`
       {
-        "&:is(:hover, [data-hover]):not(:disabled, [data-disabled])": {
-          "color": "pink !important",
-        },
         "--bg": "var(--chakra-colors-pink-400)",
+        "@media (hover: hover)": {
+          "&:is(:hover, [data-hover]):not(:disabled, [data-disabled])": {
+            "color": "pink !important",
+          },
+        },
         "@media screen and (min-width: 30rem)": {
           "padding": "20px",
         },
@@ -295,6 +297,12 @@ describe("css", () => {
         "--chakra-colors-color-palette-800": "var(--chakra-colors-red-800)",
         "--chakra-colors-color-palette-900": "var(--chakra-colors-red-900)",
         "--chakra-colors-color-palette-950": "var(--chakra-colors-red-950)",
+        "--chakra-colors-color-palette-contrast": "var(--chakra-colors-red-contrast)",
+        "--chakra-colors-color-palette-emphasized": "var(--chakra-colors-red-emphasized)",
+        "--chakra-colors-color-palette-fg": "var(--chakra-colors-red-fg)",
+        "--chakra-colors-color-palette-muted": "var(--chakra-colors-red-muted)",
+        "--chakra-colors-color-palette-solid": "var(--chakra-colors-red-solid)",
+        "--chakra-colors-color-palette-subtle": "var(--chakra-colors-red-subtle)",
         "background": "var(--chakra-colors-color-palette-300)",
       }
     `)
@@ -310,7 +318,7 @@ describe("css", () => {
 
     expect(result).toMatchInlineSnapshot(`
       {
-        "&.dark, .dark &": {
+        ".dark &, .dark .chakra-theme:not(.light) &": {
           "border": "2px solid var(--chakra-colors-green-300)",
         },
         "border": "1px solid var(--chakra-colors-white)",
@@ -395,19 +403,47 @@ describe("css", () => {
 
   test("merge layer styles", () => {
     const result = css({
-      layerStyle: "fill.muted",
+      layerStyle: "fill.subtle",
       color: "inherit",
     })
 
     expect(result).toMatchInlineSnapshot(`
       {
-        "&.dark, .dark &": {
-          "--mix-background": "color-mix(in srgb, var(--chakra-colors-color-palette-400) 20%, transparent)",
-          "background": "var(--mix-background, var(--chakra-colors-color-palette-400))",
-          "color": "var(--chakra-colors-color-palette-200)",
-        },
-        "background": "var(--chakra-colors-color-palette-100)",
+        "background": "var(--chakra-colors-color-palette-subtle)",
         "color": "inherit",
+      }
+    `)
+  })
+
+  test("media query order", () => {
+    const result = css({
+      flex: [undefined, undefined, 1, 5],
+      display: ["none", "none", "flex"],
+      h: "100vh",
+      minH: "200px",
+      position: "sticky",
+      top: "0",
+      borderLeft: [undefined, "2px solid red"],
+    })
+
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "@media screen and (min-width: 30rem)": {
+          "borderLeft": "2px solid red",
+          "display": "none",
+        },
+        "@media screen and (min-width: 48rem)": {
+          "display": "flex",
+          "flex": 1,
+        },
+        "@media screen and (min-width: 64rem)": {
+          "flex": 5,
+        },
+        "display": "none",
+        "height": "100vh",
+        "minHeight": "200px",
+        "position": "sticky",
+        "top": "0",
       }
     `)
   })

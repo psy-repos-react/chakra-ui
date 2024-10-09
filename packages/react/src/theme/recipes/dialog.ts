@@ -1,7 +1,5 @@
-import { anatomy } from "@ark-ui/anatomy/dialog"
+import { dialogAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
-
-const dialogAnatomy = anatomy.extendWith("header", "body", "footer", "backdrop")
 
 export const dialogSlotRecipe = defineSlotRecipe({
   slots: dialogAnatomy.keys(),
@@ -17,7 +15,7 @@ export const dialogSlotRecipe = defineSlotRecipe({
       zIndex: "modal",
       _open: {
         animationName: "fade-in",
-        animationDuration: "moderate",
+        animationDuration: "slow",
       },
       _closed: {
         animationName: "fade-out",
@@ -42,7 +40,7 @@ export const dialogSlotRecipe = defineSlotRecipe({
       width: "100%",
       outline: 0,
       borderRadius: "lg",
-      fontSize: "sm",
+      textStyle: "sm",
       zIndex: "modal",
       bg: "bg.panel",
       shadow: "lg",
@@ -55,24 +53,24 @@ export const dialogSlotRecipe = defineSlotRecipe({
     },
     header: {
       flex: 0,
-      padding: "6",
-    },
-    closeTrigger: {
-      position: "absolute!",
-      top: "2",
-      insetEnd: "2",
+      paddingX: "6",
+      paddingTop: "6",
+      paddingBottom: "4",
     },
     body: {
       flex: "1",
-      color: "fg.muted",
       paddingX: "6",
+      paddingTop: "2",
+      paddingBottom: "6",
     },
     footer: {
       display: "flex",
       alignItems: "center",
       justifyContent: "flex-end",
       gap: "3",
-      padding: "6",
+      paddingX: "6",
+      paddingTop: "2",
+      paddingBottom: "4",
     },
   },
 
@@ -141,6 +139,16 @@ export const dialogSlotRecipe = defineSlotRecipe({
       xl: {
         content: {
           maxW: "4xl",
+        },
+      },
+      cover: {
+        positioner: {
+          padding: "10",
+        },
+        content: {
+          width: "100%",
+          height: "100%",
+          my: "0",
         },
       },
       full: {

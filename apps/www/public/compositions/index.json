@@ -15,7 +15,9 @@
     "file": "action-bar.tsx",
     "component": "ActionBar",
     "npmDependencies": [],
-    "fileDependencies": []
+    "fileDependencies": [
+      "compositions/ui/close-button"
+    ]
   },
   {
     "type": "composition",
@@ -23,7 +25,9 @@
     "file": "alert.tsx",
     "component": "Alert",
     "npmDependencies": [],
-    "fileDependencies": []
+    "fileDependencies": [
+      "compositions/ui/close-button"
+    ]
   },
   {
     "type": "composition",
@@ -71,6 +75,16 @@
     "file": "checkbox.tsx",
     "component": "Checkbox",
     "npmDependencies": [],
+    "fileDependencies": []
+  },
+  {
+    "type": "composition",
+    "id": "clipboard",
+    "file": "clipboard.tsx",
+    "component": "Clipboard",
+    "npmDependencies": [
+      "react-icons"
+    ],
     "fileDependencies": []
   },
   {
@@ -162,6 +176,14 @@
   },
   {
     "type": "composition",
+    "id": "input-group",
+    "file": "input-group.tsx",
+    "component": "InputGroup",
+    "npmDependencies": [],
+    "fileDependencies": []
+  },
+  {
+    "type": "composition",
     "id": "link-button",
     "file": "link-button.tsx",
     "component": "LinkButton",
@@ -196,25 +218,15 @@
   },
   {
     "type": "composition",
-    "id": "overflow-menu",
-    "file": "overflow-menu.tsx",
-    "component": "OverflowMenu",
-    "npmDependencies": [
-      "react-icons"
-    ],
-    "fileDependencies": [
-      "compositions/ui/menu"
-    ]
-  },
-  {
-    "type": "composition",
     "id": "pagination",
     "file": "pagination.tsx",
     "component": "Pagination",
     "npmDependencies": [
       "react-icons"
     ],
-    "fileDependencies": []
+    "fileDependencies": [
+      "./link-button"
+    ]
   },
   {
     "type": "composition",
@@ -222,9 +234,11 @@
     "file": "password-input.tsx",
     "component": "PasswordInput",
     "npmDependencies": [
-      "@chakra-ui/hooks"
+      "react-icons"
     ],
-    "fileDependencies": []
+    "fileDependencies": [
+      "./input-group"
+    ]
   },
   {
     "type": "composition",
@@ -261,7 +275,25 @@
       "react-icons"
     ],
     "fileDependencies": [
-      "./toggle-tip"
+      "compositions/ui/toggle-tip"
+    ]
+  },
+  {
+    "type": "composition",
+    "id": "prose",
+    "file": "prose.tsx",
+    "component": "Prose",
+    "npmDependencies": [],
+    "fileDependencies": []
+  },
+  {
+    "type": "composition",
+    "id": "provider",
+    "file": "provider.tsx",
+    "component": "Provider",
+    "npmDependencies": [],
+    "fileDependencies": [
+      "compositions/ui/color-mode"
     ]
   },
   {
@@ -290,19 +322,9 @@
   },
   {
     "type": "composition",
-    "id": "scrubber-input",
-    "file": "scrubber-input.tsx",
-    "component": "ScrubberInput",
-    "npmDependencies": [],
-    "fileDependencies": [
-      "compositions/ui/tooltip"
-    ]
-  },
-  {
-    "type": "composition",
-    "id": "segment-control",
-    "file": "segment-control.tsx",
-    "component": "SegmentControl",
+    "id": "segmented-control",
+    "file": "segmented-control.tsx",
+    "component": "SegmentedControl",
     "npmDependencies": [],
     "fileDependencies": []
   },
@@ -341,7 +363,7 @@
       "react-icons"
     ],
     "fileDependencies": [
-      "./toggle-tip"
+      "compositions/ui/toggle-tip"
     ]
   },
   {
@@ -385,9 +407,23 @@
     "id": "tag",
     "file": "tag.tsx",
     "component": "Tag",
-    "npmDependencies": [
-      "react-icons"
-    ],
+    "npmDependencies": [],
+    "fileDependencies": []
+  },
+  {
+    "type": "composition",
+    "id": "timeline",
+    "file": "timeline.tsx",
+    "component": "Timeline",
+    "npmDependencies": [],
+    "fileDependencies": []
+  },
+  {
+    "type": "composition",
+    "id": "toaster",
+    "file": "toaster.tsx",
+    "component": "Toaster",
+    "npmDependencies": [],
     "fileDependencies": []
   },
   {
@@ -395,7 +431,9 @@
     "id": "toggle-tip",
     "file": "toggle-tip.tsx",
     "component": "ToggleTip",
-    "npmDependencies": [],
+    "npmDependencies": [
+      "react-icons"
+    ],
     "fileDependencies": []
   },
   {

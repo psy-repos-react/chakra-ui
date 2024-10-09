@@ -1,14 +1,15 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import {
   Toast as ArkToast,
   Toaster as ArkToaster,
   type CreateToasterProps,
+  type CreateToasterReturn,
   type ToasterBaseProps,
   createToaster,
   useToastContext,
 } from "@ark-ui/react/toast"
-////////////////////////////////////////////////////////////////////////////////////
 import { forwardRef } from "react"
 import {
   type HTMLChakraProps,
@@ -19,7 +20,7 @@ import {
 } from "../../styled-system"
 import { CheckCircleIcon, CloseIcon, WarningIcon } from "../icons"
 
-export { createToaster, type CreateToasterProps }
+export { createToaster, type CreateToasterProps, type CreateToasterReturn }
 
 const {
   withProvider,
@@ -42,10 +43,12 @@ export const Toaster = chakra(
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface ToastRootProps
-  extends HTMLChakraProps<"div", ArkToast.RootBaseProps>,
-    SlotRecipeProps<"toast">,
+export interface ToastRootBaseProps
+  extends Assign<ArkToast.RootBaseProps, SlotRecipeProps<"toast">>,
     UnstyledProp {}
+
+export interface ToastRootProps
+  extends HTMLChakraProps<"div", ToastRootBaseProps> {}
 
 export const ToastRoot = withProvider<HTMLDivElement, ToastRootProps>(
   ArkToast.Root,

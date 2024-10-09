@@ -1,6 +1,9 @@
 export {
   SliderRoot as Root,
+  SliderRootProvider as RootProvider,
+  SliderPropsProvider as PropsProvider,
   SliderMarker as Marker,
+  SliderMarkerIndicator as MarkerIndicator,
   SliderThumb as Thumb,
   SliderValueText as ValueText,
   SliderRange as Range,
@@ -8,11 +11,15 @@ export {
   SliderLabel as Label,
   SliderTrack as Track,
   SliderMarkerGroup as MarkerGroup,
+  SliderContext as Context,
+  SliderHiddenInput as HiddenInput,
 } from "./slider"
 
 export type {
   SliderRootProps as RootProps,
+  SliderRootProviderProps as RootProviderProps,
   SliderMarkerProps as MarkerProps,
+  SliderMarkerIndicatorProps as MarkerIndicatorProps,
   SliderThumbProps as ThumbProps,
   SliderValueTextProps as ValueTextProps,
   SliderRangeProps as RangeProps,
@@ -20,9 +27,5 @@ export type {
   SliderLabelProps as LabelProps,
   SliderTrackProps as TrackProps,
   SliderMarkerGroupProps as MarkerGroupProps,
+  SliderValueChangeDetails as ValueChangeDetails,
 } from "./slider"
-
-export {
-  SliderContext as Context,
-  SliderHiddenInput as HiddenInput,
-} from "@ark-ui/react/slider"

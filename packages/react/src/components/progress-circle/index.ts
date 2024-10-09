@@ -1,21 +1,24 @@
 export {
-  ProgressCircleRoot,
-  ProgressCircleLabel,
   ProgressCircleCircle,
-  ProgressCircleTrack,
+  ProgressCircleLabel,
   ProgressCircleRange,
+  ProgressCircleRoot,
+  ProgressCircleRootProvider,
+  ProgressCirclePropsProvider,
+  ProgressCircleTrack,
   ProgressCircleValueText,
+  ProgressCircleContext,
+  useProgressCircleStyles,
 } from "./progress-circle"
 
 export type {
-  ProgressCircleRootProps,
-  ProgressCircleLabelProps,
   ProgressCircleCircleProps,
-  ProgressCircleTrackProps,
+  ProgressCircleLabelProps,
   ProgressCircleRangeProps,
+  ProgressCircleRootProps,
+  ProgressCircleRootProviderProps,
+  ProgressCircleTrackProps,
   ProgressCircleValueTextProps,
 } from "./progress-circle"
-
-export { useProgressCircleStyles } from "./progress-circle"
 
 export * as ProgressCircle from "./namespace"

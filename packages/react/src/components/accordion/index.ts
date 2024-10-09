@@ -1,33 +1,33 @@
 export {
   AccordionItem,
-  AccordionItemContent,
   AccordionItemBody,
+  AccordionItemContent,
   AccordionItemIndicator,
   AccordionItemTrigger,
   AccordionRoot,
+  AccordionRootProvider,
+  AccordionPropsProvider,
   useAccordionStyles,
+  AccordionContext,
+  AccordionItemContext,
 } from "./accordion"
 
 export type {
-  AccordionItemContentProps,
   AccordionItemBodyProps,
+  AccordionItemContentProps,
   AccordionItemIndicatorProps,
   AccordionItemProps,
   AccordionItemTriggerProps,
   AccordionRootProps,
+  AccordionRootProviderProps,
+  AccordionFocusChangeDetails,
+  AccordionValueChangeDetails,
 } from "./accordion"
 
 export {
   useAccordion,
-  AccordionContext,
   useAccordionContext,
   useAccordionItemContext,
-} from "@ark-ui/react/accordion"
-
-export type {
-  AccordionContextProps,
-  AccordionFocusChangeDetails,
-  AccordionValueChangeDetails,
 } from "@ark-ui/react/accordion"
 
 export * as Accordion from "./namespace"

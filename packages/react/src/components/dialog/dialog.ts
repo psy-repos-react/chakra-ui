@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Dialog as ArkDialog } from "@ark-ui/react/dialog"
 import {
   type HTMLChakraProps,
@@ -14,22 +15,46 @@ const {
   withRootProvider,
   withContext,
   useStyles: useDialogStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "dialog" })
 
 export { useDialogStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface DialogRootProps
-  extends ArkDialog.RootProps,
-    SlotRecipeProps<"dialog">,
-    UnstyledProp {
+export interface DialogRootProviderBaseProps
+  extends Assign<ArkDialog.RootProviderProps, SlotRecipeProps<"dialog">>,
+    UnstyledProp {}
+
+export interface DialogRootProviderProps extends DialogRootProviderBaseProps {
+  children: React.ReactNode
+}
+
+export const DialogRootProvider = withRootProvider<DialogRootProviderProps>(
+  ArkDialog.RootProvider,
+  {
+    defaultProps: { unmountOnExit: true, lazyMount: true },
+  },
+)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface DialogRootBaseProps
+  extends Assign<ArkDialog.RootProps, SlotRecipeProps<"dialog">>,
+    UnstyledProp {}
+
+export interface DialogRootProps extends DialogRootBaseProps {
   children: React.ReactNode
 }
 
 export const DialogRoot = withRootProvider<DialogRootProps>(ArkDialog.Root, {
   defaultProps: { unmountOnExit: true, lazyMount: true },
 })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const DialogPropsProvider =
+  PropsProvider as React.Provider<DialogRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -131,3 +156,9 @@ export const DialogHeader = withContext<HTMLDivElement, DialogHeaderProps>(
   "div",
   "header",
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const DialogContext = ArkDialog.Context
+
+export interface DialogOpenChangeDetails extends ArkDialog.OpenChangeDetails {}

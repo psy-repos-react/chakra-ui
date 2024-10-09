@@ -14,21 +14,29 @@ const {
   withProvider,
   withContext,
   useStyles: useBlockquoteStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "blockquote" })
 
 export { useBlockquoteStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface BlockquoteRootProps
-  extends HTMLChakraProps<"figure">,
-    SlotRecipeProps<"blockquote">,
+export interface BlockquoteRootBaseProps
+  extends SlotRecipeProps<"blockquote">,
     UnstyledProp {}
+
+export interface BlockquoteRootProps
+  extends HTMLChakraProps<"figure", BlockquoteRootBaseProps> {}
 
 export const BlockquoteRoot = withProvider<HTMLElement, BlockquoteRootProps>(
   "figure",
   "root",
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const BlockquotePropsProvider =
+  PropsProvider as React.Provider<BlockquoteRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 

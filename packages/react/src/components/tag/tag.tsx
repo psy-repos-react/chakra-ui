@@ -14,21 +14,27 @@ const {
   withProvider,
   withContext,
   useStyles: useTagStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "tag" })
 
 export { useTagStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface TagRootProps
-  extends HTMLChakraProps<"span">,
-    SlotRecipeProps<"tag">,
+export interface TagRootBaseProps
+  extends SlotRecipeProps<"tag">,
     UnstyledProp {}
+
+export interface TagRootProps
+  extends HTMLChakraProps<"span", TagRootBaseProps> {}
 
 export const TagRoot = withProvider<HTMLSpanElement, TagRootProps>(
   "div",
   "root",
 )
+
+export const TagRootPropsProvider =
+  PropsProvider as React.Provider<TagRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 

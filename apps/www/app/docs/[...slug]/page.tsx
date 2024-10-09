@@ -1,11 +1,12 @@
 import { EditPageButton } from "@/components/edit-page-button"
 import { MDXContent } from "@/components/mdx-content"
+import { MDXPagination } from "@/components/mdx-pagination"
 import { PageHeader } from "@/components/page-header"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { Toc } from "@/components/toc"
 import { docsConfig } from "@/docs.config"
 import { flattenToc } from "@/lib/flatten-toc"
-import { Show, Stack } from "@chakra-ui/react"
+import { Box, Show, Stack } from "@chakra-ui/react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { SidebarEnd } from "../sidebar"
@@ -37,13 +38,15 @@ export default function Page(props: Props) {
         overflow="auto"
         minHeight="var(--content-height)"
       >
-        <span id="scroll-to-top" />
         <PageHeader
           title={page.title}
           description={page.description}
           links={page.links}
         />
-        <MDXContent code={page.code} />
+        <Box>
+          <MDXContent code={page.code} />
+          <MDXPagination />
+        </Box>
       </Stack>
 
       <Show when={!page.hideToc}>
@@ -61,9 +64,21 @@ export default function Page(props: Props) {
 
 export const generateMetadata = (props: Props): Metadata => {
   const page = getPageBySlug(props.params.slug)
+
+  const category = page?.slug
+    .replace("docs/", "")
+    .split("/")
+    .slice(0, -1)
+    .join(" > ")
+    ?.replace("-", " ")
+    .replace(/\b\w/g, (l) => l.toUpperCase())
+
   return {
     title: page?.title,
     description: page?.description,
+    openGraph: {
+      images: `/og?title=${page?.title}&category=${category}`,
+    },
   }
 }
 

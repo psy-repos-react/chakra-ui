@@ -1,13 +1,12 @@
-import { anatomy } from "@ark-ui/anatomy/rating-group"
+import { ratingGroupAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const ratingGroupSlotRecipe = defineSlotRecipe({
   className: "chakra-rating-group",
-  slots: [...anatomy.keys(), "itemIndicator"],
+  slots: ratingGroupAnatomy.keys(),
   base: {
     root: {
       display: "inline-flex",
-      colorPalette: "orange",
     },
 
     control: {
@@ -30,7 +29,7 @@ export const ratingGroupSlotRecipe = defineSlotRecipe({
       height: "1em",
       position: "relative",
 
-      "& svg": {
+      _icon: {
         stroke: "currentColor",
         width: "100%",
         height: "100%",
@@ -42,7 +41,7 @@ export const ratingGroupSlotRecipe = defineSlotRecipe({
       },
 
       "& [data-bg]": {
-        color: { base: "gray.300", _dark: "gray.700" },
+        color: "bg.emphasized",
       },
 
       "& [data-fg]": {
@@ -51,13 +50,13 @@ export const ratingGroupSlotRecipe = defineSlotRecipe({
 
       "&[data-highlighted]:not([data-half])": {
         "& [data-fg]": {
-          color: "colorPalette.500",
+          color: "colorPalette.solid",
         },
       },
 
       "&[data-half]": {
         "& [data-fg]": {
-          color: "colorPalette.500",
+          color: "colorPalette.solid",
           clipPath: "inset(0 50% 0 0)",
         },
       },
@@ -68,22 +67,22 @@ export const ratingGroupSlotRecipe = defineSlotRecipe({
     size: {
       xs: {
         item: {
-          fontSize: "0.875rem",
+          fontSize: "sm",
         },
       },
       sm: {
         item: {
-          fontSize: "1.125rem",
+          fontSize: "lg",
         },
       },
       md: {
         item: {
-          fontSize: "1.5rem",
+          fontSize: "2xl",
         },
       },
       lg: {
         item: {
-          fontSize: "2rem",
+          fontSize: "3xl",
         },
       },
     },
@@ -91,6 +90,5 @@ export const ratingGroupSlotRecipe = defineSlotRecipe({
 
   defaultVariants: {
     size: "md",
-    colorPalette: "orange",
   },
 })

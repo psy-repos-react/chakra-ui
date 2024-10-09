@@ -18,7 +18,7 @@ export const ScrollToTop = () => {
       focusRing="inside"
       focusRingWidth="2px"
       rounded="sm"
-      color="fg.muted"
+      color="fg.subtle"
       cursor="pointer"
       animationDuration="0.2s"
       animationFillMode="forwards"
@@ -29,7 +29,7 @@ export const ScrollToTop = () => {
     >
       <button onClick={scrollToTop}>
         <LuArrowUpCircle />
-        <Span fontSize="sm">Scroll to top</Span>
+        <Span fontSize="0.8rem">Scroll to top</Span>
       </button>
     </HStack>
   )

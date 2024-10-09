@@ -1,9 +1,9 @@
-import { anatomy } from "@ark-ui/anatomy/file-upload"
+import { fileUploadAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const fileUploadSlotRecipe = defineSlotRecipe({
   className: "chakra-file-upload",
-  slots: anatomy.keys(),
+  slots: fileUploadAnatomy.keys(),
   base: {
     root: {
       display: "flex",
@@ -13,25 +13,34 @@ export const fileUploadSlotRecipe = defineSlotRecipe({
     },
     label: {
       fontWeight: "medium",
-      fontSize: "sm",
+      textStyle: "sm",
     },
     dropzone: {
       background: "bg",
       borderRadius: "md",
-      borderWidth: "1px",
+      borderWidth: "2px",
       borderStyle: "dashed",
       display: "flex",
       alignItems: "center",
       flexDirection: "column",
       gap: "3",
       justifyContent: "center",
-      minHeight: "xs",
-      px: "6",
-      py: "4",
+      minHeight: "2xs",
+      px: "3",
+      py: "2",
+      transition: "backgrounds",
       focusVisibleRing: "outside",
+      _hover: {
+        bg: "bg.muted",
+      },
+      _dragging: {
+        bg: "colorPalette.muted",
+        borderStyle: "solid",
+        borderColor: "colorPalette.solid",
+      },
     },
     item: {
-      fontSize: "sm",
+      textStyle: "sm",
       animationName: "fade-in",
       animationDuration: "moderate",
       background: "bg",
@@ -52,8 +61,8 @@ export const fileUploadSlotRecipe = defineSlotRecipe({
       fontWeight: "medium",
     },
     itemSizeText: {
-      color: "fg.muted",
-      fontSize: "xs",
+      color: "fg.subtle",
+      textStyle: "xs",
     },
     itemDeleteTrigger: {
       alignSelf: "flex-start",
@@ -64,4 +73,6 @@ export const fileUploadSlotRecipe = defineSlotRecipe({
       objectFit: "scale-down",
     },
   },
+
+  defaultVariants: {},
 })

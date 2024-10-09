@@ -11,11 +11,10 @@ export const tableSlotRecipe = defineSlotRecipe({
       width: "full",
       textAlign: "start",
       verticalAlign: "top",
-      colorPalette: "gray",
     },
     row: {
       _selected: {
-        bg: { base: "colorPalette.100", _dark: "colorPalette.400/20" },
+        bg: "colorPalette.muted",
       },
     },
     cell: {
@@ -29,7 +28,7 @@ export const tableSlotRecipe = defineSlotRecipe({
     },
     caption: {
       fontWeight: "medium",
-      fontSize: "xs",
+      textStyle: "xs",
     },
     footer: {
       fontWeight: "medium",
@@ -42,7 +41,7 @@ export const tableSlotRecipe = defineSlotRecipe({
         body: {
           "& tr": {
             _hover: {
-              bg: { base: "colorPalette.100", _dark: "colorPalette.700" },
+              bg: "colorPalette.muted",
             },
           },
         },
@@ -65,7 +64,7 @@ export const tableSlotRecipe = defineSlotRecipe({
       true: {
         row: {
           "&:nth-of-type(odd) td": {
-            bg: "bg.muted",
+            bg: "bg.subtle",
           },
         },
       },
@@ -108,7 +107,7 @@ export const tableSlotRecipe = defineSlotRecipe({
           borderBottomWidth: "1px",
         },
         header: {
-          bg: "bg.muted",
+          bg: "bg.subtle",
         },
         row: {
           "&:not(:last-of-type)": {
@@ -124,7 +123,7 @@ export const tableSlotRecipe = defineSlotRecipe({
     size: {
       sm: {
         root: {
-          fontSize: "sm",
+          textStyle: "sm",
         },
         columnHeader: {
           px: "2",
@@ -138,7 +137,7 @@ export const tableSlotRecipe = defineSlotRecipe({
 
       md: {
         root: {
-          fontSize: "sm",
+          textStyle: "sm",
         },
         columnHeader: {
           px: "3",
@@ -152,7 +151,7 @@ export const tableSlotRecipe = defineSlotRecipe({
 
       lg: {
         root: {
-          fontSize: "md",
+          textStyle: "md",
         },
         columnHeader: {
           px: "4",
@@ -169,6 +168,5 @@ export const tableSlotRecipe = defineSlotRecipe({
   defaultVariants: {
     variant: "line",
     size: "md",
-    colorPalette: "gray",
   },
 })

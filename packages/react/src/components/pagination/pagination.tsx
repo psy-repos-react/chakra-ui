@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Pagination as ArkPagination } from "@ark-ui/react/pagination"
 import {
   type HTMLChakraProps,
@@ -14,22 +15,50 @@ const {
   withProvider,
   withContext,
   useStyles: usePaginationStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "pagination" })
 
 export { usePaginationStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface PaginationRootProps
-  extends HTMLChakraProps<"div", ArkPagination.RootBaseProps>,
-    SlotRecipeProps<"pagination">,
+export interface PaginationRootProviderBaseProps
+  extends Assign<
+      ArkPagination.RootProviderBaseProps,
+      SlotRecipeProps<"pagination">
+    >,
     UnstyledProp {}
+
+export interface PaginationRootProviderProps
+  extends HTMLChakraProps<"div", PaginationRootProviderBaseProps> {}
+
+export const PaginationRootProvider = withProvider<
+  HTMLDivElement,
+  PaginationRootProviderProps
+>(ArkPagination.RootProvider, "root", {
+  forwardAsChild: true,
+  forwardProps: ["page"],
+})
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface PaginationRootBaseProps
+  extends Assign<ArkPagination.RootBaseProps, SlotRecipeProps<"pagination">>,
+    UnstyledProp {}
+
+export interface PaginationRootProps
+  extends HTMLChakraProps<"div", PaginationRootBaseProps> {}
 
 export const PaginationRoot = withProvider<HTMLDivElement, PaginationRootProps>(
   ArkPagination.Root,
   "root",
   { forwardAsChild: true, forwardProps: ["page"] },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const PaginationPropsProvider =
+  PropsProvider as React.Provider<PaginationRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -70,3 +99,13 @@ export const PaginationPrevTrigger = withContext<
   HTMLButtonElement,
   PaginationPrevTriggerProps
 >(ArkPagination.PrevTrigger, "prevTrigger", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const PaginationContext = ArkPagination.Context
+
+export interface PaginationPageChangeDetails
+  extends ArkPagination.PageChangeDetails {}
+
+export interface PaginationPageSizeChangeDetails
+  extends ArkPagination.PageSizeChangeDetails {}

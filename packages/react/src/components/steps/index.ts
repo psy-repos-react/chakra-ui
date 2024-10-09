@@ -1,5 +1,7 @@
 export {
   StepsRoot,
+  StepsRootProvider,
+  StepsPropsProvider,
   StepsSeparator,
   StepsTrigger,
   StepsTitle,
@@ -7,17 +9,20 @@ export {
   StepsPrevTrigger,
   StepsNextTrigger,
   StepsContent,
-  StepsCompleteContent,
+  StepsCompletedContent,
   useStepsStyles,
   StepsNumber,
   StepsList,
   StepsItem,
   StepsIndicator,
   StepsDescription,
+  StepsContext,
+  StepsItemContext,
 } from "./steps"
 
 export type {
   StepsRootProps,
+  StepsRootProviderProps,
   StepsListProps,
   StepsItemProps,
   StepsTriggerProps,
@@ -26,13 +31,14 @@ export type {
   StepsSeparatorProps,
   StepsTitleProps,
   StepsNumberProps,
-  StepsCompleteContentProps,
+  StepsCompletedContentProps,
   StepsStatusProps,
   StepsPrevTriggerProps,
   StepsNextTriggerProps,
   StepsDescriptionProps,
+  StepsChangeDetails,
 } from "./steps"
 
-export { useStepsContext, StepsContext, StepsItemContext } from "./steps.ark"
+export { useStepsContext } from "@ark-ui/react/steps"
 
 export * as Steps from "./namespace"

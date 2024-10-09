@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Popover as ArkPopover } from "@ark-ui/react/popover"
 import {
   type HTMLChakraProps,
@@ -14,16 +15,39 @@ const {
   withRootProvider,
   withContext,
   useStyles: useActionBarStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "actionBar" })
 
 export { useActionBarStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+export interface ActionBarRootProviderBaseProps
+  extends Assign<
+      ArkPopover.RootProviderBaseProps,
+      SlotRecipeProps<"actionBar">
+    >,
+    UnstyledProp {}
+
+export interface ActionBarRootProviderProps
+  extends ActionBarRootProviderBaseProps {}
+
+export const ActionBarRootProvider =
+  withRootProvider<ActionBarRootProviderBaseProps>(ArkPopover.Root, {
+    defaultProps: {
+      lazyMount: true,
+      unmountOnExit: true,
+    },
+  })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface ActionBarRootBaseProps
+  extends Assign<ArkPopover.RootBaseProps, SlotRecipeProps<"actionBar">>,
+    UnstyledProp {}
+
 export interface ActionBarRootProps
-  extends Omit<ArkPopover.RootBaseProps, "positioning">,
-    SlotRecipeProps<"actionBar">,
-    UnstyledProp {
+  extends Omit<ActionBarRootBaseProps, "positioning"> {
   children: React.ReactNode
 }
 
@@ -37,6 +61,11 @@ export const ActionBarRoot = withRootProvider<ActionBarRootProps>(
     },
   },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const ActionBarPropsProvider =
+  PropsProvider as React.Provider<ActionBarRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -85,3 +114,10 @@ export const ActionBarCloseTrigger = withContext<
   HTMLButtonElement,
   ActionBarCloseTriggerProps
 >(ArkPopover.CloseTrigger, "closeTrigger", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const ActionBarContext = ArkPopover.Context
+
+export interface ActionBarOpenChangeDetails
+  extends ArkPopover.OpenChangeDetails {}

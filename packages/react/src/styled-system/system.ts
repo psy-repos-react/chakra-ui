@@ -1,3 +1,4 @@
+import { isCssProperty } from "@pandacss/is-valid-prop"
 import {
   type Dict,
   compact,
@@ -6,12 +7,13 @@ import {
   memo,
   mergeWith,
   splitProps,
-} from "@chakra-ui/utils"
-import { isCssProperty } from "@pandacss/is-valid-prop"
+} from "../utils"
 import { createBreakpoints } from "./breakpoints"
 import { createConditions } from "./conditions"
+import { mergeConfigs } from "./config"
 import { createCssFn } from "./css"
 import { createRecipeFn } from "./cva"
+import { createLayers } from "./layers"
 import { createNormalizeFn } from "./normalize"
 import { createPreflight } from "./preflight"
 import { createSerializeFn } from "./serialize"
@@ -25,7 +27,8 @@ import type {
 } from "./types"
 import { createUtility } from "./utility"
 
-export function createSystem(config: SystemConfig): SystemContext {
+export function createSystem(...configs: SystemConfig[]): SystemContext {
+  const config = mergeConfigs(...configs)
   const {
     theme = {},
     utilities = {},
@@ -34,6 +37,8 @@ export function createSystem(config: SystemConfig): SystemContext {
     cssVarsPrefix = "chakra",
     preflight,
   } = config
+
+  const layers = createLayers(config)
 
   const tokens = createTokenDictionary({
     breakpoints: theme.breakpoints,
@@ -87,8 +92,26 @@ export function createSystem(config: SystemConfig): SystemContext {
     (prop: string) => properties.has(prop) || isCssProperty(prop),
   )
 
-  const normalizeFn = createNormalizeFn({ utility, conditions })
-  const serialize = createSerializeFn({ conditions, isValidProperty })
+  const normalizeValue = (value: any): any => {
+    if (Array.isArray(value)) {
+      return value.reduce((acc, current, index) => {
+        const key = conditions.breakpoints[index]
+        if (current != null) acc[key] = current
+        return acc
+      }, {})
+    }
+    return value
+  }
+
+  const normalizeFn = createNormalizeFn({
+    utility,
+    normalize: normalizeValue,
+  })
+
+  const serialize = createSerializeFn({
+    conditions,
+    isValidProperty,
+  })
 
   const css = createCssFn({
     transform: utility.transform,
@@ -100,6 +123,7 @@ export function createSystem(config: SystemConfig): SystemContext {
     css: css as any,
     conditions,
     normalize: normalizeFn,
+    layers,
   })
 
   const sva = createSlotRecipeFn({ cva })
@@ -120,7 +144,7 @@ export function createSystem(config: SystemConfig): SystemContext {
       }
     }
 
-    return result
+    return layers.wrap("tokens", result)
   }
 
   function getGlobalCss() {
@@ -130,7 +154,8 @@ export function createSystem(config: SystemConfig): SystemContext {
         value,
       ]),
     )
-    return Object.assign({}, keyframes, css(serialize(globalCss)))
+    const result = Object.assign({}, keyframes, css(serialize(globalCss)))
+    return layers.wrap("base", result)
   }
 
   function splitCssProps(props: any) {
@@ -138,7 +163,8 @@ export function createSystem(config: SystemConfig): SystemContext {
   }
 
   function getPreflightCss() {
-    return createPreflight({ preflight })
+    const result = createPreflight({ preflight })
+    return layers.wrap("reset", result)
   }
 
   const tokenMap = getTokenMap(tokens)
@@ -180,8 +206,10 @@ export function createSystem(config: SystemConfig): SystemContext {
     utility,
     token: tokenFn,
     properties,
+    layers,
     isValidProperty,
     splitCssProps: splitCssProps as any,
+    normalizeValue,
     getTokenCss,
     getGlobalCss,
     getPreflightCss,

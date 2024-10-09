@@ -1,15 +1,15 @@
+import { statusAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const statusSlotRecipe = defineSlotRecipe({
   className: "chakra-status",
-  slots: ["root", "indicator"],
+  slots: statusAnatomy.keys(),
 
   base: {
     root: {
       display: "inline-flex",
       alignItems: "center",
       gap: "2",
-      colorPalette: "gray",
     },
 
     indicator: {
@@ -18,26 +18,31 @@ export const statusSlotRecipe = defineSlotRecipe({
       flexShrink: 0,
       borderRadius: "full",
       forcedColorAdjust: "none",
-      bg: "colorPalette.500",
+      bg: "colorPalette.solid",
     },
   },
 
   variants: {
     size: {
       sm: {
-        root: { fontSize: "xs" },
+        root: {
+          textStyle: "xs",
+        },
       },
       md: {
-        root: { fontSize: "sm" },
+        root: {
+          textStyle: "sm",
+        },
       },
       lg: {
-        root: { fontSize: "md" },
+        root: {
+          textStyle: "md",
+        },
       },
     },
   },
 
   defaultVariants: {
     size: "md",
-    colorPalette: "gray",
   },
 })

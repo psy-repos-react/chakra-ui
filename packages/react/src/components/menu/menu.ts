@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Menu as ArkMenu } from "@ark-ui/react/menu"
 import {
   type HTMLChakraProps,
@@ -14,20 +15,41 @@ const {
   withRootProvider,
   withContext,
   useStyles: useMenuStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "menu" })
 
 export { useMenuStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface MenuRootProps
-  extends ArkMenu.RootBaseProps,
-    SlotRecipeProps<"menu">,
-    UnstyledProp {
+export interface MenuRootProviderBaseProps
+  extends Assign<ArkMenu.RootProviderBaseProps, SlotRecipeProps<"menu">>,
+    UnstyledProp {}
+
+export interface MenuRootProviderProps extends MenuRootProviderBaseProps {
+  children: React.ReactNode
+}
+
+export const MenuRootProvider = withRootProvider<MenuRootProviderProps>(
+  ArkMenu.RootProvider,
+)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface MenuRootBaseProps
+  extends Assign<ArkMenu.RootBaseProps, SlotRecipeProps<"menu">>,
+    UnstyledProp {}
+
+export interface MenuRootProps extends MenuRootBaseProps {
   children: React.ReactNode
 }
 
 export const MenuRoot = withRootProvider<MenuRootProps>(ArkMenu.Root)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const MenuPropsProvider =
+  PropsProvider as React.Provider<MenuRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -218,3 +240,10 @@ export const MenuRadioItem = withContext<HTMLDivElement, MenuRadioItemProps>(
   "item",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const MenuContext = ArkMenu.Context
+export const MenuItemContext = ArkMenu.ItemContext
+
+export interface MenuOpenChangeDetails extends ArkMenu.OpenChangeDetails {}

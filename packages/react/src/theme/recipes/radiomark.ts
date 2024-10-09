@@ -12,7 +12,8 @@ export const radiomarkRecipe = defineRecipe({
     borderWidth: "1px",
     borderColor: "transparent",
     borderRadius: "full",
-    _focus: {
+    cursor: "radio",
+    _focusVisible: {
       outline: "2px solid",
       outlineColor: "focusRing",
       outlineOffset: "2px",
@@ -23,6 +24,7 @@ export const radiomarkRecipe = defineRecipe({
     },
     _disabled: {
       opacity: "0.5",
+      cursor: "disabled",
     },
 
     "& .dot": {
@@ -38,29 +40,22 @@ export const radiomarkRecipe = defineRecipe({
     variant: {
       outline: {
         borderWidth: "1px",
-        borderColor: "inherit",
+        borderColor: "border",
+        bg: "bg",
         _checked: {
-          bg: "colorPalette.600",
-          borderColor: "colorPalette.600",
+          bg: "colorPalette.solid",
+          color: "colorPalette.contrast",
+          borderColor: "colorPalette.solid",
         },
       },
 
       subtle: {
         borderWidth: "1px",
-        bg: {
-          base: "colorPalette.100",
-          _dark: "colorPalette.200/20",
-        },
-        borderColor: {
-          base: "colorPalette.200",
-          _dark: "colorPalette.200/10",
-        },
+        bg: "colorPalette.subtle",
+        borderColor: "colorPalette.subtle",
         color: "transparent",
         _checked: {
-          color: {
-            base: "colorPalette.700",
-            _dark: "colorPalette.200",
-          },
+          color: "colorPalette.fg",
         },
       },
 
@@ -68,11 +63,21 @@ export const radiomarkRecipe = defineRecipe({
         borderWidth: "1px",
         borderColor: "inherit",
         _checked: {
-          color: { base: "colorPalette.600", _dark: "colorPalette.300" },
+          color: "colorPalette.fg",
           borderColor: "currentcolor",
         },
         "& .dot": {
           scale: "0.6",
+        },
+      },
+
+      inverted: {
+        bg: "bg",
+        borderWidth: "1px",
+        borderColor: "inherit",
+        _checked: {
+          color: "colorPalette.solid",
+          borderColor: "currentcolor",
         },
       },
     },
@@ -92,19 +97,8 @@ export const radiomarkRecipe = defineRecipe({
     },
   },
 
-  compoundVariants: [
-    {
-      variant: "outline",
-      colorPalette: "gray",
-      css: {
-        color: "fg.inverted",
-      },
-    },
-  ],
-
   defaultVariants: {
     variant: "outline",
     size: "md",
-    colorPalette: "gray",
   },
 })

@@ -1,11 +1,12 @@
+import { dataListAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const dataListSlotRecipe = defineSlotRecipe({
-  slots: ["root", "item", "itemLabel", "itemValue"],
+  slots: dataListAnatomy.keys(),
   className: "chakra-data-list",
   base: {
     itemLabel: {
-      color: "fg.muted",
+      color: "fg.subtle",
       display: "flex",
       alignItems: "center",
       gap: "1",
@@ -50,7 +51,7 @@ export const dataListSlotRecipe = defineSlotRecipe({
           gap: "2",
         },
         item: {
-          fontSize: "xs",
+          textStyle: "xs",
         },
       },
       md: {
@@ -58,7 +59,7 @@ export const dataListSlotRecipe = defineSlotRecipe({
           gap: "4",
         },
         item: {
-          fontSize: "sm",
+          textStyle: "sm",
         },
       },
       lg: {
@@ -66,7 +67,7 @@ export const dataListSlotRecipe = defineSlotRecipe({
           gap: "5",
         },
         item: {
-          fontSize: "md",
+          textStyle: "md",
         },
       },
     },

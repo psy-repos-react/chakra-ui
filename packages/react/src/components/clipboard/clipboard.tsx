@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Clipboard as ArkClipboard } from "@ark-ui/react/clipboard"
 import {
   type HTMLChakraProps,
@@ -14,22 +15,47 @@ const {
   withProvider,
   withContext,
   useStyles: useClipboardStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "clipboard" })
 
 export { useClipboardStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface ClipboardRootProps
-  extends HTMLChakraProps<"div", ArkClipboard.RootProps>,
-    SlotRecipeProps<"clipboard">,
+export interface ClipboardRootProviderBaseProps
+  extends Assign<
+      ArkClipboard.RootProviderBaseProps,
+      SlotRecipeProps<"clipboard">
+    >,
     UnstyledProp {}
+
+export interface ClipboardRootProviderProps
+  extends HTMLChakraProps<"div", ClipboardRootProviderBaseProps> {}
+
+export const ClipboardRootProvider = withProvider<
+  HTMLDivElement,
+  ClipboardRootProviderProps
+>(ArkClipboard.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface ClipboardRootBaseProps
+  extends Assign<ArkClipboard.RootBaseProps, SlotRecipeProps<"clipboard">>,
+    UnstyledProp {}
+
+export interface ClipboardRootProps
+  extends HTMLChakraProps<"div", ClipboardRootBaseProps> {}
 
 export const ClipboardRoot = withProvider<HTMLDivElement, ClipboardRootProps>(
   ArkClipboard.Root,
   "root",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const ClipboardPropsProvider =
+  PropsProvider as React.Provider<ClipboardRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,3 +106,10 @@ export const ClipboardLabel = withContext<
   HTMLLabelElement,
   ClipboardLabelProps
 >(ArkClipboard.Label, "label", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const ClipboardContext = ArkClipboard.Context
+
+export interface ClipboardCopyStatusDetails
+  extends ArkClipboard.CopyStatusDetails {}

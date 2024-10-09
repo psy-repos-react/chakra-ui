@@ -10,36 +10,35 @@ export const kbdRecipe = defineRecipe({
     whiteSpace: "nowrap",
     wordSpacing: "-0.5em",
     userSelect: "none",
-    colorPalette: "gray",
     py: "0.2em",
   },
+
   variants: {
     variant: {
       raised: {
-        bg: { base: "colorPalette.100", _dark: "colorPalette.400/20" },
-        color: "fg",
+        bg: "colorPalette.muted",
+        color: "colorPalette.fg",
         borderWidth: "1px",
         borderBottomWidth: "var(--kbd-border)",
-        borderColor: { base: "colorPalette.300", _dark: "colorPalette.200/10" },
+        borderColor: "colorPalette.emphasized",
       },
       outline: {
         borderWidth: "1px",
-        color: { base: "colorPalette.800", _dark: "colorPalette.300" },
+        color: "colorPalette.fg",
       },
       subtle: {
-        bg: { base: "colorPalette.100", _dark: "colorPalette.400/20" },
-        color: { base: "colorPalette.800", _dark: "colorPalette.300" },
+        bg: "colorPalette.subtle",
+        color: "colorPalette.fg",
       },
-      plain: {
-        color: "colorPalette.600",
-      },
+      plain: {},
     },
+
     size: {
       sm: {
-        "--kbd-border": "1.5px",
+        "--kbd-border": "2px",
         fontSize: "0.725em",
-        px: "0.25em",
-        borderRadius: "xs",
+        px: "0.3em",
+        borderRadius: "sm",
       },
       md: {
         "--kbd-border": "2px",
@@ -55,9 +54,9 @@ export const kbdRecipe = defineRecipe({
       },
     },
   },
+
   defaultVariants: {
     size: "md",
     variant: "raised",
-    colorPalette: "gray",
   },
 })

@@ -1,7 +1,8 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Avatar as ArkAvatar } from "@ark-ui/react/avatar"
-import { forwardRef, useMemo } from "react"
+import { forwardRef } from "react"
 import {
   type HTMLChakraProps,
   type SlotRecipeProps,
@@ -9,7 +10,6 @@ import {
   chakra,
   createSlotRecipeContext,
 } from "../../styled-system"
-import { getInitials } from "./get-initials"
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,22 +17,44 @@ const {
   withProvider,
   withContext,
   useStyles: useAvatarStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "avatar" })
 
 export { useAvatarStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface AvatarRootProps
-  extends HTMLChakraProps<"div", ArkAvatar.RootProps>,
-    SlotRecipeProps<"avatar">,
+export interface AvatarRootProviderBaseProps
+  extends Assign<ArkAvatar.RootProviderBaseProps, SlotRecipeProps<"avatar">>,
     UnstyledProp {}
+
+export interface AvatarRootProviderProps
+  extends HTMLChakraProps<"div", AvatarRootProviderBaseProps> {}
+
+export const AvatarRootProvider = withProvider<
+  HTMLDivElement,
+  AvatarRootProviderProps
+>(ArkAvatar.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface AvatarRootBaseProps
+  extends Assign<ArkAvatar.RootBaseProps, SlotRecipeProps<"avatar">>,
+    UnstyledProp {}
+
+export interface AvatarRootProps
+  extends HTMLChakraProps<"div", AvatarRootBaseProps> {}
 
 export const AvatarRoot = withProvider<HTMLDivElement, AvatarRootProps>(
   ArkAvatar.Root,
   "root",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const AvatarPropsProvider =
+  PropsProvider as React.Provider<AvatarRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -64,21 +86,16 @@ export const AvatarIcon = forwardRef<SVGElement, AvatarIconProps>(
   function AvatarIcon(props, ref) {
     return (
       <chakra.svg
-        role="img"
-        viewBox="0 0 128 128"
-        width="100%"
-        height="100%"
+        stroke="currentColor"
+        fill="currentColor"
+        strokeWidth="0"
+        viewBox="0 0 24 24"
+        height="1.2em"
+        width="1.2em"
         ref={ref}
         {...props}
       >
-        <path
-          fill="currentColor"
-          d="M103,102.1388 C93.094,111.92 79.3504,118 64.1638,118 C48.8056,118 34.9294,111.768 25,101.7892 L25,95.2 C25,86.8096 31.981,80 40.6,80 L87.4,80 C96.019,80 103,86.8096 103,95.2 L103,102.1388 Z"
-        />
-        <path
-          fill="currentColor"
-          d="M63.9961647,24 C51.2938136,24 41,34.2938136 41,46.9961647 C41,59.7061864 51.2938136,70 63.9961647,70 C76.6985159,70 87,59.7061864 87,46.9961647 C87,34.2938136 76.6985159,24 63.9961647,24"
-        />
+        <path d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"></path>
       </chakra.svg>
     )
   },
@@ -86,8 +103,7 @@ export const AvatarIcon = forwardRef<SVGElement, AvatarIconProps>(
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export const AvatarInitial = (props: { name: string }) => {
-  const { name } = props
-  const initials = useMemo(() => getInitials(name), [name])
-  return <>{initials}</>
-}
+export const AvatarContext = ArkAvatar.Context
+
+export interface AvatarStatusChangeDetails
+  extends ArkAvatar.StatusChangeDetails {}

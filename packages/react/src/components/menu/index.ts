@@ -15,18 +15,17 @@ export {
   MenuRadioItem,
   MenuRadioItemGroup,
   MenuRoot,
+  MenuRootProvider,
+  MenuPropsProvider,
   MenuSeparator,
   MenuTrigger,
   MenuTriggerItem,
+  MenuContext,
+  MenuItemContext,
   useMenuStyles,
 } from "./menu"
 
-export {
-  MenuContext,
-  MenuItemContext,
-  useMenuContext,
-  useMenuItemContext,
-} from "@ark-ui/react/menu"
+export { useMenuContext, useMenuItemContext } from "@ark-ui/react/menu"
 
 export type {
   MenuArrowProps,
@@ -45,11 +44,11 @@ export type {
   MenuRadioItemGroupProps,
   MenuRadioItemProps,
   MenuRootProps,
+  MenuRootProviderProps,
   MenuSeparatorProps,
   MenuTriggerItemProps,
   MenuTriggerProps,
+  MenuOpenChangeDetails,
 } from "./menu"
-
-export type { MenuContextProps, MenuItemContextProps } from "@ark-ui/react/menu"
 
 export * as Menu from "./namespace"

@@ -1,22 +1,20 @@
-import { Box, Container, Flex } from "@chakra-ui/react"
-import { Header } from "./header"
-import { SidebarStart } from "./sidebar"
+import { Header } from "@/components/docs/header"
+import { Container, SkipNavContent, SkipNavLink } from "@chakra-ui/react"
+import { MobileSidebarNav, SidebarStart } from "./sidebar"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Box
-      css={{
-        "--header-height": "104px",
-        "--content-height": "calc(100dvh - var(--header-height))",
-      }}
-    >
+    <>
+      <SkipNavLink>Skip to Content</SkipNavLink>
       <Header />
-      <Container pt="var(--header-height)" minHeight="var(--content-height)">
-        <Flex>
+      <main>
+        <MobileSidebarNav />
+        <Container display="flex">
           <SidebarStart />
+          <SkipNavContent />
           {children}
-        </Flex>
-      </Container>
-    </Box>
+        </Container>
+      </main>
+    </>
   )
 }

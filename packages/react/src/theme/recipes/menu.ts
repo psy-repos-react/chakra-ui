@@ -1,9 +1,9 @@
-import { anatomy } from "@ark-ui/anatomy/menu"
+import { menuAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const menuSlotRecipe = defineSlotRecipe({
   className: "chakra-menu",
-  slots: [...anatomy.keys(), "itemCommand"],
+  slots: menuAnatomy.keys(),
   base: {
     content: {
       outline: 0,
@@ -13,7 +13,6 @@ export const menuSlotRecipe = defineSlotRecipe({
       zIndex: "dropdown",
       borderRadius: "md",
       overflow: "hidden",
-      colorPalette: "gray",
       _open: {
         animationStyle: "slide-fade-in",
         animationDuration: "fast",
@@ -29,6 +28,7 @@ export const menuSlotRecipe = defineSlotRecipe({
       userSelect: "none",
       width: "100%",
       display: "flex",
+      cursor: "menuitem",
       alignItems: "center",
       textAlign: "start",
       position: "relative",
@@ -44,8 +44,8 @@ export const menuSlotRecipe = defineSlotRecipe({
     itemGroupLabel: {
       px: "2",
       py: "1.5",
-      fontWeight: "semibold",
-      fontSize: "sm",
+      fontWeight: "medium",
+      textStyle: "sm",
     },
     indicator: {
       display: "inline-flex",
@@ -62,7 +62,7 @@ export const menuSlotRecipe = defineSlotRecipe({
     },
     separator: {
       height: "1px",
-      bg: "bg.muted",
+      bg: "bg.subtle",
       my: "1",
       mx: "-1",
     },
@@ -73,15 +73,15 @@ export const menuSlotRecipe = defineSlotRecipe({
       subtle: {
         item: {
           _highlighted: {
-            bg: { base: "gray.100", _dark: "whiteAlpha.100" },
+            bg: { _light: "bg.subtle", _dark: "bg.emphasized" },
           },
         },
       },
       solid: {
         item: {
           _highlighted: {
-            bg: "colorPalette.600",
-            color: "white",
+            bg: "colorPalette.solid",
+            color: "colorPalette.contrast",
           },
         },
       },
@@ -95,7 +95,7 @@ export const menuSlotRecipe = defineSlotRecipe({
         },
         item: {
           gap: "1",
-          fontSize: "xs",
+          textStyle: "xs",
           borderRadius: "sm",
           py: "1",
           px: "1.5",
@@ -108,7 +108,7 @@ export const menuSlotRecipe = defineSlotRecipe({
         },
         item: {
           gap: "2",
-          fontSize: "sm",
+          textStyle: "sm",
           borderRadius: "sm",
           py: "1.5",
           px: "2",
@@ -120,6 +120,5 @@ export const menuSlotRecipe = defineSlotRecipe({
   defaultVariants: {
     size: "md",
     variant: "subtle",
-    colorPalette: "gray",
   },
 })

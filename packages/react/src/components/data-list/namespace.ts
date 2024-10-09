@@ -1,5 +1,6 @@
 export {
   DataListRoot as Root,
+  DataListPropsProvider as PropsProvider,
   DataListItem as Item,
   DataListItemLabel as ItemLabel,
   DataListItemValue as ItemValue,

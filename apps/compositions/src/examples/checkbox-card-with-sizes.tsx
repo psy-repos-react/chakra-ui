@@ -1,30 +1,12 @@
-import { Stack } from "@chakra-ui/react"
-import {
-  CheckboxCardControl,
-  CheckboxCardLabel,
-  CheckboxCardRoot,
-} from "compositions/ui/checkbox-card"
+import { For, Stack } from "@chakra-ui/react"
+import { CheckboxCard } from "compositions/ui/checkbox-card"
 
 export const CheckboxCardWithSizes = () => {
   return (
     <Stack maxW="320px">
-      <CheckboxCardRoot size="sm">
-        <CheckboxCardControl>
-          <CheckboxCardLabel>Checkbox (sm)</CheckboxCardLabel>
-        </CheckboxCardControl>
-      </CheckboxCardRoot>
-
-      <CheckboxCardRoot size="md">
-        <CheckboxCardControl>
-          <CheckboxCardLabel>Checkbox (md)</CheckboxCardLabel>
-        </CheckboxCardControl>
-      </CheckboxCardRoot>
-
-      <CheckboxCardRoot size="lg">
-        <CheckboxCardControl>
-          <CheckboxCardLabel>Checkbox (lg)</CheckboxCardLabel>
-        </CheckboxCardControl>
-      </CheckboxCardRoot>
+      <For each={["sm", "md", "lg"]}>
+        {(size) => <CheckboxCard label={`Checkbox (${size})`} size={size} />}
+      </For>
     </Stack>
   )
 }

@@ -4,11 +4,10 @@ description:
   Used to enter a number, and increment or decrement the value using stepper
   buttons.
 links:
-  [
-    { title: "Source", url: "#" },
-    { title: "Storybook", url: "#" },
-    { title: "Recipe", url: "#" },
-  ]
+  source: components/number-input
+  storybook: components-number-input--basic
+  recipe: number-input
+  ark: https://ark-ui.com/react/docs/components/number-input
 ---
 
 <ExampleTabs name="number-input-basic" />
@@ -100,3 +99,30 @@ Use the `allowMouseWheel` prop to enable or disable the mouse wheel to change
 Use the `disabled` prop to disable the number input.
 
 <ExampleTabs name="number-input-with-disabled" />
+
+### Invalid
+
+Use the `Field` component and pass the `invalid` prop to indicate that the
+number input is invalid.
+
+<ExampleTabs name="number-input-with-invalid" />
+
+### Helper Text
+
+Use the `Field` component and pass the `helperText` prop to add helper text to
+the number input.
+
+<ExampleTabs name="number-input-with-field" />
+
+### Hook Form
+
+Here is an example of how to use the `NumberInput` component with
+`react-hook-form`.
+
+<ExampleTabs name="number-input-with-hook-form" />
+
+## Props
+
+### Root
+
+<PropTable component="NumberInput" part="Root" />

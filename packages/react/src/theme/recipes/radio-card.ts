@@ -1,38 +1,36 @@
-import { anatomy } from "@ark-ui/anatomy/radio-group"
+import { radioGroupAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 import { radiomarkRecipe } from "./radiomark"
 
 export const radioCardSlotRecipe = defineSlotRecipe({
   className: "chakra-radio-card",
-  slots: [...anatomy.keys(), "itemAddon", "itemIndicator"],
+  slots: radioGroupAnatomy.keys(),
   base: {
-    root: {
-      colorPalette: "gray",
-    },
     item: {
+      flex: "1",
       display: "flex",
       flexDirection: "column",
-      borderWidth: "1px",
       userSelect: "none",
       position: "relative",
       _focus: {
-        outline: "2px solid",
-        outlineColor: "focusRing",
-        outlineOffset: "2px",
+        bg: "colorPalette.subtle/20",
       },
       _disabled: {
         opacity: 0.8,
-        color: "fg.muted",
-        cursor: "not-allowed",
         borderColor: "border.disabled",
       },
     },
     label: {
       display: "inline-flex",
       fontWeight: "medium",
+      textStyle: "sm",
       _disabled: {
-        color: "fg.muted",
+        color: "fg.subtle",
       },
+    },
+    itemText: {
+      lineHeight: "1.2",
+      fontWeight: "medium",
     },
     itemControl: {
       display: "inline-flex",
@@ -40,13 +38,14 @@ export const radioCardSlotRecipe = defineSlotRecipe({
       pos: "relative",
       rounded: "inherit",
       _disabled: {
-        bg: "bg.muted",
+        bg: "bg.subtle",
       },
     },
     itemIndicator: radiomarkRecipe.base,
     itemAddon: {
+      roundedBottom: "inherit",
       _disabled: {
-        color: "fg.muted",
+        color: "fg.subtle",
       },
     },
   },
@@ -56,7 +55,7 @@ export const radioCardSlotRecipe = defineSlotRecipe({
       sm: {
         item: {
           rounded: "md",
-          fontSize: "xs",
+          textStyle: "xs",
         },
         itemControl: {
           padding: "3",
@@ -72,7 +71,7 @@ export const radioCardSlotRecipe = defineSlotRecipe({
       md: {
         item: {
           rounded: "md",
-          fontSize: "sm",
+          textStyle: "sm",
         },
         itemControl: {
           padding: "4",
@@ -88,7 +87,7 @@ export const radioCardSlotRecipe = defineSlotRecipe({
       lg: {
         item: {
           rounded: "lg",
-          fontSize: "md",
+          textStyle: "md",
         },
         itemControl: {
           padding: "4",
@@ -104,39 +103,62 @@ export const radioCardSlotRecipe = defineSlotRecipe({
     },
 
     variant: {
-      plain: {
+      surface: {
         item: {
-          bg: "bg",
-        },
-      },
-      subtle: {
-        item: {
+          borderWidth: "1px",
           bg: "bg",
           _checked: {
-            borderColor: {
-              base: "colorPalette.300",
-              _dark: "colorPalette.300/24",
-            },
+            bg: "colorPalette.muted",
+            color: "colorPalette.fg",
+            borderColor: "colorPalette.emphasized",
           },
+        },
+        itemIndicator: radiomarkRecipe.variants?.variant.outline,
+      },
+
+      subtle: {
+        item: {
+          bg: "bg.subtle",
         },
         itemControl: {
           _checked: {
-            bg: { base: "colorPalette.50", _dark: "colorPalette.400/10" },
-          },
-        },
-        itemText: {
-          _checked: {
-            color: { base: "colorPalette.700", _dark: "colorPalette.200" },
+            bg: "colorPalette.subtle",
+            color: "colorPalette.fg",
           },
         },
         itemIndicator: radiomarkRecipe.variants?.variant.classic,
+      },
+
+      outline: {
+        item: {
+          borderWidth: "1px",
+          bg: "bg",
+          _checked: {
+            boxShadow: "0 0 0 1px var(--shadow-color)",
+            boxShadowColor: "colorPalette.solid",
+            borderColor: "colorPalette.solid",
+          },
+        },
+        itemIndicator: radiomarkRecipe.variants?.variant.outline,
+      },
+
+      solid: {
+        item: {
+          borderWidth: "1px",
+          bg: "bg",
+          _checked: {
+            bg: "colorPalette.solid",
+            color: "colorPalette.contrast",
+            borderColor: "colorPalette.solid",
+          },
+        },
+        itemIndicator: radiomarkRecipe.variants?.variant.inverted,
       },
     },
   },
 
   defaultVariants: {
     size: "md",
-    variant: "subtle",
-    colorPalette: "gray",
+    variant: "outline",
   },
 })

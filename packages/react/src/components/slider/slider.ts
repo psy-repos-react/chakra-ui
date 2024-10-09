@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Slider as ArkSlider } from "@ark-ui/react/slider"
 import {
   type HTMLChakraProps,
@@ -14,22 +15,44 @@ const {
   withProvider,
   withContext,
   useStyles: useSliderStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "slider" })
 
 export { useSliderStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface SliderRootProps
-  extends HTMLChakraProps<"div", ArkSlider.RootBaseProps>,
-    SlotRecipeProps<"slider">,
+export interface SliderRootProviderBaseProps
+  extends Assign<ArkSlider.RootProviderBaseProps, SlotRecipeProps<"slider">>,
     UnstyledProp {}
+
+export interface SliderRootProviderProps
+  extends HTMLChakraProps<"div", SliderRootProviderBaseProps> {}
+
+export const SliderRootProvider = withProvider<
+  HTMLDivElement,
+  SliderRootProviderProps
+>(ArkSlider.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface SliderRootBaseProps
+  extends Assign<ArkSlider.RootBaseProps, SlotRecipeProps<"slider">>,
+    UnstyledProp {}
+
+export interface SliderRootProps
+  extends HTMLChakraProps<"div", SliderRootBaseProps> {}
 
 export const SliderRoot = withProvider<HTMLDivElement, SliderRootProps>(
   ArkSlider.Root,
   "root",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const SliderPropsProvider =
+  PropsProvider as React.Provider<SliderRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -116,3 +139,20 @@ export const SliderMarker = withContext<HTMLDivElement, SliderMarkerProps>(
   "marker",
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface SliderMarkerIndicatorProps extends HTMLChakraProps<"div"> {}
+
+export const SliderMarkerIndicator = withContext<
+  HTMLDivElement,
+  SliderMarkerIndicatorProps
+>("div", "markerIndicator")
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const SliderContext = ArkSlider.Context
+export const SliderHiddenInput = ArkSlider.HiddenInput
+
+export interface SliderValueChangeDetails
+  extends ArkSlider.ValueChangeDetails {}

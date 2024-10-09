@@ -5,6 +5,7 @@ export {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbRoot,
+  BreadcrumbPropsProvider,
   BreadcrumbSeparator,
   useBreadcrumbStyles,
 } from "./breadcrumb"

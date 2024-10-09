@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { HoverCard as ArkHoverCard } from "@ark-ui/react/hover-card"
 import {
   type HTMLChakraProps,
@@ -14,22 +15,46 @@ const {
   withRootProvider,
   withContext,
   useStyles: useHoverCardStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "hoverCard" })
 
 export { useHoverCardStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface HoverCardRootProps
-  extends ArkHoverCard.RootBaseProps,
-    SlotRecipeProps<"hoverCard">,
-    UnstyledProp {
+export interface HoverCardRootProviderBaseProps
+  extends Assign<
+      ArkHoverCard.RootProviderBaseProps,
+      SlotRecipeProps<"hoverCard">
+    >,
+    UnstyledProp {}
+
+export interface HoverCardRootProviderProps
+  extends HoverCardRootProviderBaseProps {
+  children: React.ReactNode
+}
+
+export const HoverCardRootProvider =
+  withRootProvider<HoverCardRootProviderProps>(ArkHoverCard.Root)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface HoverCardRootBaseProps
+  extends Assign<ArkHoverCard.RootBaseProps, SlotRecipeProps<"hoverCard">>,
+    UnstyledProp {}
+
+export interface HoverCardRootProps extends HoverCardRootBaseProps {
   children: React.ReactNode
 }
 
 export const HoverCardRoot = withRootProvider<HoverCardRootProps>(
   ArkHoverCard.Root,
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const HoverCardPropsProvider =
+  PropsProvider as React.Provider<HoverCardRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -81,3 +106,10 @@ export const HoverCardArrowTip = withContext<
   HTMLDivElement,
   HoverCardArrowTipProps
 >(ArkHoverCard.ArrowTip, "arrowTip", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const HoverCardContext = ArkHoverCard.Context
+
+export interface HoverCardOpenChangeDetails
+  extends ArkHoverCard.OpenChangeDetails {}

@@ -1,14 +1,9 @@
+import { actionBarAnatomy } from "../../anatomy"
 import { defineSlotRecipe } from "../../styled-system"
 
 export const actionBarSlotRecipe = defineSlotRecipe({
   className: "chakra-action-bar",
-  slots: [
-    "positioner",
-    "content",
-    "separator",
-    "selectionTrigger",
-    "closeTrigger",
-  ],
+  slots: actionBarAnatomy.keys(),
   base: {
     positioner: {
       position: "fixed",
@@ -30,6 +25,9 @@ export const actionBarSlotRecipe = defineSlotRecipe({
       paddingY: "2",
       paddingX: "2",
       pointerEvents: "auto",
+      // Stabilize the position of the action bar when the scrollbar is hidden
+      // by using the scrollbar width to offset the position.
+      translate: "calc(-1 * var(--scrollbar-width) / 2) 0px",
 
       _open: {
         animationName: "slide-from-bottom, fade-in",
@@ -52,7 +50,7 @@ export const actionBarSlotRecipe = defineSlotRecipe({
       display: "inline-flex",
       alignItems: "center",
       gap: "2",
-      fontSize: "sm",
+      textStyle: "sm",
       paddingX: "4",
       paddingY: "1",
       borderRadius: "md",

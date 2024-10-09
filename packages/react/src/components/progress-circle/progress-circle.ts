@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import { Progress as ArkProgress } from "@ark-ui/react/progress"
 import {
   type HTMLChakraProps,
@@ -14,21 +15,46 @@ const {
   withProvider,
   withContext,
   useStyles: useProgressCircleStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "progressCircle" })
 
 export { useProgressCircleStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface ProgressCircleRootProps
-  extends HTMLChakraProps<"div", ArkProgress.RootBaseProps>,
-    SlotRecipeProps<"progressCircle">,
+export interface ProgressCircleRootProviderBaseProps
+  extends Assign<
+      ArkProgress.RootProviderBaseProps,
+      SlotRecipeProps<"progressCircle">
+    >,
     UnstyledProp {}
+
+export interface ProgressCircleRootProviderProps
+  extends HTMLChakraProps<"div", ProgressCircleRootProviderBaseProps> {}
+
+export const ProgressCircleRootProvider = withProvider<
+  HTMLDivElement,
+  ProgressCircleRootProviderProps
+>(ArkProgress.RootProvider, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export interface ProgressCircleRootBaseProps
+  extends Assign<ArkProgress.RootBaseProps, SlotRecipeProps<"progressCircle">>,
+    UnstyledProp {}
+
+export interface ProgressCircleRootProps
+  extends HTMLChakraProps<"div", ProgressCircleRootBaseProps> {}
 
 export const ProgressCircleRoot = withProvider<
   HTMLDivElement,
   ProgressCircleRootProps
->(ArkProgress.Root, "root")
+>(ArkProgress.Root, "root", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const ProgressCirclePropsProvider =
+  PropsProvider as React.Provider<ProgressCircleRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -79,3 +105,7 @@ export const ProgressCircleValueText = withContext<
   HTMLDivElement,
   ProgressCircleValueTextProps
 >(ArkProgress.ValueText, "valueText", { forwardAsChild: true })
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const ProgressCircleContext = ArkProgress.Context

@@ -15,14 +15,9 @@ how to properly customize the styling engine, and get type safety.
 Here's an example of how to customize breakpoints in Chakra UI.
 
 ```tsx title="theme.ts"
-import {
-  createSystem,
-  defaultConfig,
-  defineConfig,
-  mergeConfigs,
-} from "@chakra-ui/react"
+import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react"
 
-const customConfig = defineConfig({
+const config = defineConfig({
   theme: {
     breakpoints: {
       tablet: "992px",
@@ -32,14 +27,12 @@ const customConfig = defineConfig({
   },
 })
 
-const config = mergeConfigs(defaultConfig, customConfig)
-
-export const system = createSystem(config)
+export default createSystem(defaultConfig, config)
 ```
 
 ## Usage
 
-When using responsive properties, you can now reference the new breakpoints.
+When using responsive properties, reference the new breakpoints.
 
 ```tsx title="App.tsx"
 <Box fontSize={{ base: "16px", tablet: "18px", desktop: "20px" }}>Hello</Box>

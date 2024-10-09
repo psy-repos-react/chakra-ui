@@ -16,10 +16,11 @@ interface VersionItem {
 
 interface Props {
   items: VersionItem[]
+  portalRef?: React.RefObject<HTMLElement>
 }
 
 export const VersionMenu = (props: Props) => {
-  const { items } = props
+  const { items, portalRef } = props
   const [currentItem, ...restItems] = items
   return (
     <MenuRoot>
@@ -29,14 +30,14 @@ export const VersionMenu = (props: Props) => {
           <LuChevronDown />
         </Button>
       </MenuTrigger>
-      <MenuContent>
+      <MenuContent portalRef={portalRef}>
         {restItems.map((item, index) => (
           <MenuItem value={item.value} key={index} asChild>
             <Link href={item.url}>
               <Span fontWeight="medium" flex="1">
                 {item.title}
               </Span>
-              <Span color="fg.muted">{item.value}</Span>
+              <Span color="fg.subtle">{item.value}</Span>
             </Link>
           </MenuItem>
         ))}

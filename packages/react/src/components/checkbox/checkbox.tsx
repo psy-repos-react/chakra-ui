@@ -1,5 +1,6 @@
 "use client"
 
+import type { Assign } from "@ark-ui/react"
 import {
   Checkbox as ArkCheckbox,
   useCheckboxContext,
@@ -20,22 +21,28 @@ const {
   withProvider,
   withContext,
   useStyles: useCheckboxStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "checkbox" })
 
 export { useCheckboxStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface CheckboxRootProps
-  extends HTMLChakraProps<"label", ArkCheckbox.RootBaseProps>,
-    SlotRecipeProps<"checkbox">,
+export interface CheckboxRootBaseProps
+  extends Assign<ArkCheckbox.RootBaseProps, SlotRecipeProps<"checkbox">>,
     UnstyledProp {}
+
+export interface CheckboxRootProps
+  extends HTMLChakraProps<"label", CheckboxRootBaseProps> {}
 
 export const CheckboxRoot = withProvider<HTMLLabelElement, CheckboxRootProps>(
   ArkCheckbox.Root,
   "root",
   { forwardAsChild: true },
 )
+
+export const CheckboxPropsProvider =
+  PropsProvider as React.Provider<CheckboxRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -124,3 +131,11 @@ export const CheckboxGroup = chakra(
   {},
   { forwardAsChild: true },
 )
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export const CheckboxContext = ArkCheckbox.Context
+export const CheckboxHiddenInput = ArkCheckbox.HiddenInput
+
+export interface CheckboxCheckedChangeDetails
+  extends ArkCheckbox.CheckedChangeDetails {}

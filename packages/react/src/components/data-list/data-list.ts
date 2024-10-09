@@ -13,20 +13,27 @@ const {
   withProvider,
   withContext,
   useStyles: useDataListStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "dataList" })
 
 export { useDataListStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface DataListRootProps
-  extends HTMLChakraProps<"dl", SlotRecipeProps<"dataList">>,
+export interface DataListRootBaseProps
+  extends SlotRecipeProps<"dataList">,
     UnstyledProp {}
+
+export interface DataListRootProps
+  extends HTMLChakraProps<"dl", DataListRootBaseProps> {}
 
 export const DataListRoot = withProvider<HTMLDListElement, DataListRootProps>(
   "dl",
   "root",
 )
+
+export const DataListPropsProvider =
+  PropsProvider as React.Provider<DataListRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 

@@ -14,21 +14,27 @@ const {
   withProvider,
   withContext,
   useStyles: useStatStyles,
+  PropsProvider,
 } = createSlotRecipeContext({ key: "stat" })
 
 export { useStatStyles }
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export interface StatRootProps
-  extends HTMLChakraProps<"dl">,
-    SlotRecipeProps<"stat">,
+export interface StatRootBaseProps
+  extends SlotRecipeProps<"stat">,
     UnstyledProp {}
+
+export interface StatRootProps
+  extends HTMLChakraProps<"dl", StatRootBaseProps> {}
 
 export const StatRoot = withProvider<HTMLDListElement, StatRootProps>(
   "dl",
   "root",
 )
+
+export const StatPropsProvider =
+  PropsProvider as React.Provider<StatRootBaseProps>
 
 ////////////////////////////////////////////////////////////////////////////////////
 

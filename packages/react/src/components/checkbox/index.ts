@@ -3,7 +3,10 @@ export {
   CheckboxIndicator,
   CheckboxLabel,
   CheckboxRoot,
+  CheckboxPropsProvider,
+  CheckboxContext,
   CheckboxGroup,
+  CheckboxHiddenInput,
   useCheckboxStyles,
 } from "./checkbox"
 
@@ -13,11 +16,10 @@ export type {
   CheckboxLabelProps,
   CheckboxRootProps,
   CheckboxGroupProps,
+  CheckboxCheckedChangeDetails,
 } from "./checkbox"
 
 export {
-  CheckboxContext,
-  CheckboxHiddenInput,
   useCheckbox,
   useCheckboxContext,
   useCheckboxGroup,

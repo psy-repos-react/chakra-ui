@@ -70,7 +70,10 @@ const createTransition = (value: string) => {
 }
 
 export const defaultConditions = defineConditions({
-  hover: "&:is(:hover, [data-hover]):not(:disabled, [data-disabled])",
+  hover: [
+    "@media (hover: hover)",
+    "&:is(:hover, [data-hover]):not(:disabled, [data-disabled])",
+  ],
   active:
     "&:is(:active, [data-active]):not(:disabled, [data-disabled], [data-state=open])",
   focus: "&:is(:focus, [data-focus])",
@@ -91,6 +94,7 @@ export const defaultConditions = defineConditions({
   highlighted: "&[data-highlighted]",
   complete: "&[data-complete]",
   incomplete: "&[data-incomplete]",
+  dragging: "&[data-dragging]",
 
   before: "&::before",
   after: "&::after",
@@ -144,8 +148,8 @@ export const defaultConditions = defineConditions({
   valid: "&:is([data-valid], [data-state=valid])",
   invalid: "&:is([data-invalid], [aria-invalid=true], [data-state=invalid])",
   autofill: "&:autofill",
-  inRange: "&:in-range",
-  outOfRange: "&:out-of-range",
+  inRange: "&:is(:in-range, [data-in-range])",
+  outOfRange: "&:is(:out-of-range, [data-outside-range])",
   placeholder: "&::placeholder, &[data-placeholder]",
   placeholderShown: "&:is(:placeholder-shown, [data-placeholder-shown])",
   pressed: "&:is([aria-pressed=true], [data-pressed])",
@@ -163,6 +167,12 @@ export const defaultConditions = defineConditions({
   current: "&[data-current]",
   currentPage: "&[aria-current=page]",
   currentStep: "&[aria-current=step]",
+  today: "&[data-today]",
+  unavailable: "&[data-unavailable]",
+  rangeStart: "&[data-range-start]",
+  rangeEnd: "&[data-range-end]",
+  now: "&[data-now]",
+  topmost: "&[data-topmost]",
 
   motionReduce: "@media (prefers-reduced-motion: reduce)",
   motionSafe: "@media (prefers-reduced-motion: no-preference)",
@@ -170,8 +180,8 @@ export const defaultConditions = defineConditions({
   landscape: "@media (orientation: landscape)",
   portrait: "@media (orientation: portrait)",
 
-  dark: "&.dark, .dark &",
-  light: "&.light, .light &",
+  dark: ".dark &, .dark .chakra-theme:not(.light) &",
+  light: ":root &, .light &",
   osDark: "@media (prefers-color-scheme: dark)",
   osLight: "@media (prefers-color-scheme: light)",
 
@@ -211,7 +221,15 @@ export const defaultBaseConfig = defineConfig({
     backgroundPosition: { shorthand: ["bgPos"] },
     backgroundRepeat: { shorthand: ["bgRepeat"] },
     backgroundAttachment: { shorthand: ["bgAttachment"] },
-    backgroundClip: { shorthand: ["bgClip"] },
+    backgroundClip: {
+      shorthand: ["bgClip"],
+      values: ["text"],
+      transform(value) {
+        return value === "text"
+          ? { color: "transparent", backgroundClip: "text" }
+          : { backgroundClip: value }
+      },
+    },
     backgroundGradient: {
       shorthand: ["bgGradient"],
       values(theme) {
@@ -237,17 +255,18 @@ export const defaultBaseConfig = defineConfig({
     },
     gradientFrom: {
       values: "colors",
-      transform: (value) => ({ "--gradient-from": value }),
+      transform: createColorMixTransform("--gradient-from"),
     },
     gradientTo: {
       values: "colors",
-      transform: (value) => ({ "--gradient-to": value }),
+      transform: createColorMixTransform("--gradient-to"),
     },
     gradientVia: {
       values: "colors",
-      transform(value) {
+      transform(value, args) {
+        const color = createColorMixTransform("--gradient-via")(value, args)
         return {
-          "--gradient-via": value,
+          "--gradient-via": color,
           "--gradient-via-stops":
             "var(--gradient-from), var(--gradient-via), var(--gradient-to)",
         }
@@ -1041,6 +1060,7 @@ export const defaultBaseConfig = defineConfig({
       values: "colors",
       transform: createColorMixTransform("caretColor"),
     },
+    cursor: { values: "cursor" },
   },
 })
 
